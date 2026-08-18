@@ -1,0 +1,38 @@
+==========================================================================
+CANDIDATE EVALUATION -- v0.3
+==========================================================================
+
+BASELINE (v0.2.1, 20 indicators)
+  Watch/Warning lead months: 1990-91: W12/Wn-  2001: W4/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 21%/-, 2015-16 industrial recession 26%/WATCH, 2022 rate shock 37%/WATCH
+
+C2 -- Technology Investment Reversal: FAIL
+  Watch/Warning lead months: 1990-91: W12/Wn-  2001: W4/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 10%/-, 2011 debt ceiling / Europe 20%/-, 2015-16 industrial recession 25%/WATCH, 2022 rate shock 35%/WATCH
+  note: own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)
+  note: CRITERION 2 FAIL: red in fewer than 2 of 3 recessions
+
+C3 -- Small-Firm Lending Standards: FAIL
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn3  2007-09: W5/Wn0
+  control windows: 1998 LTCM 10%/-, 2011 debt ceiling / Europe 20%/-, 2015-16 industrial recession 25%/WATCH, 2022 rate shock 40%/WARNING
+  note: own red pre-onset: {'1990-91': True, '2001': True, '2007-09': False} (2/3)
+  note: disagreement with #6 (DRTSCILM): 12% (needs >=25%)
+  note: CRITERION FAIL: redundant with #6
+  FAIL: raised 2022 rate shock from WATCH to WARNING
+
+ALL CANDIDATES TOGETHER
+  Watch/Warning lead months: 1990-91: W12/Wn-  2001: W4/Wn2  2007-09: W4/Wn0
+  control windows: 1998 LTCM 10%/-, 2011 debt ceiling / Europe 19%/-, 2015-16 industrial recession 24%/-, 2022 rate shock 38%/WATCH
+  C-ignition events: ['1990-11-01', '2001-01-01', '2007-12-01', '2020-06-01']
+
+SENSITIVITY (full candidate board)
+  x0.8: 1990-91: W12/Wn11  2001: W8/Wn3  2007-09: W5/Wn0   false BROAD: none
+  x1.2: 1990-91: W12/Wn-  2001: W3/Wn0  2007-09: W2/Wn-   false BROAD: none
+
+CURRENT READING (with candidates)
+  2026-08-01  0/22 (0%)  -  [A:0 B:0 C:0]
+
+DECISION
+  Candidates marked PASS meet every pre-registered criterion and may
+  join the board as v0.3. Candidates marked FAIL are recorded as
+  tested-and-rejected and must NOT be retained as commentary.

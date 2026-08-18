@@ -1,0 +1,154 @@
+{
+  "spec_version": "0.2",
+  "frozen": true,
+  "tiers": {
+    "watch_fraction": 0.25,
+    "warning_fraction": 0.40,
+    "warning_min_buckets": 2,
+    "broad_fraction": 0.60,
+    "broad_bucket_fraction": 0.25,
+    "broad_bucket_min_available": 3
+  },
+  "c_ignition": {
+    "c_min_reds": 2,
+    "a_min_reds_ex_confirmation": 3,
+    "b_min_reds": 3,
+    "episode_reset_fraction": 0.25,
+    "episode_reset_months": 6
+  },
+  "staleness_days": { "d": 21, "w": 21, "m": 60, "q": 135 },
+  "indicators": [
+    {
+      "id": 1, "name": "Yield curve (10Y-3M)", "bucket": "A", "role": "leading",
+      "fred": "T10Y3M", "freq": "d", "revised": false,
+      "rule": "curve", "params": { "streak_days": 15, "lookback_days": 365 },
+      "scalable": [], "note": "Variants 1a (current) and 1b (lookback) both evaluated"
+    },
+    {
+      "id": 2, "name": "High-yield spread", "bucket": "A", "role": "leading",
+      "fred": "BAMLH0A0HYM2", "freq": "d", "revised": false,
+      "rule": "hy_spread", "params": { "level": 5.0, "widen": 1.5, "low_window": 63, "streak_days": 10 },
+      "scalable": ["level", "widen"]
+    },
+    {
+      "id": 3, "name": "BBB spread", "bucket": "A", "role": "leading",
+      "fred": "BAMLC0A4CBBB", "freq": "d", "revised": false,
+      "rule": "level_above", "params": { "level": 2.5, "streak": 10 },
+      "scalable": ["level"]
+    },
+    {
+      "id": 4, "name": "Chicago Fed NFCI", "bucket": "A", "role": "leading",
+      "fred": "NFCI", "freq": "w", "revised": true, "integrity_note": "Class B before index launch (~2011)",
+      "rule": "level_above", "params": { "level": 0.0, "streak": 3 },
+      "scalable": []
+    },
+    {
+      "id": 5, "name": "St. Louis Fed Stress Index", "bucket": "A", "role": "leading",
+      "fred": "STLFSI4", "freq": "w", "revised": true, "integrity_note": "Class B before 2010; index revised 4x",
+      "rule": "level_above", "params": { "level": 1.0, "streak": 2 },
+      "scalable": ["level"]
+    },
+    {
+      "id": 6, "name": "Bank lending standards (C&I)", "bucket": "A", "role": "leading",
+      "fred": "DRTSCILM", "freq": "q", "revised": true,
+      "rule": "level_above", "params": { "level": 20.0, "streak": 1 },
+      "scalable": ["level"]
+    },
+    {
+      "id": 7, "name": "Equity drawdown", "bucket": "A", "role": "confirmation",
+      "fred": "SP500_EXTERNAL", "freq": "d", "revised": false,
+      "rule": "drawdown", "params": { "drop": 0.15, "high_window": 252, "streak_days": 10 },
+      "scalable": ["drop"]
+    },
+    {
+      "id": 8, "name": "CFNAI 3-month average", "bucket": "B", "role": "leading",
+      "fred": "CFNAIMA3", "freq": "m", "revised": true, "integrity_note": "Class B before 2001 (index created 2001)",
+      "rule": "level_below", "params": { "level": -0.35, "streak": 1 },
+      "scalable": ["level"]
+    },
+    {
+      "id": 9, "name": "Industrial production", "bucket": "B", "role": "leading",
+      "fred": "INDPRO", "freq": "m", "revised": true,
+      "rule": "yoy_below", "params": { "pct": -1.0, "streak": 2 },
+      "scalable": ["pct"]
+    },
+    {
+      "id": 10, "name": "Heavy truck sales", "bucket": "B", "role": "leading",
+      "fred": "HTRUCKSSAAR", "freq": "m", "revised": true,
+      "rule": "drop_from_peak_ma", "params": { "ma": 4, "peak_window": 24, "drop": 0.20, "streak": 2 },
+      "scalable": ["drop"]
+    },
+    {
+      "id": 11, "name": "Building permits", "bucket": "B", "role": "leading",
+      "fred": "PERMIT", "freq": "m", "revised": true,
+      "rule": "yoy_below", "params": { "pct": -10.0, "streak": 2 },
+      "scalable": ["pct"]
+    },
+    {
+      "id": 12, "name": "Core capital goods orders", "bucket": "B", "role": "leading",
+      "fred": "NEWORDER", "freq": "m", "revised": true,
+      "rule": "yoy_below", "params": { "pct": -2.0, "streak": 2 },
+      "scalable": ["pct"]
+    },
+    {
+      "id": 13, "name": "Temporary help employment", "bucket": "B", "role": "leading",
+      "fred": "TEMPHELPS", "freq": "m", "revised": true, "integrity_note": "Known structural false-positive risk post-2023",
+      "rule": "yoy_below", "params": { "pct": -3.0, "streak": 2 },
+      "scalable": ["pct"]
+    },
+    {
+      "id": 14, "name": "Business Loan Delinquencies", "bucket": "B", "role": "leading",
+      "fred": "DRBLACBS", "freq": "q", "revised": true,
+      "rule": "level_or_rising", "params": { "level": 2.0, "rising_periods": 3 },
+      "scalable": ["level"]
+    },
+    {
+      "id": 15, "name": "Initial claims (4-wk avg)", "bucket": "C", "role": "lagging",
+      "fred": "ICSA", "freq": "w", "revised": true,
+      "rule": "claims_vs_low", "params": { "ma": 4, "low_window": 52, "rise": 0.20, "streak": 3 },
+      "scalable": ["rise"]
+    },
+    {
+      "id": 16, "name": "Continuing claims", "bucket": "C", "role": "lagging",
+      "fred": "CCSA", "freq": "w", "revised": true,
+      "rule": "yoy_above_weekly", "params": { "pct": 15.0, "streak": 3 },
+      "scalable": ["pct"]
+    },
+    {
+      "id": 17, "name": "Sahm Rule (real-time)", "bucket": "C", "role": "lagging",
+      "fred": "SAHMREALTIME", "freq": "m", "revised": false,
+      "rule": "level_above", "params": { "level": 0.4999, "streak": 1 },
+      "scalable": []
+    },
+    {
+      "id": 18, "name": "Credit card delinquency", "bucket": "C", "role": "lagging",
+      "fred": "DRCCLACBS", "freq": "q", "revised": true, "integrity_note": "Baseline shifted post-2021; threshold flagged for recalibration review",
+      "rule": "level_and_rising", "params": { "level": 3.0, "rising_periods": 1 },
+      "scalable": ["level"]
+    },
+    {
+      "id": 19, "name": "Mortgage delinquency", "bucket": "C", "role": "lagging",
+      "fred": "DRSFRMACBS", "freq": "q", "revised": true,
+      "rule": "level_and_rising", "params": { "level": 2.5, "rising_periods": 2 },
+      "scalable": ["level"]
+    },
+    {
+      "id": 20, "name": "Real retail sales", "bucket": "C", "role": "lagging",
+      "fred": "RRSFS", "freq": "m", "revised": true,
+      "rule": "yoy_below", "params": { "pct": 0.0, "streak": 2 },
+      "scalable": []
+    }
+  ],
+  "nber_recessions": [
+    { "name": "1990-91", "start": "1990-07-01", "end": "1991-03-01" },
+    { "name": "2001", "start": "2001-03-01", "end": "2001-11-01" },
+    { "name": "2007-09", "start": "2007-12-01", "end": "2009-06-01" },
+    { "name": "2020", "start": "2020-02-01", "end": "2020-04-01", "external_shock": true }
+  ],
+  "false_positive_windows": [
+    { "name": "1998 LTCM", "start": "1998-06-01", "end": "1999-06-01" },
+    { "name": "2011 debt ceiling / Europe", "start": "2011-06-01", "end": "2012-06-01" },
+    { "name": "2015-16 industrial recession", "start": "2015-07-01", "end": "2016-12-01" },
+    { "name": "2022 rate shock", "start": "2022-01-01", "end": "2023-12-01" }
+  ]
+}

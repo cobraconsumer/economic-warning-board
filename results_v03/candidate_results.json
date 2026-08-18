@@ -1,0 +1,115 @@
+{
+  "C2": {
+    "name": "Technology Investment Reversal",
+    "verdict": "FAIL",
+    "fails": [],
+    "notes": [
+      "own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)",
+      "CRITERION 2 FAIL: red in fewer than 2 of 3 recessions"
+    ],
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": null,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 4,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 5,
+        "WARNING": 0,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.25,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.35,
+        "worst": "WATCH"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ]
+  },
+  "C3": {
+    "name": "Small-Firm Lending Standards",
+    "verdict": "FAIL",
+    "fails": [
+      "raised 2022 rate shock from WATCH to WARNING"
+    ],
+    "notes": [
+      "own red pre-onset: {'1990-91': True, '2001': True, '2007-09': False} (2/3)",
+      "disagreement with #6 (DRTSCILM): 12% (needs >=25%)",
+      "CRITERION FAIL: redundant with #6"
+    ],
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": 1,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 6,
+        "WARNING": 3,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 5,
+        "WARNING": 0,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.25,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.4,
+        "worst": "WARNING"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ]
+  }
+}

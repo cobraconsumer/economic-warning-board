@@ -1,0 +1,34 @@
+============================================================================================
+THRESHOLD REVIEW -- v0.3 (decision rule pre-registered)
+============================================================================================
+
+ scale   1990W  2001W  2007W   medW   quiet  worst control window               elig
+--------------------------------------------------------------------------------------------
+  0.70      25      8      8    8.0     64%  WARNING (2022 rate shock)          no: 2022 rate shock=WARNING, quiet=64%
+  0.80      12      8      8    8.0     69%  WARNING (2022 rate shock)          no: 2022 rate shock=WARNING, quiet=69%
+  0.85      12      8      8    8.0     71%  WARNING (2022 rate shock)          no: 2022 rate shock=WARNING
+  0.90      12      6      7    7.0     73%  WARNING (2022 rate shock)          no: 2022 rate shock=WARNING
+  0.95      12      6      5    6.0     74%  WATCH (2015-16 industrial rec)     YES
+  1.00      12      4      5    5.0     75%  WATCH (2015-16 industrial rec)     YES
+  1.05      12      4      5    5.0     76%  WATCH (2022 rate shock)            YES
+  1.10      12      3      5    5.0     78%  WATCH (2022 rate shock)            YES
+  1.20      12      3      4    4.0     80%  WATCH (2022 rate shock)            YES
+  1.30      12      3      2    3.0     81%  WATCH (2022 rate shock)            YES
+
+--------------------------------------------------------------------------------------------
+DECISION
+--------------------------------------------------------------------------------------------
+  baseline (x1.00) median Watch lead: 5.0 months, quiet 75%
+  eligible scales: [0.95, 1.0, 1.05, 1.1, 1.2, 1.3]
+
+  RESULT: adopt scale x0.95
+  median Watch lead 5.0 -> 6.0 months
+  quiet fraction 75% -> 74%
+  Watch leads: 1990-91=12mo, 2001=6mo, 2007-09=5mo
+  current reading: 0/20 -
+
+  wrote spec_v03.json  sha256:a67f4fb8e6b2856d  (record this hash)
+
+--------------------------------------------------------------------------------------------
+Full sweep recorded above, including rejected scales, per the
+pre-registration's disclosure requirement.

@@ -1,0 +1,10 @@
+venv/
+.fred_cache/
+__pycache__/
+*.pyc
+.DS_Store
+board.json.tmp
+*.xcuserstate
+xcuserdata/
+DerivedData/
+.build/
