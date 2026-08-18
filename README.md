@@ -1,50 +1,67 @@
-# Warning Board Backtest Harness — Setup & Run
+# Economic Warning Board
 
-Three files: `spec_v02.json` (the frozen spec — record its hash, never edit it mid-experiment), `backtest.py` (the harness), and `spec-v0.2-amendment.md` (the pre-registration document).
+A 20-indicator recession watchlist, evaluated daily against free government
+data (mostly FRED), published as a static JSON file, and shown in an iOS app.
+No server, no database, no accounts, no push infrastructure. Running cost: **$0**.
 
-## Setup (5 minutes, runs on your MacBook)
+```
+GitHub Action (daily, ~06:00 ET)
+  └─ evaluate.py — fetches 20 FRED series, applies spec_v03.json's rules
+       └─ writes board.json
+            └─ committed to the gh-pages branch
+                 └─ served free at https://cobraconsumer.github.io/economic-warning-board/board.json
+                      └─ SwiftUI app fetches on launch + background refresh
+                           └─ local notification on tier change
+```
+
+**Live board:** https://cobraconsumer.github.io/economic-warning-board/board.json
+
+## What this is not
+
+Not a prediction. Not a probability. Not financial advice. Not a
+recommendation to buy or sell anything. The app's own Methodology screen
+carries the full disclaimer, the tiers, the honest out-of-sample lead times,
+and the three named blind spots — stated in the app itself, not just here.
+
+## Repo layout
+
+- **`spec_v03.json`** — the frozen, hash-pinned rule spec (v0.3). Never edited
+  in place; changes land as a new spec file plus a `CHANGELOG.md` entry.
+- **`CHANGELOG.md`** — what changed at each spec revision and why.
+- **`backtest.py`** — the point-in-time (ALFRED-vintage) research harness that
+  validated the rules against 1988–present. See [`docs/BACKTEST.md`](docs/BACKTEST.md)
+  for how to run it. Frozen; not used in production.
+- **`evaluate.py`** — the live evaluator. Imports `evaluate()` / `is_stale()` /
+  `score_board()` from `backtest.py` unmodified and swaps the ALFRED
+  point-in-time lookup for a plain "latest observations" fetch, since a daily
+  live board only ever needs today's reading. Verified to reproduce the
+  backtest's most recent recorded reading exactly before this was trusted.
+- **`scripts/seed_history.py`** — turns `results_v03/scored_v03.csv` (the
+  frozen v0.3 backtest) into `history_seed.json`, the static monthly history
+  `board.json` ships with. The live evaluator appends to it daily.
+- **`results/`, `results_v021/`, `results_v03/`** — backtest output for each
+  spec revision: lead-time reports, sensitivity sweeps, coverage tables.
+- **`.github/workflows/daily-board.yml`** — the daily cron + manual-dispatch
+  Action. Refuses to publish a partial board on failure; the previous
+  `board.json` stays live.
+- **`ios/EconomicWarningBoard/`** — the SwiftUI app (iOS 17+, no third-party
+  dependencies). Open `EconomicWarningBoard.xcodeproj` in Xcode to build. The
+  project is generated with [XcodeGen](https://github.com/yonaskolb/XcodeGen)
+  from `project.yml` — run `xcodegen generate` there after changing it.
+
+## `board.json` schema
+
+See `spec_v03.json`'s `indicators` array for the rules themselves, and
+`evaluate.py`'s `WHAT_IS_THIS` / `threshold_text` / `why_text` for how each
+reading is turned into plain English. Every indicator's `why_text` explains
+*why* it's green as much as why it would be red — that's the
+anti-confirmation-bias feature the whole app is built around.
+
+## Local development
 
 ```bash
-mkdir warning-board && cd warning-board   # put the three files here
 python3 -m venv venv && source venv/bin/activate
-pip install requests pandas numpy matplotlib
+pip install requests pandas numpy
+export FRED_API_KEY=your_key_here   # free: https://fred.stlouisfed.org/docs/api/api_key.html
+python3 evaluate.py --spec spec_v03.json --out board.json --history-seed history_seed.json
 ```
-
-Get a free FRED API key at https://fred.stlouisfed.org/docs/api/api_key.html (instant), then:
-
-```bash
-export FRED_API_KEY=your_key_here
-```
-
-**S&P 500 data (optional but recommended):** FRED only licenses ~10 years of SP500. Download full daily history from Stooq — visit `https://stooq.com/q/d/l/?s=^spx&i=d` (downloads a CSV) — and save it as `spx_daily.csv`. Without it, indicator #7 is simply marked unavailable (pre-registered as acceptable).
-
-## Run
-
-```bash
-# Full backtest, both yield-curve variants:
-python backtest.py --spec spec_v02.json --sp500-csv spx_daily.csv --out results/
-
-# Add the ±20% threshold sensitivity pass:
-python backtest.py --spec spec_v02.json --sp500-csv spx_daily.csv --sensitivity --out results/
-```
-
-First run: expect 30–90 minutes — it downloads and caches thousands of vintage snapshots from ALFRED at a polite request rate. Everything caches to `.fred_cache/`, so re-runs (including sensitivity) take a couple of minutes. If it dies mid-run (network hiccup), just re-run; it resumes from cache.
-
-## What comes out (`results/`)
-
-- `report_variant_a.txt` / `report_variant_b.txt` — **the main event.** Lead times for each tier before each recession, false-positive window verdicts, C-ignition (H1) results, and the "what did the board show each quarter" run-up tables for 1990/2001/2007/2020.
-- `scored_variant_*.csv` — month-by-month red counts, fractions, tiers, bucket breakdowns. Chartable in anything.
-- `fraction_variant_*.png` — red fraction over ~35 years with recession shading. If the concept works, this one picture is your App Store screenshot and your pitch.
-- `coverage_by_era.csv` — the authoritative integrity table (M/V/B/missing per indicator per era) that finalizes the amendment doc's estimates.
-- `sensitivity_summary.csv` — whether lead times and false-positive verdicts survive thresholds ×0.8 and ×1.2.
-
-## How to read the results (pre-committed, from the amendment)
-
-- **Success:** Warning-tier lead of several months before 2001 and 2007; 1998/2011/2015-16/2022 peak at Watch or Warning but never Broad; C-ignition fires before or at recession onset and never in control windows.
-- **2020 showing no warning is fine** — pre-registered as expected.
-- **1990 is corroborating only** (thin coverage).
-- If results are ugly: that's the experiment working. Document it, then and only then revise thresholds — in a v0.3 with a changelog.
-
-## What I could not verify from here
-
-This sandbox can't reach `api.stlouisfed.org`, so the harness is smoke-tested against synthetic data (all 20 rules, both curve variants, tier logic, ignition logic, availability fractions — all verified) but has **not** touched the live API. Two things may need a small first-run fix: exact ALFRED vintage behavior for the handful of Class-B series, and any FRED series whose units differ from assumed (spreads are assumed in percent, e.g. 5.0 = 500bp — that one is correct). If a series errors, the harness marks it missing rather than crashing.
