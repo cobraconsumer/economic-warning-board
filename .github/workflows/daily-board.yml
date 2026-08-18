@@ -1,0 +1,49 @@
+name: Daily board update
+
+on:
+  schedule:
+    # 10:00 UTC ~= 06:00 ET (drifts an hour across the DST boundary; fine for v1)
+    - cron: "0 10 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-board:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests pandas numpy
+
+      - name: Fetch previously published board.json
+        run: |
+          curl -fsSL "https://cobraconsumer.github.io/economic-warning-board/board.json" \
+            -o previous_board.json || echo "{}" > previous_board.json
+
+      - name: Run evaluator
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: |
+          python evaluate.py --spec spec_v03.json --out board.json \
+            --history-seed history_seed.json --previous previous_board.json
+
+      - name: Stage publish directory
+        run: |
+          mkdir -p publish
+          cp board.json publish/board.json
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./publish
+          keep_files: false
