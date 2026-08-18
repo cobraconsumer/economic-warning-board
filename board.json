@@ -1,0 +1,3899 @@
+{
+  "generated_at": "2026-08-18T20:51:48Z",
+  "spec_version": "0.3",
+  "spec_hash": "a67f4fb8e6b2856d",
+  "board": {
+    "reds": 0,
+    "available": 20,
+    "fraction": 0.0,
+    "tier": "QUIET",
+    "tier_since": "2024-12-01",
+    "buckets": {
+      "A": {
+        "red": 0,
+        "available": 7,
+        "label": "Financial & Credit"
+      },
+      "B": {
+        "red": 0,
+        "available": 7,
+        "label": "Business"
+      },
+      "C": {
+        "red": 0,
+        "available": 6,
+        "label": "Household & Labor"
+      }
+    },
+    "ignition_active": false
+  },
+  "indicators": [
+    {
+      "id": 1,
+      "name": "Yield curve (10Y-3M)",
+      "bucket": "A",
+      "role": "leading",
+      "state": "green",
+      "value": 0.85,
+      "unit": "percentage points",
+      "threshold_text": "Red when inverted (below 0) for 15 straight trading days, or if that happened within the past 12 months",
+      "why_text": "The curve is positive at 0.85 and has not been inverted in the past 12 months.",
+      "observation_date": "2026-08-17",
+      "days_in_state": 148,
+      "source_name": "Federal Reserve (FRED: T10Y3M)",
+      "source_url": "https://fred.stlouisfed.org/series/T10Y3M",
+      "sparkline": [
+        0.89,
+        0.88,
+        0.82,
+        0.8,
+        0.76,
+        0.76,
+        0.69,
+        0.69,
+        0.71,
+        0.69,
+        0.77,
+        0.76,
+        0.74,
+        0.76,
+        0.67,
+        0.7,
+        0.68,
+        0.64,
+        0.66,
+        0.63,
+        0.66,
+        0.65,
+        0.56,
+        0.56,
+        0.55,
+        0.51,
+        0.57,
+        0.63,
+        0.67,
+        0.61,
+        0.69,
+        0.69,
+        0.71,
+        0.71,
+        0.73,
+        0.74,
+        0.72,
+        0.73,
+        0.7,
+        0.74,
+        0.76,
+        0.78,
+        0.76,
+        0.73,
+        0.69,
+        0.71,
+        0.84,
+        0.86,
+        0.92,
+        0.79,
+        0.74,
+        0.74,
+        0.79,
+        0.78,
+        0.83,
+        0.81,
+        0.81,
+        0.76,
+        0.82,
+        0.85
+      ]
+    },
+    {
+      "id": 2,
+      "name": "High-yield spread",
+      "bucket": "A",
+      "role": "leading",
+      "state": "green",
+      "value": 2.7,
+      "unit": "percentage points",
+      "threshold_text": "Red when the spread is above 4.75 points, or has widened 1.425 points from its 3-month low, for 10 straight trading days",
+      "why_text": "The spread is 2.70 points, below the 4.75-point level and not sharply wider than its recent low.",
+      "observation_date": "2026-08-17",
+      "days_in_state": 483,
+      "source_name": "Federal Reserve (FRED: BAMLH0A0HYM2)",
+      "source_url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+      "sparkline": [
+        2.71,
+        2.72,
+        2.72,
+        2.74,
+        2.72,
+        2.71,
+        2.75,
+        2.74,
+        2.76,
+        2.75,
+        2.78,
+        2.8,
+        2.78,
+        2.71,
+        2.66,
+        2.71,
+        2.63,
+        2.66,
+        2.66,
+        2.65,
+        2.71,
+        2.76,
+        2.78,
+        2.83,
+        2.8,
+        2.75,
+        2.74,
+        2.75,
+        2.74,
+        2.72,
+        2.67,
+        2.7,
+        2.7,
+        2.69,
+        2.69,
+        2.72,
+        2.71,
+        2.71,
+        2.73,
+        2.69,
+        2.69,
+        2.68,
+        2.77,
+        2.79,
+        2.81,
+        2.84,
+        2.87,
+        2.84,
+        2.85,
+        2.78,
+        2.73,
+        2.75,
+        2.71,
+        2.7,
+        2.7,
+        2.72,
+        2.71,
+        2.71,
+        2.67,
+        2.7
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Baa corporate spread over 10Y Treasury",
+      "bucket": "A",
+      "role": "leading",
+      "state": "green",
+      "value": 1.69,
+      "unit": "percentage points",
+      "threshold_text": "Red when the reading is above 2.375 for 10 straight trading days",
+      "why_text": "The spread is 1.69, below the 2.375 threshold.",
+      "observation_date": "2026-08-14",
+      "days_in_state": 2098,
+      "source_name": "Federal Reserve (FRED: BAA10Y)",
+      "source_url": "https://fred.stlouisfed.org/series/BAA10Y",
+      "sparkline": [
+        1.59,
+        1.59,
+        1.57,
+        1.56,
+        1.57,
+        1.57,
+        1.57,
+        1.54,
+        1.54,
+        1.54,
+        1.54,
+        1.51,
+        1.52,
+        1.53,
+        1.53,
+        1.55,
+        1.53,
+        1.53,
+        1.55,
+        1.5,
+        1.51,
+        1.51,
+        1.51,
+        1.52,
+        1.54,
+        1.56,
+        1.55,
+        1.53,
+        1.54,
+        1.54,
+        1.56,
+        1.55,
+        1.56,
+        1.56,
+        1.58,
+        1.56,
+        1.6,
+        1.6,
+        1.59,
+        1.59,
+        1.61,
+        1.6,
+        1.58,
+        1.58,
+        1.59,
+        1.61,
+        1.62,
+        1.6,
+        1.64,
+        1.63,
+        1.61,
+        1.64,
+        1.62,
+        1.61,
+        1.64,
+        1.62,
+        1.64,
+        1.66,
+        1.67,
+        1.69
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Chicago Fed NFCI",
+      "bucket": "A",
+      "role": "leading",
+      "state": "green",
+      "value": -0.549,
+      "unit": "index level",
+      "threshold_text": "Red when the reading is above 0.0 for 3 straight weeks",
+      "why_text": "The index is -0.55, below the 0.0 threshold.",
+      "observation_date": "2026-08-07",
+      "days_in_state": 2293,
+      "source_name": "Federal Reserve (FRED: NFCI)",
+      "source_url": "https://fred.stlouisfed.org/series/NFCI",
+      "sparkline": [
+        -0.49,
+        -0.497,
+        -0.503,
+        -0.51,
+        -0.514,
+        -0.519,
+        -0.521,
+        -0.523,
+        -0.526,
+        -0.527,
+        -0.528,
+        -0.528,
+        -0.529,
+        -0.528,
+        -0.527,
+        -0.526,
+        -0.525,
+        -0.521,
+        -0.518,
+        -0.515,
+        -0.512,
+        -0.51,
+        -0.509,
+        -0.511,
+        -0.514,
+        -0.519,
+        -0.528,
+        -0.54,
+        -0.551,
+        -0.563,
+        -0.569,
+        -0.571,
+        -0.567,
+        -0.559,
+        -0.545,
+        -0.528,
+        -0.509,
+        -0.49,
+        -0.473,
+        -0.464,
+        -0.46,
+        -0.465,
+        -0.475,
+        -0.487,
+        -0.497,
+        -0.505,
+        -0.509,
+        -0.51,
+        -0.509,
+        -0.508,
+        -0.507,
+        -0.508,
+        -0.511,
+        -0.516,
+        -0.524,
+        -0.531,
+        -0.537,
+        -0.543,
+        -0.546,
+        -0.549
+      ]
+    },
+    {
+      "id": 5,
+      "name": "St. Louis Fed Stress Index",
+      "bucket": "A",
+      "role": "leading",
+      "state": "green",
+      "value": -0.7709,
+      "unit": "index level",
+      "threshold_text": "Red when the reading is above 0.95 for 2 straight weeks",
+      "why_text": "The index is -0.77, below the 0.95 threshold.",
+      "observation_date": "2026-08-07",
+      "days_in_state": 2286,
+      "source_name": "Federal Reserve (FRED: STLFSI4)",
+      "source_url": "https://fred.stlouisfed.org/series/STLFSI4",
+      "sparkline": [
+        -0.6459,
+        -0.6956,
+        -0.8735,
+        -0.7496,
+        -0.7136,
+        -0.7945,
+        -0.676,
+        -0.5638,
+        -0.8171,
+        -0.7507,
+        -0.6038,
+        -0.4184,
+        -0.559,
+        -0.5906,
+        -0.536,
+        -0.4924,
+        -0.4826,
+        -0.3622,
+        -0.5061,
+        -0.4593,
+        -0.3105,
+        -0.504,
+        -0.1277,
+        -0.3883,
+        -0.4222,
+        -0.3551,
+        -0.3332,
+        -0.5744,
+        -0.5581,
+        -0.6574,
+        -0.6441,
+        -0.7071,
+        -0.671,
+        -0.6505,
+        -0.6102,
+        -0.4806,
+        -0.4356,
+        -0.4256,
+        -0.2964,
+        -0.3632,
+        -0.1778,
+        -0.232,
+        -0.6402,
+        -0.7508,
+        -0.6731,
+        -0.6675,
+        -0.7579,
+        -0.7375,
+        -0.7579,
+        -0.6813,
+        -0.8653,
+        -0.7677,
+        -0.9531,
+        -0.6441,
+        -0.7237,
+        -0.8825,
+        -0.7007,
+        -0.8257,
+        -0.5059,
+        -0.7709
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Bank lending standards (C&I)",
+      "bucket": "A",
+      "role": "leading",
+      "state": "green",
+      "value": 0.0,
+      "unit": "% of banks, net",
+      "threshold_text": "Red when the reading is above 19.0",
+      "why_text": "The net tightening share is 0.00, below the 19.0 threshold.",
+      "observation_date": "2026-07-01",
+      "days_in_state": 960,
+      "source_name": "Federal Reserve (FRED: DRTSCILM)",
+      "source_url": "https://fred.stlouisfed.org/series/DRTSCILM",
+      "sparkline": [
+        -5.9,
+        5.4,
+        -6.9,
+        -9.5,
+        -7.6,
+        -7.4,
+        -19.1,
+        -18.1,
+        -8.3,
+        -13.7,
+        -11.1,
+        -10.7,
+        -10.5,
+        -5.5,
+        -5.3,
+        -7.0,
+        7.4,
+        8.2,
+        11.6,
+        8.5,
+        1.5,
+        1.4,
+        -2.8,
+        -3.9,
+        -8.5,
+        -10.0,
+        -11.3,
+        -15.9,
+        -15.9,
+        2.8,
+        -4.2,
+        -2.8,
+        5.4,
+        0.0,
+        41.5,
+        71.2,
+        37.7,
+        5.5,
+        -15.1,
+        -32.4,
+        -18.2,
+        -14.5,
+        -1.5,
+        24.2,
+        39.1,
+        44.8,
+        46.0,
+        50.8,
+        33.9,
+        14.5,
+        15.6,
+        7.9,
+        0.0,
+        6.2,
+        18.5,
+        9.5,
+        6.5,
+        5.3,
+        8.1,
+        0.0
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Equity drawdown",
+      "bucket": "A",
+      "role": "confirmation",
+      "state": "green",
+      "value": -0.6915,
+      "unit": "% below 1-year high",
+      "threshold_text": "Red when the index is more than 14.2% below its 1-year high for 10 straight trading days",
+      "why_text": "The index is 0.7% off its 1-year high, inside the 14.2% drawdown threshold.",
+      "observation_date": "2026-08-17",
+      "days_in_state": 1313,
+      "source_name": "Federal Reserve (FRED: SP500)",
+      "source_url": "https://fred.stlouisfed.org/series/SP500",
+      "sparkline": [
+        -0.7401,
+        -0.3702,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.7372,
+        -0.3347,
+        -2.9704,
+        -2.6814,
+        -2.9321,
+        -4.5046,
+        -2.8316,
+        -2.3433,
+        -0.7292,
+        -1.2935,
+        -2.4926,
+        -1.435,
+        -1.8002,
+        -3.2106,
+        -3.3057,
+        -3.3153,
+        -3.3609,
+        -2.2254,
+        -1.451,
+        -1.663,
+        -1.6629,
+        -0.9508,
+        -1.392,
+        -1.6698,
+        -0.8691,
+        -0.4519,
+        -1.241,
+        -0.8698,
+        -0.4912,
+        -0.9988,
+        -1.9986,
+        -2.188,
+        -1.3217,
+        -1.4563,
+        -2.6476,
+        -2.5993,
+        -2.5835,
+        -2.3785,
+        -3.8586,
+        -2.2622,
+        -1.5777,
+        -0.1219,
+        0.0,
+        -0.1676,
+        -0.3433,
+        0.0,
+        -0.0584,
+        -0.3795,
+        -0.1178,
+        0.0,
+        -0.1696,
+        -0.6915
+      ]
+    },
+    {
+      "id": 8,
+      "name": "CFNAI 3-month average",
+      "bucket": "B",
+      "role": "leading",
+      "state": "green",
+      "value": -0.05,
+      "unit": "index level",
+      "threshold_text": "Red when the reading is below -0.3325",
+      "why_text": "The 3-month average is -0.05, above the -0.3325 threshold.",
+      "observation_date": "2026-06-01",
+      "days_in_state": 260,
+      "source_name": "Federal Reserve (FRED: CFNAIMA3)",
+      "source_url": "https://fred.stlouisfed.org/series/CFNAIMA3",
+      "sparkline": [
+        0.44,
+        0.35,
+        0.19,
+        0.25,
+        0.48,
+        0.59,
+        0.26,
+        0.18,
+        0.26,
+        0.28,
+        0.01,
+        -0.22,
+        -0.15,
+        0.0,
+        0.08,
+        0.03,
+        -0.19,
+        -0.34,
+        -0.17,
+        -0.11,
+        -0.09,
+        -0.27,
+        -0.18,
+        -0.18,
+        -0.15,
+        -0.15,
+        -0.02,
+        -0.24,
+        -0.13,
+        -0.16,
+        -0.32,
+        -0.28,
+        -0.28,
+        -0.08,
+        -0.12,
+        -0.15,
+        -0.15,
+        -0.23,
+        -0.25,
+        -0.31,
+        -0.3,
+        -0.09,
+        -0.07,
+        0.07,
+        0.01,
+        0.06,
+        -0.17,
+        -0.25,
+        -0.12,
+        -0.14,
+        -0.22,
+        -0.39,
+        -0.37,
+        -0.29,
+        -0.15,
+        0.03,
+        -0.01,
+        0.03,
+        -0.1,
+        -0.05
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Industrial production",
+      "bucket": "B",
+      "role": "leading",
+      "state": "green",
+      "value": 1.0795,
+      "unit": "% year-over-year",
+      "threshold_text": "Red when down 0.95% or more year-over-year for 2 straight months",
+      "why_text": "Output is up 1.1% year-over-year, above the -0.95% threshold.",
+      "observation_date": "2026-07-01",
+      "days_in_state": 625,
+      "source_name": "Federal Reserve (FRED: INDPRO)",
+      "source_url": "https://fred.stlouisfed.org/series/INDPRO",
+      "sparkline": [
+        4.2612,
+        3.0125,
+        3.5629,
+        3.8975,
+        2.2464,
+        1.3181,
+        5.4296,
+        3.0544,
+        2.9234,
+        1.911,
+        1.2218,
+        0.9687,
+        1.0521,
+        2.462,
+        1.0648,
+        0.089,
+        -0.8016,
+        0.3188,
+        -0.1635,
+        -0.3651,
+        -0.1843,
+        -0.3996,
+        -0.8893,
+        -0.3125,
+        -0.2542,
+        -0.2672,
+        -0.7743,
+        -0.0904,
+        0.8387,
+        -1.2763,
+        -0.3543,
+        -0.5573,
+        -0.9971,
+        -0.065,
+        0.7735,
+        -0.9226,
+        -0.405,
+        -1.2004,
+        -0.9947,
+        -1.5579,
+        -0.2741,
+        0.849,
+        0.812,
+        0.5802,
+        0.8824,
+        0.1016,
+        0.5793,
+        1.9188,
+        1.1887,
+        1.8632,
+        1.7593,
+        1.7543,
+        1.163,
+        0.9735,
+        0.7972,
+        0.7065,
+        1.3764,
+        1.5296,
+        1.2892,
+        1.0795
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Heavy truck sales",
+      "bucket": "B",
+      "role": "leading",
+      "state": "green",
+      "value": -9.6641,
+      "unit": "% below 2-year high",
+      "threshold_text": "Red when the 4-month average is 19% or more below its 24-month high for 2 straight months",
+      "why_text": "Truck sales are 9.7% off their 2-year high, inside the 19% threshold.",
+      "observation_date": "2026-07-01",
+      "days_in_state": 78,
+      "source_name": "Federal Reserve (FRED: HTRUCKSSAAR)",
+      "source_url": "https://fred.stlouisfed.org/series/HTRUCKSSAAR",
+      "sparkline": [
+        -17.4387,
+        -20.0273,
+        -16.3601,
+        -13.4403,
+        -9.7549,
+        -8.9377,
+        -8.2737,
+        -7.4055,
+        -7.763,
+        -6.7926,
+        -6.0776,
+        -4.6987,
+        -2.9111,
+        -1.7365,
+        -0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.8321,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.7306,
+        -3.3209,
+        -6.4079,
+        -8.1384,
+        -9.4013,
+        -10.0561,
+        -8.7933,
+        -8.4191,
+        -8.7465,
+        -9.6819,
+        -11.0851,
+        -10.4771,
+        -9.8223,
+        -9.4949,
+        -9.5884,
+        -9.7755,
+        -11.319,
+        -11.5996,
+        -12.4415,
+        -13.985,
+        -14.4528,
+        -15.3882,
+        -15.0608,
+        -15.2784,
+        -16.3522,
+        -17.1414,
+        -21.3849,
+        -25.5363,
+        -25.9448,
+        -25.6384,
+        -23.7487,
+        -21.8862,
+        -21.7054,
+        -19.7933,
+        -14.2636,
+        -9.6641
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Building permits",
+      "bucket": "B",
+      "role": "leading",
+      "state": "green",
+      "value": 3.0714,
+      "unit": "% year-over-year",
+      "threshold_text": "Red when down 9.5% or more year-over-year for 2 straight months",
+      "why_text": "Permits are up 3.1% year-over-year, above the -9.5% threshold.",
+      "observation_date": "2026-07-01",
+      "days_in_state": 1113,
+      "source_name": "Federal Reserve (FRED: PERMIT)",
+      "source_url": "https://fred.stlouisfed.org/series/PERMIT",
+      "sparkline": [
+        13.4289,
+        -0.0606,
+        5.397,
+        4.6099,
+        7.4644,
+        3.6099,
+        8.3969,
+        8.1435,
+        8.1287,
+        0.3519,
+        3.8508,
+        2.461,
+        -10.0575,
+        -3.8205,
+        -6.8275,
+        -19.548,
+        -25.8749,
+        -26.2611,
+        -13.0553,
+        -22.4855,
+        -19.8486,
+        -7.7148,
+        -16.1645,
+        -10.3691,
+        1.9808,
+        -3.5309,
+        -3.7271,
+        6.25,
+        7.3677,
+        9.1678,
+        -2.1807,
+        0.3397,
+        -1.7544,
+        -11.0196,
+        0.8293,
+        -5.3595,
+        -6.5163,
+        -7.1242,
+        -5.8399,
+        -0.0661,
+        -2.2652,
+        -5.491,
+        -7.8981,
+        1.0156,
+        -0.7555,
+        0.7829,
+        -4.1124,
+        -3.3149,
+        -9.7185,
+        1.6186,
+        -1.1847,
+        -6.4815,
+        1.0225,
+        -4.7847,
+        6.5007,
+        -8.6461,
+        -1.5225,
+        -0.4237,
+        -1.787,
+        3.0714
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Core capital goods orders",
+      "bucket": "B",
+      "role": "leading",
+      "state": "green",
+      "value": 12.9418,
+      "unit": "% year-over-year",
+      "threshold_text": "Red when down 1.9% or more year-over-year for 2 straight months",
+      "why_text": "Orders are up 12.9% year-over-year, above the -1.9% threshold.",
+      "observation_date": "2026-06-01",
+      "days_in_state": 929,
+      "source_name": "Federal Reserve (FRED: NEWORDER)",
+      "source_url": "https://fred.stlouisfed.org/series/NEWORDER",
+      "sparkline": [
+        15.4329,
+        15.1219,
+        12.3073,
+        12.7878,
+        12.8713,
+        11.8206,
+        11.9906,
+        11.5091,
+        10.6034,
+        7.7847,
+        11.6631,
+        9.6345,
+        9.2429,
+        9.4126,
+        7.7857,
+        6.8573,
+        5.2586,
+        3.8986,
+        0.2033,
+        -1.4845,
+        -3.0126,
+        -2.0015,
+        -1.6662,
+        -3.046,
+        -2.6268,
+        -4.7712,
+        -3.1334,
+        -3.8729,
+        -2.8751,
+        -2.6802,
+        -2.2906,
+        -0.3019,
+        0.1814,
+        -0.516,
+        -2.9537,
+        -1.6384,
+        -2.2758,
+        -0.8725,
+        -0.0631,
+        -0.9749,
+        0.0363,
+        0.7047,
+        3.1262,
+        2.1523,
+        2.4261,
+        0.7982,
+        3.9816,
+        2.8065,
+        3.7097,
+        4.1607,
+        4.1672,
+        6.1383,
+        5.7999,
+        6.2565,
+        3.9739,
+        6.1857,
+        9.9167,
+        10.9164,
+        10.9285,
+        12.9418
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Temporary help employment",
+      "bucket": "B",
+      "role": "leading",
+      "state": "green",
+      "value": 0.433,
+      "unit": "% year-over-year",
+      "threshold_text": "Red when down 2.85% or more year-over-year for 2 straight months",
+      "why_text": "Temp employment is up 0.4% year-over-year, above the -2.85% threshold.",
+      "observation_date": "2026-07-01",
+      "days_in_state": 229,
+      "source_name": "Federal Reserve (FRED: TEMPHELPS)",
+      "source_url": "https://fred.stlouisfed.org/series/TEMPHELPS",
+      "sparkline": [
+        16.8758,
+        16.3085,
+        16.4997,
+        14.0155,
+        12.0045,
+        9.7151,
+        11.2053,
+        10.1955,
+        11.2113,
+        10.9171,
+        8.7507,
+        7.1228,
+        6.3702,
+        6.0354,
+        1.5578,
+        -0.4556,
+        -3.6138,
+        -3.5777,
+        -6.2822,
+        -7.6042,
+        -7.2081,
+        -6.8808,
+        -7.6958,
+        -8.4391,
+        -8.7964,
+        -9.5405,
+        -9.689,
+        -9.945,
+        -9.5264,
+        -9.1969,
+        -9.2564,
+        -8.5827,
+        -8.659,
+        -8.8761,
+        -8.7942,
+        -8.3136,
+        -8.0824,
+        -8.0212,
+        -8.1212,
+        -6.7539,
+        -5.3578,
+        -5.7564,
+        -5.3544,
+        -5.3178,
+        -4.8058,
+        -4.8609,
+        -4.2438,
+        -4.0065,
+        -3.8487,
+        -3.6037,
+        -3.768,
+        -3.3137,
+        -3.5603,
+        -2.7212,
+        -2.4122,
+        -1.9143,
+        -1.4679,
+        -0.8953,
+        -0.1198,
+        0.433
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Business Loan Delinquencies",
+      "bucket": "B",
+      "role": "leading",
+      "state": "green",
+      "value": 1.34,
+      "unit": "%",
+      "threshold_text": "Red when above 1.9, or rising for 3 straight quarters",
+      "why_text": "The delinquency rate is 1.34, below 1.9 and not on a sustained rise.",
+      "observation_date": "2026-01-01",
+      "days_in_state": 504,
+      "source_name": "Federal Reserve (FRED: DRBLACBS)",
+      "source_url": "https://fred.stlouisfed.org/series/DRBLACBS",
+      "sparkline": [
+        2.12,
+        1.84,
+        1.64,
+        1.53,
+        1.4,
+        1.25,
+        1.18,
+        1.11,
+        1.04,
+        0.98,
+        0.89,
+        0.9,
+        0.8,
+        0.77,
+        0.72,
+        0.75,
+        0.81,
+        0.9,
+        1.02,
+        1.5,
+        1.6,
+        1.59,
+        1.58,
+        1.53,
+        1.35,
+        1.27,
+        1.18,
+        1.11,
+        1.08,
+        0.99,
+        0.94,
+        1.16,
+        1.07,
+        1.12,
+        1.09,
+        1.14,
+        1.28,
+        1.3,
+        1.24,
+        1.16,
+        1.06,
+        1.03,
+        1.12,
+        1.05,
+        1.03,
+        1.12,
+        1.02,
+        0.97,
+        1.0,
+        0.98,
+        1.02,
+        1.12,
+        1.14,
+        1.18,
+        1.27,
+        1.29,
+        1.28,
+        1.33,
+        1.34,
+        1.34
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Initial claims (4-wk avg)",
+      "bucket": "C",
+      "role": "lagging",
+      "state": "green",
+      "value": 0.0,
+      "unit": "% above 1-year low",
+      "threshold_text": "Red when 19% or more above the 1-year low for 3 straight weeks",
+      "why_text": "Claims are 0.0% above their 1-year low, inside the 19% threshold.",
+      "observation_date": "2026-08-08",
+      "days_in_state": 1074,
+      "source_name": "Federal Reserve (FRED: ICSA)",
+      "source_url": "https://fred.stlouisfed.org/series/ICSA",
+      "sparkline": [
+        13.2009,
+        11.6822,
+        9.5794,
+        7.0093,
+        4.9065,
+        3.5047,
+        3.271,
+        3.6215,
+        5.3738,
+        6.5421,
+        7.7103,
+        11.7991,
+        11.7991,
+        10.6308,
+        9.3458,
+        6.3084,
+        5.0234,
+        6.4252,
+        5.9579,
+        5.3738,
+        6.0748,
+        5.0234,
+        4.6729,
+        3.271,
+        4.0888,
+        4.3224,
+        3.972,
+        2.4533,
+        -0.8178,
+        -2.7091,
+        -0.6053,
+        0.9744,
+        3.7759,
+        7.3082,
+        7.0646,
+        7.0646,
+        5.1157,
+        3.0451,
+        2.6797,
+        2.6797,
+        1.3398,
+        1.9488,
+        2.3143,
+        2.8015,
+        1.218,
+        -1.0962,
+        0.4926,
+        -0.1232,
+        2.7127,
+        5.9186,
+        8.1381,
+        10.2343,
+        10.7275,
+        9.7411,
+        8.1381,
+        5.9186,
+        2.5894,
+        0.2466,
+        -1.8496,
+        0.0
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Continuing claims",
+      "bucket": "C",
+      "role": "lagging",
+      "state": "green",
+      "value": -8.4964,
+      "unit": "% year-over-year",
+      "threshold_text": "Red when up 14.25% or more year-over-year for 3 straight weeks",
+      "why_text": "Claims are down 8.5% year-over-year, below the 14.25% threshold.",
+      "observation_date": "2026-08-01",
+      "days_in_state": 969,
+      "source_name": "Federal Reserve (FRED: CCSA)",
+      "source_url": "https://fred.stlouisfed.org/series/CCSA",
+      "sparkline": [
+        6.5797,
+        4.9409,
+        5.3427,
+        4.5601,
+        5.0325,
+        3.3636,
+        4.9172,
+        4.2405,
+        5.4987,
+        4.2965,
+        4.8728,
+        4.4444,
+        5.4795,
+        4.6423,
+        5.2603,
+        3.8213,
+        3.1568,
+        3.4538,
+        5.3967,
+        4.5842,
+        4.0642,
+        3.2856,
+        2.9677,
+        3.537,
+        1.8827,
+        1.1796,
+        1.5417,
+        1.473,
+        1.7131,
+        1.3514,
+        -1.3749,
+        -1.6721,
+        -1.8124,
+        1.0326,
+        0.1611,
+        -1.1898,
+        -0.9529,
+        -0.5385,
+        -1.3326,
+        -1.9438,
+        -3.0175,
+        -3.5097,
+        -3.5714,
+        -1.7391,
+        -6.8206,
+        -6.29,
+        -5.7325,
+        -6.2467,
+        -6.8858,
+        -6.5928,
+        -8.2691,
+        -6.9767,
+        -7.551,
+        -7.5742,
+        -6.7111,
+        -7.7476,
+        -7.831,
+        -8.2128,
+        -8.3546,
+        -8.4964
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Sahm Rule (real-time)",
+      "bucket": "C",
+      "role": "lagging",
+      "state": "green",
+      "value": -0.03,
+      "unit": "percentage points",
+      "threshold_text": "Red when the reading is above 0.4999",
+      "why_text": "The sahm rule reading is -0.03, below the 0.4999 threshold.",
+      "observation_date": "2026-07-01",
+      "days_in_state": 686,
+      "source_name": "Federal Reserve (FRED: SAHMREALTIME)",
+      "source_url": "https://fred.stlouisfed.org/series/SAHMREALTIME",
+      "sparkline": [
+        -0.23,
+        -0.2,
+        -0.37,
+        -0.27,
+        -0.33,
+        -0.27,
+        -0.2,
+        -0.13,
+        -0.1,
+        -0.13,
+        -0.07,
+        0.0,
+        -0.03,
+        0.03,
+        0.0,
+        0.07,
+        0.07,
+        0.03,
+        -0.07,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.07,
+        0.1,
+        0.13,
+        0.2,
+        0.33,
+        0.3,
+        0.23,
+        0.2,
+        0.27,
+        0.3,
+        0.37,
+        0.37,
+        0.43,
+        0.53,
+        0.57,
+        0.5,
+        0.43,
+        0.43,
+        0.4,
+        0.37,
+        0.27,
+        0.27,
+        0.27,
+        0.27,
+        0.17,
+        0.1,
+        0.13,
+        0.23,
+        0.43,
+        0.35,
+        0.3,
+        0.27,
+        0.2,
+        0.13,
+        0.1,
+        0.07,
+        -0.03
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Credit card delinquency",
+      "bucket": "C",
+      "role": "lagging",
+      "state": "green",
+      "value": 2.92,
+      "unit": "%",
+      "threshold_text": "Red when above 2.85 and rising for 1 straight quarter",
+      "why_text": "Delinquencies are at 2.92%, above the 2.85% threshold, but have not risen for 1 straight quarter.",
+      "observation_date": "2026-01-01",
+      "days_in_state": 778,
+      "source_name": "Federal Reserve (FRED: DRCCLACBS)",
+      "source_url": "https://fred.stlouisfed.org/series/DRCCLACBS",
+      "sparkline": [
+        3.65,
+        3.45,
+        3.25,
+        3.06,
+        2.92,
+        2.82,
+        2.71,
+        2.64,
+        2.53,
+        2.44,
+        2.38,
+        2.32,
+        2.26,
+        2.2,
+        2.15,
+        2.11,
+        2.12,
+        2.15,
+        2.16,
+        2.15,
+        2.21,
+        2.29,
+        2.37,
+        2.4,
+        2.49,
+        2.54,
+        2.48,
+        2.5,
+        2.5,
+        2.52,
+        2.54,
+        2.54,
+        2.59,
+        2.6,
+        2.61,
+        2.69,
+        2.45,
+        1.99,
+        2.1,
+        1.88,
+        1.59,
+        1.53,
+        1.57,
+        1.69,
+        1.83,
+        2.05,
+        2.26,
+        2.47,
+        2.75,
+        2.94,
+        3.1,
+        3.17,
+        3.22,
+        3.2,
+        3.08,
+        3.06,
+        3.04,
+        2.98,
+        2.94,
+        2.92
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Mortgage delinquency",
+      "bucket": "C",
+      "role": "lagging",
+      "state": "green",
+      "value": 1.89,
+      "unit": "%",
+      "threshold_text": "Red when above 2.375 and rising for 2 straight quarters",
+      "why_text": "Delinquencies are at 1.89%, below the 2.375% threshold.",
+      "observation_date": "2026-01-01",
+      "days_in_state": 2147,
+      "source_name": "Federal Reserve (FRED: DRSFRMACBS)",
+      "source_url": "https://fred.stlouisfed.org/series/DRSFRMACBS",
+      "sparkline": [
+        10.55,
+        10.5,
+        10.25,
+        10.33,
+        10.45,
+        10.47,
+        10.03,
+        9.73,
+        9.31,
+        8.66,
+        8.29,
+        7.78,
+        7.43,
+        7.05,
+        6.52,
+        6.23,
+        5.81,
+        5.4,
+        5.12,
+        4.78,
+        4.58,
+        4.38,
+        4.14,
+        3.91,
+        3.68,
+        3.64,
+        3.57,
+        3.48,
+        3.22,
+        2.99,
+        2.83,
+        2.69,
+        2.6,
+        2.44,
+        2.34,
+        2.35,
+        2.54,
+        2.83,
+        2.75,
+        2.68,
+        2.47,
+        2.3,
+        2.29,
+        2.09,
+        1.95,
+        1.84,
+        1.79,
+        1.74,
+        1.72,
+        1.72,
+        1.7,
+        1.71,
+        1.73,
+        1.74,
+        1.78,
+        1.77,
+        1.78,
+        1.78,
+        1.79,
+        1.89
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Real retail sales",
+      "bucket": "C",
+      "role": "lagging",
+      "state": "green",
+      "value": 2.5036,
+      "unit": "% year-over-year",
+      "threshold_text": "Red when down 0.0% or more year-over-year for 2 straight months",
+      "why_text": "Sales are up 2.5% year-over-year, above the 0.0% threshold.",
+      "observation_date": "2026-07-01",
+      "days_in_state": 686,
+      "source_name": "Federal Reserve (FRED: RRSFS)",
+      "source_url": "https://fred.stlouisfed.org/series/RRSFS",
+      "sparkline": [
+        8.6488,
+        8.5036,
+        6.9099,
+        8.0049,
+        9.4745,
+        7.4072,
+        4.989,
+        8.4947,
+        -0.6554,
+        0.1677,
+        0.4394,
+        -0.1176,
+        1.0423,
+        1.2577,
+        0.3392,
+        0.3156,
+        -1.4828,
+        -1.1946,
+        1.3087,
+        -0.5867,
+        -2.6309,
+        -3.2301,
+        -1.9226,
+        -1.3762,
+        -0.4123,
+        -0.5105,
+        0.4585,
+        -0.6177,
+        0.7657,
+        1.9161,
+        -2.9669,
+        -1.167,
+        -0.0903,
+        -0.7828,
+        -0.4299,
+        -0.6856,
+        0.0651,
+        -0.7925,
+        -0.4359,
+        0.6319,
+        1.1205,
+        1.5989,
+        1.4915,
+        1.0069,
+        2.744,
+        2.6791,
+        0.7432,
+        1.1917,
+        1.2779,
+        1.9762,
+        1.0887,
+        0.7215,
+        0.2037,
+        -0.4136,
+        1.5153,
+        2.559,
+        0.9589,
+        1.7127,
+        3.6338,
+        2.5036
+      ]
+    }
+  ],
+  "history": [
+    {
+      "date": "1988-01-01",
+      "fraction": 0.3077,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1988-02-01",
+      "fraction": 0.3077,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1988-03-01",
+      "fraction": 0.3077,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1988-04-01",
+      "fraction": 0.3077,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1988-05-01",
+      "fraction": 0.2308,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1988-06-01",
+      "fraction": 0.2308,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1988-07-01",
+      "fraction": 0.2308,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1988-08-01",
+      "fraction": 0.2308,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1988-09-01",
+      "fraction": 0.2308,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1988-10-01",
+      "fraction": 0.2308,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1988-11-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1988-12-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1989-01-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1989-02-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1989-03-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1989-04-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1989-05-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1989-06-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1989-07-01",
+      "fraction": 0.3846,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1989-08-01",
+      "fraction": 0.3077,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1989-09-01",
+      "fraction": 0.3077,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1989-10-01",
+      "fraction": 0.2308,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1989-11-01",
+      "fraction": 0.3846,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1989-12-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1990-01-01",
+      "fraction": 0.2308,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1990-02-01",
+      "fraction": 0.2308,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1990-03-01",
+      "fraction": 0.1538,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1990-04-01",
+      "fraction": 0.2143,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1990-05-01",
+      "fraction": 0.2857,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1990-06-01",
+      "fraction": 0.4286,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1990-07-01",
+      "fraction": 0.4286,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1990-08-01",
+      "fraction": 0.4286,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1990-09-01",
+      "fraction": 0.5,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1990-10-01",
+      "fraction": 0.5,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1990-11-01",
+      "fraction": 0.7857,
+      "tier": "BROAD"
+    },
+    {
+      "date": "1990-12-01",
+      "fraction": 0.7857,
+      "tier": "BROAD"
+    },
+    {
+      "date": "1991-01-01",
+      "fraction": 0.7143,
+      "tier": "BROAD"
+    },
+    {
+      "date": "1991-02-01",
+      "fraction": 0.6,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1991-03-01",
+      "fraction": 0.6667,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1991-04-01",
+      "fraction": 0.625,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1991-05-01",
+      "fraction": 0.625,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1991-06-01",
+      "fraction": 0.5625,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1991-07-01",
+      "fraction": 0.5294,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1991-08-01",
+      "fraction": 0.5294,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1991-09-01",
+      "fraction": 0.4706,
+      "tier": "WARNING"
+    },
+    {
+      "date": "1991-10-01",
+      "fraction": 0.3529,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1991-11-01",
+      "fraction": 0.2941,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1991-12-01",
+      "fraction": 0.2941,
+      "tier": "WATCH"
+    },
+    {
+      "date": "1992-01-01",
+      "fraction": 0.2353,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-02-01",
+      "fraction": 0.2353,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-03-01",
+      "fraction": 0.1765,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-04-01",
+      "fraction": 0.1176,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-05-01",
+      "fraction": 0.1176,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-06-01",
+      "fraction": 0.1176,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-07-01",
+      "fraction": 0.1176,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-08-01",
+      "fraction": 0.1176,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-09-01",
+      "fraction": 0.1176,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-10-01",
+      "fraction": 0.1176,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-11-01",
+      "fraction": 0.1176,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1992-12-01",
+      "fraction": 0.0588,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-01-01",
+      "fraction": 0.0588,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-02-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-03-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-04-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-05-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-06-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-07-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-08-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-09-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-10-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-11-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1993-12-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-01-01",
+      "fraction": 0.0556,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-02-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-04-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-05-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-06-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-07-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-08-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-09-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-10-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-11-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1994-12-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-01-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-02-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-03-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-04-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-05-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-06-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-07-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-08-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-09-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-10-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-11-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1995-12-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-01-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-02-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-03-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-04-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-05-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-06-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-07-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-08-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-09-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-10-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-11-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1996-12-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-01-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-02-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-04-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-05-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-06-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-07-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-08-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-09-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-10-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-11-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1997-12-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-01-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-02-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-03-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-04-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-05-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-06-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-07-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-08-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-09-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-10-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-11-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1998-12-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-01-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-02-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-04-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-05-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-06-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-07-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-08-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-09-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-10-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-11-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "1999-12-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2000-01-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2000-02-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2000-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2000-04-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2000-05-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2000-06-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2000-07-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2000-08-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2000-09-01",
+      "fraction": 0.3158,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2000-10-01",
+      "fraction": 0.3158,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2000-11-01",
+      "fraction": 0.3158,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2000-12-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2001-01-01",
+      "fraction": 0.4211,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2001-02-01",
+      "fraction": 0.4211,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2001-03-01",
+      "fraction": 0.5263,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2001-04-01",
+      "fraction": 0.6316,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2001-05-01",
+      "fraction": 0.6316,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2001-06-01",
+      "fraction": 0.6316,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2001-07-01",
+      "fraction": 0.7368,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2001-08-01",
+      "fraction": 0.7368,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2001-09-01",
+      "fraction": 0.7368,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2001-10-01",
+      "fraction": 0.6842,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2001-11-01",
+      "fraction": 0.6842,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2001-12-01",
+      "fraction": 0.6842,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2002-01-01",
+      "fraction": 0.7368,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2002-02-01",
+      "fraction": 0.6842,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2002-03-01",
+      "fraction": 0.5263,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2002-04-01",
+      "fraction": 0.4737,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2002-05-01",
+      "fraction": 0.5263,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2002-06-01",
+      "fraction": 0.5263,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2002-07-01",
+      "fraction": 0.5789,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2002-08-01",
+      "fraction": 0.5263,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2002-09-01",
+      "fraction": 0.4211,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2002-10-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2002-11-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2002-12-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2003-01-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2003-02-01",
+      "fraction": 0.3158,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2003-03-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2003-04-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2003-05-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2003-06-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2003-07-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2003-08-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2003-09-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2003-10-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2003-11-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2003-12-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-01-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-02-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-04-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-05-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-06-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-07-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-08-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-09-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-10-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-11-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2004-12-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-01-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-02-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-03-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-04-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-05-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-06-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-07-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-08-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-09-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-10-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-11-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2005-12-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-01-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-02-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-04-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-05-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-06-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-07-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-08-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-09-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-10-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-11-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2006-12-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2007-01-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2007-02-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2007-03-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2007-04-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2007-05-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2007-06-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2007-07-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2007-08-01",
+      "fraction": 0.3158,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2007-09-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2007-10-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2007-11-01",
+      "fraction": 0.3158,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2007-12-01",
+      "fraction": 0.5263,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2008-01-01",
+      "fraction": 0.6842,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-02-01",
+      "fraction": 0.5789,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2008-03-01",
+      "fraction": 0.6842,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-04-01",
+      "fraction": 0.7368,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-05-01",
+      "fraction": 0.8421,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-06-01",
+      "fraction": 0.7895,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-07-01",
+      "fraction": 0.7368,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-08-01",
+      "fraction": 0.7895,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-09-01",
+      "fraction": 0.7368,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-10-01",
+      "fraction": 0.8421,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-11-01",
+      "fraction": 0.8947,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2008-12-01",
+      "fraction": 0.8947,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-01-01",
+      "fraction": 0.8947,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-02-01",
+      "fraction": 0.9474,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-03-01",
+      "fraction": 0.9474,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-04-01",
+      "fraction": 0.9474,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-05-01",
+      "fraction": 0.9474,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-06-01",
+      "fraction": 0.9474,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-07-01",
+      "fraction": 0.8947,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-08-01",
+      "fraction": 0.8421,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-09-01",
+      "fraction": 0.8421,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2009-10-01",
+      "fraction": 0.6316,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2009-11-01",
+      "fraction": 0.6316,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2009-12-01",
+      "fraction": 0.6316,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2010-01-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2010-02-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2010-03-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2010-04-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2010-05-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2010-06-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2010-07-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2010-08-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2010-09-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2010-10-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2010-11-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2010-12-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-01-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-02-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-03-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-04-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-05-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-06-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-07-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-08-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-09-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-10-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-11-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2011-12-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-01-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-02-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-04-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-05-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-06-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-07-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-08-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-09-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-10-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-11-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2012-12-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-01-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-02-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-04-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-05-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-06-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-07-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-08-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-09-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-10-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-11-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2013-12-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-01-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-02-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-03-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-04-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-05-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-06-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-07-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-08-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-09-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-10-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-11-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2014-12-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-01-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-02-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-04-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-05-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-06-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-07-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-08-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-09-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-10-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-11-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2015-12-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-01-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-02-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-03-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-04-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-05-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-06-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-07-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2016-08-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-09-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-10-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-11-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2016-12-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-01-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-02-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-04-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-05-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-06-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-07-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-08-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-09-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-10-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-11-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2017-12-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-01-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-02-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-03-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-04-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-05-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-06-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-07-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-08-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-09-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-10-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-11-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2018-12-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-01-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-02-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-03-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-04-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-05-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-06-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-07-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-08-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-09-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-10-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-11-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2019-12-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2020-01-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2020-02-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2020-03-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2020-04-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2020-05-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2020-06-01",
+      "fraction": 0.5789,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2020-07-01",
+      "fraction": 0.6316,
+      "tier": "BROAD"
+    },
+    {
+      "date": "2020-08-01",
+      "fraction": 0.5789,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2020-09-01",
+      "fraction": 0.5263,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2020-10-01",
+      "fraction": 0.5263,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2020-11-01",
+      "fraction": 0.4737,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2020-12-01",
+      "fraction": 0.4211,
+      "tier": "WARNING"
+    },
+    {
+      "date": "2021-01-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2021-02-01",
+      "fraction": 0.3158,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2021-03-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2021-04-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2021-05-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2021-06-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2021-07-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2021-08-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2021-09-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2021-10-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2021-11-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2021-12-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-01-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-02-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-03-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-04-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-05-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-06-01",
+      "fraction": 0.0526,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-07-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-08-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-09-01",
+      "fraction": 0.1053,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-10-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-11-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2022-12-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2023-01-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2023-02-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2023-03-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2023-04-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2023-05-01",
+      "fraction": 0.3158,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2023-06-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2023-07-01",
+      "fraction": 0.3158,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2023-08-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2023-09-01",
+      "fraction": 0.3684,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2023-10-01",
+      "fraction": 0.2632,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2023-11-01",
+      "fraction": 0.2105,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2023-12-01",
+      "fraction": 0.25,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2024-01-01",
+      "fraction": 0.25,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2024-02-01",
+      "fraction": 0.2,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2024-03-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2024-04-01",
+      "fraction": 0.2,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2024-05-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2024-06-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2024-07-01",
+      "fraction": 0.25,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2024-08-01",
+      "fraction": 0.25,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2024-09-01",
+      "fraction": 0.3,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2024-10-01",
+      "fraction": 0.25,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2024-11-01",
+      "fraction": 0.25,
+      "tier": "WATCH"
+    },
+    {
+      "date": "2024-12-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-01-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-02-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-03-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-04-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-05-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-06-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-07-01",
+      "fraction": 0.15,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-08-01",
+      "fraction": 0.1,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-09-01",
+      "fraction": 0.05,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-10-01",
+      "fraction": 0.1,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-11-01",
+      "fraction": 0.1111,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2025-12-01",
+      "fraction": 0.125,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2026-01-01",
+      "fraction": 0.1176,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2026-02-01",
+      "fraction": 0.1579,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2026-03-01",
+      "fraction": 0.1,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2026-04-01",
+      "fraction": 0.1,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2026-05-01",
+      "fraction": 0.05,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2026-06-01",
+      "fraction": 0.05,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2026-07-01",
+      "fraction": 0.05,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2026-08-01",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    },
+    {
+      "date": "2026-08-18",
+      "fraction": 0.0,
+      "tier": "QUIET"
+    }
+  ]
+}
