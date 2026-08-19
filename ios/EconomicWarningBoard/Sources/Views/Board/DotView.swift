@@ -11,6 +11,7 @@ struct DotView: View {
             .strokeBorder(strokeColor, style: strokeStyle)
             .background(Circle().fill(fillColor))
             .frame(width: 30, height: 30)
+            .contentShape(Rectangle())
             .animation(.easeInOut(duration: 0.5), value: state)
     }
 
