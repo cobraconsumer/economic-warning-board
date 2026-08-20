@@ -1,0 +1,28 @@
+==========================================================================
+C7 -- YIELD CURVE LOOKBACK SWEEP (variant 1c)
+==========================================================================
+
+Indicator #1 params.lookback_days. 365 is the frozen v0.3 value.
+The 1998 and 2015-16 control windows are where a longer window is
+punished; those are the tests that matter.
+
+lookback 365d
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 21%/-, 2015-16 industrial recession 26%/WATCH, 2022 rate shock 37%/WATCH
+  #1 red today: 0   board today: 0 red, -
+
+lookback 540d
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 21%/-, 2015-16 industrial recession 26%/WATCH, 2022 rate shock 37%/WATCH
+  #1 red today: 1   board today: 1 red, -
+
+lookback 730d
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 21%/-, 2015-16 industrial recession 26%/WATCH, 2022 rate shock 37%/WATCH
+  #1 red today: 1   board today: 1 red, -
+
+DECISION RULE (pre-registered)
+  Adopt the longest lookback that does not raise 1998 or 2015-16
+  above the 365d baseline's worst tier AND does not shorten the
+  2001 or 2007-09 Watch lead. If 365d wins on those tests, the
+  March 2026 gap is the honest cost of the frozen rule and stays.

@@ -1,0 +1,301 @@
+{
+  "C4": {
+    "name": "Prime-age employment-population ratio",
+    "verdict": "PASS",
+    "fails": [],
+    "notes": [
+      "integrity classes: {'B': 324, 'V': 140}",
+      "pre-1998 integrity: {'B': 120}",
+      "CRITERION 5 WARNING: pre-1998 predominantly class B -- 1990 result is APPROXIMATE and does not count toward the 3-recession bar",
+      "own red pre-onset: {'1990-91': False, '2001': True, '2007-09': True} (2/3)",
+      "disagreement with #17 (Sahm rule): 40% (needs >=25%)",
+      "disagreement with #15 (initial claims): 58% (needs >=25%)"
+    ],
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": 1,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 6,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 5,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.25,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.35,
+        "worst": "WATCH"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ]
+  },
+  "C6": {
+    "name": "Aggregate weekly hours, total private",
+    "verdict": "FAIL",
+    "fails": [],
+    "notes": [
+      "integrity classes: {'V': 354, 'B': 110}",
+      "pre-1998 integrity: {'B': 110, 'V': 10}",
+      "CRITERION 5 WARNING: pre-1998 predominantly class B -- 1990 result is APPROXIMATE and does not count toward the 3-recession bar",
+      "own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)",
+      "CRITERION 3 FAIL: red in fewer than 2 of 3 recessions",
+      "disagreement with #13 (temp help): 61% (needs >=25%)",
+      "disagreement with #15 (initial claims): 67% (needs >=25%)"
+    ],
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": 1,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 6,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 5,
+        "WARNING": 0,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.25,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.35,
+        "worst": "WATCH"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ]
+  },
+  "C8": {
+    "name": "Baa - Aaa corporate quality spread",
+    "verdict": "FAIL",
+    "fails": [],
+    "notes": [
+      "integrity classes: {'M': 464}",
+      "pre-1998 integrity: {'M': 120}",
+      "own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)",
+      "CRITERION 3 FAIL: red in fewer than 2 of 3 recessions",
+      "disagreement with #3 (Baa - 10Y): 66% (needs >=25%)",
+      "disagreement with #2 (HY OAS): n/a (needs >=25%)"
+    ],
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": 1,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 6,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 5,
+        "WARNING": 0,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.25,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.35,
+        "worst": "WATCH"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ]
+  },
+  "C9": {
+    "name": "Hamilton net oil price increase",
+    "verdict": "FAIL",
+    "fails": [],
+    "notes": [
+      "integrity classes: {'M': 464}",
+      "pre-1998 integrity: {'M': 120}",
+      "own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)",
+      "CRITERION 3 FAIL: red in fewer than 2 of 3 recessions",
+      "disagreement with #9 (industrial production): 100% (needs >=25%)",
+      "2026 reading (expected GREEN): green, as pre-registered"
+    ],
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": 1,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 6,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 5,
+        "WARNING": 0,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.25,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.35,
+        "worst": "WATCH"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ]
+  },
+  "C5": {
+    "name": "Core capital goods orders (real, PPI-deflated)",
+    "verdict": "FAIL",
+    "fails": [
+      "raised 2022 rate shock from WATCH to WARNING"
+    ],
+    "notes": [
+      "C5 replaces #12 rather than adding a slot: denominator unchanged at 20.",
+      "Pass condition is NOT 'improves leads'. It is 'closes the nominal/real inconsistency with the C2 rejection without degrading anything'.",
+      "nominal vs real #12 disagreement: 38% of either-red months (97 months)",
+      "red only when deflated: 36 months; red only when nominal: 1 months",
+      "1990-91 Watch lead: nominal 12 -> real 12 months",
+      "2001 Watch lead: nominal 6 -> real 6 months",
+      "2007-09 Watch lead: nominal 5 -> real 7 months"
+    ],
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": 8,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 6,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 7,
+        "WARNING": 3,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1053,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2105,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.2632,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.4211,
+        "worst": "WARNING"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ]
+  }
+}

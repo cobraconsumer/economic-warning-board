@@ -1,0 +1,78 @@
+==========================================================================
+CANDIDATE EVALUATION -- v0.5 (C4-C9)
+==========================================================================
+
+Pre-registered in spec-v0.5-candidates.md. Thresholds were fixed
+before this run. No threshold search is permitted on a failure.
+
+BASELINE (v0.3, 20 indicators)
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 21%/-, 2015-16 industrial recession 26%/WATCH, 2022 rate shock 37%/WATCH
+
+C4 -- Prime-age employment-population ratio: PASS
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn2
+  control windows: 1998 LTCM 10%/-, 2011 debt ceiling / Europe 20%/-, 2015-16 industrial recession 25%/WATCH, 2022 rate shock 35%/WATCH
+  note: integrity classes: {'B': 324, 'V': 140}
+  note: pre-1998 integrity: {'B': 120}
+  note: CRITERION 5 WARNING: pre-1998 predominantly class B -- 1990 result is APPROXIMATE and does not count toward the 3-recession bar
+  note: own red pre-onset: {'1990-91': False, '2001': True, '2007-09': True} (2/3)
+  note: disagreement with #17 (Sahm rule): 40% (needs >=25%)
+  note: disagreement with #15 (initial claims): 58% (needs >=25%)
+
+C5 -- Core capital goods orders (real, PPI-deflated): FAIL
+  Watch/Warning lead months: 1990-91: W12/Wn8  2001: W6/Wn2  2007-09: W7/Wn3
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 21%/-, 2015-16 industrial recession 26%/WATCH, 2022 rate shock 42%/WARNING
+  note: C5 replaces #12 rather than adding a slot: denominator unchanged at 20.
+  note: Pass condition is NOT 'improves leads'. It is 'closes the nominal/real inconsistency with the C2 rejection without degrading anything'.
+  note: nominal vs real #12 disagreement: 38% of either-red months (97 months)
+  note: red only when deflated: 36 months; red only when nominal: 1 months
+  note: 1990-91 Watch lead: nominal 12 -> real 12 months
+  note: 2001 Watch lead: nominal 6 -> real 6 months
+  note: 2007-09 Watch lead: nominal 5 -> real 7 months
+  FAIL: raised 2022 rate shock from WATCH to WARNING
+
+C6 -- Aggregate weekly hours, total private: FAIL
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 10%/-, 2011 debt ceiling / Europe 20%/-, 2015-16 industrial recession 25%/WATCH, 2022 rate shock 35%/WATCH
+  note: integrity classes: {'V': 354, 'B': 110}
+  note: pre-1998 integrity: {'B': 110, 'V': 10}
+  note: CRITERION 5 WARNING: pre-1998 predominantly class B -- 1990 result is APPROXIMATE and does not count toward the 3-recession bar
+  note: own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)
+  note: CRITERION 3 FAIL: red in fewer than 2 of 3 recessions
+  note: disagreement with #13 (temp help): 61% (needs >=25%)
+  note: disagreement with #15 (initial claims): 67% (needs >=25%)
+
+C8 -- Baa - Aaa corporate quality spread: FAIL
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 10%/-, 2011 debt ceiling / Europe 20%/-, 2015-16 industrial recession 25%/WATCH, 2022 rate shock 35%/WATCH
+  note: integrity classes: {'M': 464}
+  note: pre-1998 integrity: {'M': 120}
+  note: own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)
+  note: CRITERION 3 FAIL: red in fewer than 2 of 3 recessions
+  note: disagreement with #3 (Baa - 10Y): 66% (needs >=25%)
+  note: disagreement with #2 (HY OAS): n/a (needs >=25%)
+
+C9 -- Hamilton net oil price increase: FAIL
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 10%/-, 2011 debt ceiling / Europe 20%/-, 2015-16 industrial recession 25%/WATCH, 2022 rate shock 35%/WATCH
+  note: integrity classes: {'M': 464}
+  note: pre-1998 integrity: {'M': 120}
+  note: own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)
+  note: CRITERION 3 FAIL: red in fewer than 2 of 3 recessions
+  note: disagreement with #9 (industrial production): 100% (needs >=25%)
+  note: 2026 reading (expected GREEN): green, as pre-registered
+
+ALL PASSING CANDIDATES TOGETHER (1 promoted, denominator 21)
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn2
+  control windows: 1998 LTCM 10%/-, 2011 debt ceiling / Europe 20%/-, 2015-16 industrial recession 25%/WATCH, 2022 rate shock 35%/WATCH
+  C-ignition events: ['1990-11-01', '2001-01-01', '2007-12-01', '2020-06-01']
+
+CURRENT READING (with passing candidates)
+  2026-08-01  0/21 (0%)  -  [A:0 B:0 C:0]
+
+DECISION
+  PASS candidates meet every pre-registered criterion and may be
+  promoted in a v0.5 amendment. FAIL candidates are recorded as
+  tested-and-rejected in CHANGELOG.md and must NOT be retained as
+  commentary. Watchlist items W1-W5 are display-only and never enter
+  reds / available / fraction.

@@ -2,6 +2,157 @@
 
 ---
 
+## v0.5 candidate round — 20 August 2026
+
+**Spec hash:** `e011e3d4b9e94e03` (`spec_v05.json`)
+**Supersedes:** v0.3 (`a67f4fb8e6b2856d`)
+**Board size:** unchanged at 20 indicators
+
+`spec_v05.json` promotes exactly one change (C7), pre-registered in
+`spec-v0.5-candidates.md`, written before any backtest ran.
+
+Motivation for the round: the board read 0/20 on 2026-08-19, and it's a
+correct, defensible reading — but 2026's labor market is a "low-fire" regime
+(payrolls flat, unemployment rate falling only because the labor force is
+shrinking) that several Bucket C indicators structurally can't see, credit
+stress has migrated into private markets that Bucket A doesn't reach, and
+indicator #1's post-inversion memory lapsed in March 2026 while the
+historical recession hazard window was still open. Six candidates and one
+parameter correction were pre-registered to address specific pieces of that.
+
+### C7 — Yield curve lookback 365→730 days: **ADOPTED**
+
+Indicator #1's `lookback_days` swept at 365 (frozen v0.3 value), 540, and
+730. Result: **byte-identical** Watch/Warning lead times and control-window
+outcomes at all three values, across the full 1988–2026 backtest. The 53
+dates where 365d and 730d disagree cluster into exactly three episodes —
+mid-2009, late 2020–2021, and April–August 2026 — and every one is *after*
+a recession's onset, never before. Extending the memory only affects how
+long the indicator stays lit during and after a stress episode; it never
+changes when a fresh inversion first triggers a warning. Per the
+pre-registered decision rule (adopt the longest lookback that doesn't
+raise 1998/2015-16 or shorten 2001/2007-09), 730 days wins outright with
+zero downside anywhere in the backtest.
+
+This closes the gap the round was partly motivated by: indicator #1 read
+green as of 2026-08-19 only because its 365-day memory of the March-2026
+un-inversion had just expired, not because the curve's signal had changed
+character. Under 730 days it reads red again today.
+
+### C4 — Prime-age employment-population ratio (`LNS12300060`): tested, **demoted to WATCHLIST**
+
+The harness's mechanical verdict printed PASS — own-red-before-onset was
+2/3 (green in 1990-91, red before both 2001 and 2007-09) and no control
+window degraded. **That verdict is overridden here.** ALFRED's vintage
+archive for this exact series starts 2014-12-05; every evaluation date
+before that falls back to the earliest-vintage approximation (class B).
+Pre-1998 integrity came back **100% class B (120/120 evaluation dates)**.
+The 1990-91 result -- already the one recession where it read green -- is
+not just unconfirmed, it's uninformative: there is no clean vintage
+reconstruction of this series before 2014, full stop. That leaves 2 clean,
+confirmed recessions (2001, 2007-09) against the project's standing ≥3 bar.
+Per spec-v0.5-candidates.md §5 criterion 5 (an era that is predominantly
+class B does not count toward the bar) and its own worked example for
+this exact shape of result, C4 is demoted to WATCHLIST: displayed,
+labeled not-out-of-sample-validated, never scored.
+
+Checked whether the vintage gap could be closed by manual historical
+reconstruction (BLS's own archived press releases, back to 1966, exist
+as plain text at bls.gov/news.release/history/ -- not scanned images).
+Pulled the actual May 1994 release: Table A-1 breaks employment-population
+ratio out by sex and by "16-19" vs. "20 and over," with no 25-54 cut
+anywhere in it. The statistic wasn't published in that form yet -- there
+is no historical document to transcribe from. This is a structural dead
+end, not an access problem, and lines up with ALFRED's 2014 vintage start
+date: that's roughly when this specific age cut started getting
+standalone attention.
+
+### C5 — Deflate #12 (core capital goods orders) by PPI: **FAIL**
+
+Replaces `NEWORDER` (nominal) with `RATIO:NEWORDER/WPSFD41312` (PPI-
+deflated), same rule and threshold, closing the same nominal-vs-real
+inconsistency that sank C2. **Raised the 2022 rate-shock control window
+from WATCH to WARNING** -- a new false positive, disqualifying regardless
+of anything else. Deflating changed indicator #12's color on 38% of
+either-red months (97 of 464): 36 months red-only-when-deflated against
+just 1 red-only-when-nominal, so the real series is substantially more
+trigger-happy, and 2022's inflation-driven equipment-order slump is
+exactly the kind of month it newly catches. The 2007-09 Watch lead did
+genuinely improve (5→7 months) under the real series, but the pre-
+registered pass condition was explicitly "closes the inconsistency
+without degrading anything," not "improves leads," so a new false
+positive fails it outright. Also newly discovered: the PPI deflator leg
+(`WPSFD41312`) has its own ALFRED vintage gap (first vintage 2015-03-13),
+so even a passing result here couldn't have been vintage-validated
+before 2015 -- a limitation the original proposal didn't anticipate,
+having assumed "PPI is barely revised" implied negligible vintage risk.
+Indicator #12 stays nominal.
+
+### C6 — Aggregate weekly hours, total private (`AWHI`): **FAIL**
+
+Zero red readings in the 24-month pre-onset window for any of the three
+recessions (0/3, against the pre-registered ≥2/3 bar) -- CRITERION 3 FAIL,
+caught by the harness automatically. It isn't silent, though: it does
+fire, just late -- first red 4 months into 1990-91, 7 months into 2001,
+8 months into 2007-09. A labor-hoarding regime cuts hours only once a
+downturn is already visible, the same lagging-not-leading shape the C2
+retry found for realized capex. (Also would have been vintage-limited to
+2/3 clean recessions regardless, per the same pre-flight gap as C4's
+1990-91 window -- moot given the more fundamental timing failure.)
+
+### C8 — Baa − Aaa corporate quality spread: **FAIL**
+
+Zero red readings in the 24-month pre-onset window for any of the three
+recessions (0/3) -- CRITERION 3 FAIL. Fires 4 months into 1990-91, 10
+months into 2001 (after that recession had already ended), 2 months into
+2007-09. Same lagging pattern as C6: within-corporate credit-quality
+migration is a realized, coincident signal, not an anticipatory one. The
+pre-registration's predicted rejection reason -- redundancy with #3 --
+did not materialize (66% disagreement on either-red months, well clear of
+the 25% bar, so this genuinely is a different signal from Baa−10Y). It
+just doesn't lead.
+
+### C9 — Hamilton net oil price increase (`WTISPLC`): **FAIL**
+
+Never read red once in the entire 1988–2026 backtest. Not a data problem
+and not a rule bug -- the rule-correction unit tests (8/8) and the
+pre-registered 2026 expectation both held exactly as designed (green
+through the 2026 shock, confirmed). The reason it never fires is
+mechanical and instructive: oil rose enormously in cumulative terms
+across all three recession windows (+113% into 1990-91, +186% into 2001,
++226% into 2007-09), but every one of those was a gradual, multi-year
+climb, not a sudden spike against a flat base. Hamilton's construction
+compares today's price to the *rolling max of the trailing 3 years* --
+for a steady climb, that ceiling rises right along with the price, so
+the price is never 40% above its own recent high, even while being far
+above where it started years earlier. The rule is built to catch sharp
+discrete shocks (1973/1979-style embargoes); none of the three pre-2020
+episodes in this dataset were shaped like that, not even the 1990 Gulf
+War spike, which was sharp but apparently didn't hold the 2-month streak.
+No energy-shock indicator is added; the gap named in §0 of the
+pre-registration stays open.
+
+### Watchlist (W1–W5): added, display-only
+
+`LNFACBW027SBOG` (bank loans to nondepository financial institutions,
+the private-credit bridge), `JTSHIR` (JOLTS hires rate), Census data-center
+construction spending, `BABATOTALSAUS` (business applications), and BDC
+price-to-NAV discount are added to the app as a labeled "Context -- not
+part of the scored board, not out-of-sample validated" section per
+spec-v0.5-candidates.md §4. None enter `reds`, `available`, or `fraction`.
+The BDC non-accrual composite proposal was rejected even as a watchlist
+item, for the same reasons C1 was rejected in v0.3: no standard
+machine-readable field across filers, survivorship bias runs the wrong
+direction, and it would require a permanent manual scraping obligation
+the architecture is deliberately built without.
+
+### Current reading (v0.5, i.e. v0.3 + C7 only)
+
+**2026-08-01: 1 of 20 red** (indicator #1, yield curve, under the 730-day
+lookback). Every other indicator unchanged from v0.3's 0/20 reading.
+
+---
+
 ## Post-v0.3 note — 19 August 2026: C2 retry, tested and rejected again
 
 **Board size:** unchanged at 20 indicators. Spec unchanged; no new spec file.

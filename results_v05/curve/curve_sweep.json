@@ -1,0 +1,164 @@
+{
+  "365": {
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": 1,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 6,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 5,
+        "WARNING": 0,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1053,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2105,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.2632,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.3684,
+        "worst": "WATCH"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ],
+    "current": {
+      "date": "2026-08-01",
+      "reds": 0,
+      "tier": "-",
+      "i01": 0
+    }
+  },
+  "540": {
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": 1,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 6,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 5,
+        "WARNING": 0,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1053,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2105,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.2632,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.3684,
+        "worst": "WATCH"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ],
+    "current": {
+      "date": "2026-08-01",
+      "reds": 1,
+      "tier": "-",
+      "i01": 1
+    }
+  },
+  "730": {
+    "leads": {
+      "1990-91": {
+        "WATCH": 12,
+        "WARNING": 1,
+        "BROAD": null
+      },
+      "2001": {
+        "WATCH": 6,
+        "WARNING": 2,
+        "BROAD": null
+      },
+      "2007-09": {
+        "WATCH": 5,
+        "WARNING": 0,
+        "BROAD": null
+      },
+      "2020": {
+        "WATCH": null,
+        "WARNING": null,
+        "BROAD": null
+      }
+    },
+    "fps": {
+      "1998 LTCM": {
+        "peak": 0.1053,
+        "worst": "-"
+      },
+      "2011 debt ceiling / Europe": {
+        "peak": 0.2105,
+        "worst": "-"
+      },
+      "2015-16 industrial recession": {
+        "peak": 0.2632,
+        "worst": "WATCH"
+      },
+      "2022 rate shock": {
+        "peak": 0.3684,
+        "worst": "WATCH"
+      }
+    },
+    "ignition": [
+      "1990-11-01",
+      "2001-01-01",
+      "2007-12-01",
+      "2020-06-01"
+    ],
+    "current": {
+      "date": "2026-08-01",
+      "reds": 1,
+      "tier": "-",
+      "i01": 1
+    }
+  }
+}

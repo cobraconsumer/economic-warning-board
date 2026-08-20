@@ -1,0 +1,21 @@
+{
+  "start": "1988-01-01",
+  "class_b_series": [
+    {
+      "cand": "C4",
+      "series": "LNS12300060"
+    },
+    {
+      "cand": "C6",
+      "series": "AWHI"
+    },
+    {
+      "cand": "C5",
+      "series": "NEWORDER"
+    },
+    {
+      "cand": "C5",
+      "series": "WPSFD41312"
+    }
+  ]
+}
