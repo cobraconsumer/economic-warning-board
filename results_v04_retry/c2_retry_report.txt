@@ -1,0 +1,23 @@
+==========================================================================
+C2 RETRY -- Real Tech Investment Reversal (spec-v0.4-candidate-C2-retry.md)
+==========================================================================
+
+BASELINE (v0.3, 20 indicators)
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 21%/-, 2015-16 industrial recession 26%/WATCH, 2022 rate shock 37%/WATCH
+
+C2 RETRY: FAIL
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 10%/-, 2011 debt ceiling / Europe 20%/-, 2015-16 industrial recession 25%/WATCH, 2022 rate shock 35%/WATCH
+  note: own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)
+  note: CRITERION 2 FAIL: red in fewer than 2 of 3 recessions
+
+SENSITIVITY (+/-1.5pp)
+  x0.8: 1990-91: W24/Wn11  2001: W8/Wn5  2007-09: W8/Wn3   false BROAD: none
+  x1.2: 1990-91: W12/Wn-  2001: W3/Wn0  2007-09: W4/Wn0   false BROAD: none
+
+CURRENT READING (with C2 retry)
+  2026-08-01  0/21 (0%)  -
+
+DECISION
+  FAIL. Recorded as tested-and-rejected. Must not be retained as commentary.

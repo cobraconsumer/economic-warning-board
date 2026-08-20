@@ -2,6 +2,40 @@
 
 ---
 
+## Post-v0.3 note — 19 August 2026: C2 retry, tested and rejected again
+
+**Board size:** unchanged at 20 indicators. Spec unchanged; no new spec file.
+
+v0.3's C2 (Technology Investment Reversal) failed because it used a nominal-
+dollar series, and the CHANGELOG left the door open: *"A real
+(inflation-adjusted) series or a deceleration rule may work, but that
+requires fresh pre-registration as a future candidate."* Pre-registered in
+`spec-v0.4-candidate-C2-retry.md` and run via `run_c2_retry.py`, changing
+exactly one thing — swapping `A679RC1Q027SBEA` (nominal) for
+`B679RA3Q086SBEA` (the real, chained-quantity-index counterpart of the same
+BEA category), same rule, same thresholds, same acceptance criteria as the
+original candidates.
+
+**Verdict: FAIL.** The indicator never read red in the 24 months before any
+of the three pre-2020 recessions (0/3, against a pre-registered minimum of
+2/3). It did eventually go red both other times it was checked — 1–7 months
+into the 2001 recession (first red October 2001, recession ran March–November
+2001) and 13 months into 2007-09 (first red January 2009, recession ran
+December 2007–June 2009) — which makes this a clean negative result, not a
+noisy one: real tech investment cuts show up as a *reaction* to a downturn
+already underway, not a warning ahead of one. Fixing the inflation problem
+didn't fix the underlying issue — capex is lagging by construction here, not
+leading.
+
+**Consequence.** The AI-specific capital spending blind spot named in the
+app's Methodology screen remains open. This closes the specific "retry with
+real data" thread the v0.3 CHANGELOG left pending; a future attempt would
+need a genuinely different mechanism (e.g. financing/credit conditions for
+data-center buildouts, rather than realized investment spending, which by
+definition can only be measured after the money's already been spent).
+
+---
+
 ## v0.3 — 18 August 2026
 
 **Spec hash:** `a67f4fb8e6b2856d` (`spec_v03.json`)
