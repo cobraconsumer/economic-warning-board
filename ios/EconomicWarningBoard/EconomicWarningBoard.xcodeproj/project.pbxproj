@@ -21,6 +21,7 @@
 		41218F432FC49FF1CE5303E3 /* EconomicWarningBoardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BC6C0355648193D033C195 /* EconomicWarningBoardApp.swift */; };
 		47FD3F07546B0A6BA5E4CF94 /* TierLadder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70398CCB9772F306966DECD /* TierLadder.swift */; };
 		50E4EFDDB7E72B2AF61584F1 /* BoardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252D7BE3A8ECBD44B335E5A1 /* BoardService.swift */; };
+		54C3BEC88229397A8AE7A262 /* ContrastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686A3A0962273A6B43B2407 /* ContrastTests.swift */; };
 		6415EBE06C66AFB75D3E3E45 /* SparklineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E59DE60DE2BE15F41C6101 /* SparklineChart.swift */; };
 		890FEF04C14633A7EBC48707 /* IndicatorPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2926EB420505F5D5EB29FE3 /* IndicatorPreviewCard.swift */; };
 		C1AB2A1473328475D859A346 /* BoardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1019D063A41EFD6BE6D59 /* BoardStore.swift */; };
@@ -32,11 +33,22 @@
 		F49EDE61BB9A872ECA6D2754 /* MethodologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD649CC6844271B6B7A9C3 /* MethodologyView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BF4DA57532D0511C3FC356F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 82B6B2E6667659D33BD5DFF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A6DC2297F5A7E5D339EBAC7;
+			remoteInfo = EconomicWarningBoard;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		01B7C99228DF5F84805757DE /* WatchlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistView.swift; sourceTree = "<group>"; };
 		06BC6C0355648193D033C195 /* EconomicWarningBoardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomicWarningBoardApp.swift; sourceTree = "<group>"; };
 		1ED788990FF618D8D58963AA /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		252D7BE3A8ECBD44B335E5A1 /* BoardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardService.swift; sourceTree = "<group>"; };
+		283DDD952D4E89059158020D /* EconomicWarningBoardTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = EconomicWarningBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29D5B27FEB3561B082FE3B99 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		31D1019D063A41EFD6BE6D59 /* BoardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardStore.swift; sourceTree = "<group>"; };
 		3CFD649CC6844271B6B7A9C3 /* MethodologyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodologyView.swift; sourceTree = "<group>"; };
@@ -47,6 +59,7 @@
 		719EA449A9142FE639371D5B /* AmbientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBackground.swift; sourceTree = "<group>"; };
 		7D01473D635FFC011E8E98D9 /* IndicatorCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorCopy.swift; sourceTree = "<group>"; };
 		8DEDEDBAB39AFA14F898A6B1 /* StateDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDot.swift; sourceTree = "<group>"; };
+		9686A3A0962273A6B43B2407 /* ContrastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastTests.swift; sourceTree = "<group>"; };
 		A70398CCB9772F306966DECD /* TierLadder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierLadder.swift; sourceTree = "<group>"; };
 		A75279FFB1CD14341940DA84 /* EconomicWarningBoard.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EconomicWarningBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8E59DE60DE2BE15F41C6101 /* SparklineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineChart.swift; sourceTree = "<group>"; };
@@ -72,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				A75279FFB1CD14341940DA84 /* EconomicWarningBoard.app */,
+				283DDD952D4E89059158020D /* EconomicWarningBoardTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,6 +158,7 @@
 			children = (
 				926C15C1B1293EC6E23037A9 /* Resources */,
 				5ABAA5E30B61EE02DB7D6C16 /* Sources */,
+				D03DC3A31CA5EA97713A161F /* Tests */,
 				0D86FD127B7E02D4AF569497 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -183,6 +198,14 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		D03DC3A31CA5EA97713A161F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9686A3A0962273A6B43B2407 /* ContrastTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		FE9E46BE2A06A7261A75079A /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +238,24 @@
 			productReference = A75279FFB1CD14341940DA84 /* EconomicWarningBoard.app */;
 			productType = "com.apple.product-type.application";
 		};
+		66125F3B88A7F229454A790A /* EconomicWarningBoardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D55DF18D910F51558A07573D /* Build configuration list for PBXNativeTarget "EconomicWarningBoardTests" */;
+			buildPhases = (
+				AB0BD723480A1ABD756FFAE3 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B13CB842F2D29702877D2F6 /* PBXTargetDependency */,
+			);
+			name = EconomicWarningBoardTests;
+			packageProductDependencies = (
+			);
+			productName = EconomicWarningBoardTests;
+			productReference = 283DDD952D4E89059158020D /* EconomicWarningBoardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -226,6 +267,10 @@
 				TargetAttributes = {
 					1A6DC2297F5A7E5D339EBAC7 = {
 						DevelopmentTeam = WM98K2XP6U;
+					};
+					66125F3B88A7F229454A790A = {
+						DevelopmentTeam = WM98K2XP6U;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -244,6 +289,7 @@
 			projectRoot = "";
 			targets = (
 				1A6DC2297F5A7E5D339EBAC7 /* EconomicWarningBoard */,
+				66125F3B88A7F229454A790A /* EconomicWarningBoardTests */,
 			);
 		};
 /* End PBXProject section */
@@ -260,6 +306,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AB0BD723480A1ABD756FFAE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54C3BEC88229397A8AE7A262 /* ContrastTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D52E26848BAA23861E96791B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -290,6 +344,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8B13CB842F2D29702877D2F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A6DC2297F5A7E5D339EBAC7 /* EconomicWarningBoard */;
+			targetProxy = BF4DA57532D0511C3FC356F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		24275B6411526EAA99B12BEA /* Debug */ = {
@@ -404,6 +466,27 @@
 			};
 			name = Release;
 		};
+		B488E85C6B1319A4AE487C04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WM98K2XP6U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cobraconsumer.economicwarningboard.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EconomicWarningBoard.app/EconomicWarningBoard";
+			};
+			name = Release;
+		};
 		D9E3A07448BC5F458535E27B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -460,6 +543,27 @@
 			};
 			name = Release;
 		};
+		E3333FEA1F3C8C0BE8193176 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WM98K2XP6U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cobraconsumer.economicwarningboard.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EconomicWarningBoard.app/EconomicWarningBoard";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -477,6 +581,15 @@
 			buildConfigurations = (
 				24275B6411526EAA99B12BEA /* Debug */,
 				D9E3A07448BC5F458535E27B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D55DF18D910F51558A07573D /* Build configuration list for PBXNativeTarget "EconomicWarningBoardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3333FEA1F3C8C0BE8193176 /* Debug */,
+				B488E85C6B1319A4AE487C04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

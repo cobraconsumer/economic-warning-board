@@ -48,3 +48,23 @@ targets:
           CODE_SIGN_IDENTITY: Apple Distribution
           PROVISIONING_PROFILE_SPECIFIER: EconomicWarningBoard App Store
     scheme: {}
+
+  EconomicWarningBoardTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Tests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.cobraconsumer.economicwarningboard.tests
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: WM98K2XP6U
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: EconomicWarningBoard
+    scheme:
+      testTargets:
+        - EconomicWarningBoardTests
+      gatherCoverageData: false

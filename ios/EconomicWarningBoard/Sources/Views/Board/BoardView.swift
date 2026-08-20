@@ -77,6 +77,10 @@ struct BoardView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
 
+        if let closest = closestToFlipping(board.indicators) {
+            closestToFlippingRow(closest)
+        }
+
         if let watchlist = board.watchlist, !watchlist.isEmpty {
             contextRow(count: watchlist.count)
         }
@@ -84,7 +88,7 @@ struct BoardView: View {
         if let lastError = store.lastError {
             Text(lastError)
                 .font(.footnote)
-                .foregroundStyle(EWB.watchText)
+                .foregroundStyle(EWB.warnText)
         }
     }
 
@@ -126,6 +130,54 @@ struct BoardView: View {
 
     private func sinceText(_ summary: BoardSummary) -> String {
         "since " + (DateFormatting.monthYear(summary.tierSince) ?? summary.tierSince)
+    }
+
+    /// The clear indicator nearest its own threshold, so someone scanning a
+    /// quiet board can see what's worth watching next -- not just today's
+    /// count. Only surfaces past the halfway mark; a clear indicator that's
+    /// nowhere close isn't worth naming. Spec section 9 flags this module as
+    /// undesigned; this is a plain, low-key placeholder, not a final look.
+    private func closestToFlipping(_ indicators: [Indicator]) -> Indicator? {
+        indicators
+            .filter { $0.state == .green }
+            .compactMap { ind -> (Indicator, Double)? in
+                guard let p = ind.position, p >= 0.5 else { return nil }
+                return (ind, p)
+            }
+            .max { $0.1 < $1.1 }?
+            .0
+    }
+
+    private func closestToFlippingRow(_ indicator: Indicator) -> some View {
+        NavigationLink(value: indicator) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("CLOSEST TO FLIPPING")
+                        .font(.caption2.weight(.bold))
+                        .tracking(1.6)
+                        .foregroundStyle(EWB.ink3)
+                    Text(IndicatorCopy.shortName[indicator.id] ?? indicator.name)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(EWB.ink)
+                }
+                Spacer()
+                Text(headroomLabel(indicator.position ?? 0))
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(indicator.bucket.textColor)
+                Image(systemName: "chevron.right")
+                    .font(.footnote)
+                    .foregroundStyle(EWB.ink3)
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity)
+            .glassCard()
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func headroomLabel(_ position: Double) -> String {
+        let headroom = max(0, min(1, 1 - position))
+        return "\(Int((headroom * 100).rounded()))% left"
     }
 
     private func contextRow(count: Int) -> some View {

@@ -39,7 +39,7 @@ struct IndicatorDetailView: View {
                                 Text(age.uppercased())
                                     .font(.caption2.weight(.bold))
                                     .tracking(1)
-                                    .foregroundStyle(EWB.quietText)
+                                    .foregroundStyle(EWB.ink3)
                             }
                         }
                     }
