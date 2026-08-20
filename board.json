@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T03:58:39Z",
+  "generated_at": "2026-08-20T04:05:02Z",
   "spec_version": "0.5",
   "spec_hash": "e011e3d4b9e94e03",
   "board": {
@@ -37,7 +37,7 @@
       "value": 0.79,
       "unit": "percentage points",
       "threshold_text": "Red when inverted (below 0) for 15 straight trading days, or if that happened within the past 24 months",
-      "why_text": "The curve is inverted at 0.79, below zero.",
+      "why_text": "The curve is positive at 0.79 today, but was inverted within the past 24 months -- recessions have historically followed within roughly that window of an inversion ending.",
       "observation_date": "2026-08-19",
       "days_in_state": 1374,
       "since": "2022-11-15",
