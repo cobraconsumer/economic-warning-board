@@ -20,6 +20,14 @@ struct BucketRow: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("\(indicator.name), \(indicator.state.rawValue)")
+                    .contextMenu {
+                        Label(
+                            indicator.state.rawValue.capitalized,
+                            systemImage: indicator.state == .red ? "exclamationmark.circle" : "checkmark.circle"
+                        )
+                    } preview: {
+                        IndicatorPreviewCard(indicator: indicator)
+                    }
                 }
             }
         }
