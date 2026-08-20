@@ -405,7 +405,12 @@ def main():
 
     today = datetime.now(timezone.utc).date()
     prev = fetch_previous(args.previous) if args.previous else None
-    prev_indicators = {str(i["id"]): i for i in (prev or {}).get("indicators", [])}
+    # A spec version bump changes the rules, not the underlying reality --
+    # yesterday's board.json was computed under different params, so its
+    # per-indicator states aren't a valid continuity baseline. Re-bootstrap
+    # from real history instead of reading a rule change as "changed today."
+    spec_changed = bool(prev) and prev.get("spec_hash") != spec_hash
+    prev_indicators = {} if spec_changed else {str(i["id"]): i for i in (prev or {}).get("indicators", [])}
 
     fred = LiveFred(api_key)
 
@@ -432,7 +437,7 @@ def main():
     tier_raw = scored["tier"]
     tier = "QUIET" if tier_raw == "-" else tier_raw
 
-    if prev and prev.get("board", {}).get("tier") == tier:
+    if prev and not spec_changed and prev.get("board", {}).get("tier") == tier:
         tier_since = prev["board"]["tier_since"]
     else:
         history_seed = json.loads(Path(args.history_seed).read_text()) if Path(args.history_seed).exists() else []
