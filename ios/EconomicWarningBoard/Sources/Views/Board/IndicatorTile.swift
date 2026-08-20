@@ -6,6 +6,16 @@ extension Indicator {
         return String(format: abs(value) >= 100 ? "%.0f" : "%.2f", value)
     }
 
+    /// Tile-only: appends a bare "%" for percentage-based units so a value
+    /// like 0.00 reads as "0.00%" instead of a bare "0.00" that a scanning
+    /// eye can mistake for the underlying count being literally zero (e.g.
+    /// jobless claims at their 1-year low reads as 0% above it, not as zero
+    /// claims filed). The Detail screen already spells the unit out in full,
+    /// so this stays tile-only rather than folding into tileValueText.
+    var compactValueText: String {
+        unit.hasPrefix("%") ? tileValueText + "%" : tileValueText
+    }
+
     var accessibilityStateWord: String {
         switch state {
         case .red: return "flagged"
@@ -37,7 +47,7 @@ struct IndicatorTile: View {
                     .padding(.trailing, 2)
             }
             Spacer(minLength: 0)
-            Text(indicator.tileValueText)
+            Text(indicator.compactValueText)
                 .font(.caption2.monospacedDigit())
                 .foregroundStyle(indicator.state == .red ? EWB.broadText : EWB.ink2)
         }
@@ -48,7 +58,7 @@ struct IndicatorTile: View {
         .overlay(tileBorder)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(indicator.name), \(indicator.accessibilityStateWord), \(indicator.tileValueText)")
+        .accessibilityLabel("\(indicator.name), \(indicator.accessibilityStateWord), \(indicator.tileValueText) \(indicator.unit)")
     }
 
     private var tileBackground: some View {
@@ -94,7 +104,7 @@ struct IndicatorWideTile: View {
                 Spacer()
             }
 
-            Text(indicator.tileValueText)
+            Text(indicator.compactValueText)
                 .font(.caption.monospacedDigit())
                 .foregroundStyle(indicator.state == .red ? EWB.broadText : EWB.ink2)
         }
@@ -116,6 +126,6 @@ struct IndicatorWideTile: View {
         )
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(indicator.name), \(indicator.accessibilityStateWord), \(indicator.tileValueText)")
+        .accessibilityLabel("\(indicator.name), \(indicator.accessibilityStateWord), \(indicator.tileValueText) \(indicator.unit)")
     }
 }
