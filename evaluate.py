@@ -95,6 +95,41 @@ UNIT = {
     20: "% year-over-year",
 }
 
+# Watchlist: public, free, timely, but doesn't clear the >=3-recession
+# backtestable-history bar the scored 20 require. Display-only -- never
+# enters reds/available/fraction or any tier. Per spec-v0.5-candidates.md
+# section 4. W3 (Census data-center construction) and W5 (BDC price-to-NAV)
+# are named in that document but need a non-FRED data source with no clean
+# free automated path, so they're not implemented here -- adding them would
+# mean exactly the kind of manual/fragile dependency that got the BDC
+# non-accrual composite rejected outright in the same document.
+WATCHLIST = [
+    {
+        "id": "W1",
+        "name": "Bank loans to nondepository financial institutions",
+        "fred": "LNFACBW027SBOG",
+        "freq": "w",
+        "unit": "$ billions",
+        "what_is_this": "Commercial bank lending to nonbank financial firms -- private credit funds, BDCs, and similar vehicles among them. The best available public, free, weekly bridge to private-credit stress: when private lenders draw on bank credit lines under pressure, it shows up here.",
+    },
+    {
+        "id": "W2",
+        "name": "JOLTS hires rate",
+        "fred": "JTSHIR",
+        "freq": "m",
+        "unit": "%",
+        "what_is_this": "New hires as a share of total employment. A direct read on how willing employers are to hire, independent of the labor-force-size arithmetic that can distort the unemployment rate.",
+    },
+    {
+        "id": "W4",
+        "name": "Business applications",
+        "fred": "BABATOTALSAUS",
+        "freq": "m",
+        "unit": "applications",
+        "what_is_this": "New business applications filed nationwide. A timely read on small-business formation -- and currently reads healthy, which is evidence against a broad SMB-collapse story, not for one.",
+    },
+]
+
 
 def _n(period_word, n):
     return f"{period_word}s" if n != 1 else period_word
@@ -382,6 +417,32 @@ def build_indicator(ind, fred, today, prev_indicators):
     }, int(red)
 
 
+def build_watchlist_item(item, fred):
+    """No rule, no red/green -- just today's reading, for context. Never
+    touches reds/available/fraction."""
+    df = fred.observations(item["fred"])
+    if df.empty:
+        return {
+            "id": item["id"], "name": item["name"], "unit": item["unit"],
+            "what_is_this": item["what_is_this"], "value": None,
+            "observation_date": None, "sparkline": [],
+            "source_name": f"Federal Reserve (FRED: {item['fred']})",
+            "source_url": f"https://fred.stlouisfed.org/series/{item['fred']}",
+        }
+    v = df["value"].reset_index(drop=True)
+    return {
+        "id": item["id"],
+        "name": item["name"],
+        "unit": item["unit"],
+        "what_is_this": item["what_is_this"],
+        "value": round(float(v.iloc[-1]), 4),
+        "observation_date": df["date"].iloc[-1].date().isoformat(),
+        "sparkline": [round(float(x), 4) for x in v.tail(60).tolist()],
+        "source_name": f"Federal Reserve (FRED: {item['fred']})",
+        "source_url": f"https://fred.stlouisfed.org/series/{item['fred']}",
+    }
+
+
 SPEC = None  # set in main(), read by build_indicator for staleness windows
 
 
@@ -431,6 +492,8 @@ def main():
         sys.exit(f"Only {available}/{len(SPEC['indicators'])} indicators available -- "
                  f"refusing to publish a partial board.")
 
+    watchlist_out = [build_watchlist_item(item, fred) for item in WATCHLIST]
+
     board_df = pd.DataFrame([row])
     scored = score_board(board_df, SPEC).iloc[0]
 
@@ -479,6 +542,7 @@ def main():
         },
         "indicators": indicators_out,
         "history": history,
+        "watchlist": watchlist_out,
     }
 
     Path(args.out).write_text(json.dumps(board, indent=2) + "\n")
