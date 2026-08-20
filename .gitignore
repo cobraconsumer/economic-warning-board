@@ -10,3 +10,7 @@ board.json.tmp
 xcuserdata/
 DerivedData/
 .build/
+*.certSigningRequest
+*.cer
+*.mobileprovision
+*.p12
