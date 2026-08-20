@@ -1,8 +1,13 @@
 import Charts
 import SwiftUI
 
+/// The one place in the app that uses Swift Charts rather than the plain
+/// Path sparkline -- one instance, benefits from real axis handling. Spec
+/// 7.4. Recession shading uses `ink` at low opacity, deliberately not red:
+/// the bands are context, not warnings.
 struct HistoryChart: View {
     let history: [HistoryPoint]
+    let watchFraction: Double
 
     private struct Recession {
         let name: String
@@ -32,25 +37,31 @@ struct HistoryChart: View {
         Chart {
             ForEach(Self.recessions, id: \.name) { recession in
                 RectangleMark(xStart: .value("Start", recession.start), xEnd: .value("End", recession.end))
-                    .foregroundStyle(Color(.systemGray5))
+                    .foregroundStyle(EWB.ink.opacity(0.085))
             }
             ForEach(points, id: \.date) { point in
-                LineMark(x: .value("Date", point.date), y: .value("% red", point.fraction))
-                    .foregroundStyle(Color(.label))
+                AreaMark(x: .value("Date", point.date), y: .value("% flagged", point.fraction))
+                    .foregroundStyle(EWB.broadMark.opacity(0.12))
+                LineMark(x: .value("Date", point.date), y: .value("% flagged", point.fraction))
+                    .foregroundStyle(EWB.broadText)
                     .lineStyle(StrokeStyle(lineWidth: 1.3))
             }
-            RuleMark(y: .value("Watch", 25))
-                .foregroundStyle(Tier.watch.color.opacity(0.5))
-                .lineStyle(StrokeStyle(lineWidth: 1, dash: [3, 3]))
-            RuleMark(y: .value("Warning", 40))
-                .foregroundStyle(Tier.warning.color.opacity(0.5))
-                .lineStyle(StrokeStyle(lineWidth: 1, dash: [3, 3]))
-            RuleMark(y: .value("Broad", 60))
-                .foregroundStyle(Tier.broad.color.opacity(0.5))
+            RuleMark(y: .value("Watch threshold", watchFraction * 100))
+                .foregroundStyle(EWB.ink3)
                 .lineStyle(StrokeStyle(lineWidth: 1, dash: [3, 3]))
         }
-        .chartYAxisLabel("% of indicators red")
+        .chartYAxis {
+            AxisMarks(position: .leading) { _ in
+                AxisGridLine().foregroundStyle(EWB.stroke)
+                AxisValueLabel().foregroundStyle(EWB.ink3)
+            }
+        }
+        .chartXAxis {
+            AxisMarks { _ in
+                AxisValueLabel().foregroundStyle(EWB.ink3)
+            }
+        }
         .chartYScale(domain: 0...100)
-        .frame(height: 220)
+        .frame(height: 200)
     }
 }

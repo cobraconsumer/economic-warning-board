@@ -2,15 +2,22 @@ import Foundation
 
 /// Static, spec-frozen copy the board.json payload deliberately doesn't carry
 /// every day: the one-sentence "what is this?" per indicator (mirrors
-/// evaluate.py's WHAT_IS_THIS) and the numeric threshold line drawn on each
-/// sparkline (mirrors spec_v03.json's already-scaled params, in the same
-/// units as evaluate.py's metric_series). Keep in sync with the backend by
-/// hand -- both are frozen alongside the spec, not data that changes daily.
+/// evaluate.py's WHAT_IS_THIS) and short tile labels (the detail screen's
+/// `name` is already the full descriptive form; tiles need something
+/// shorter -- "Temp Help", not "Temporary help employment"). Keep in sync
+/// with the backend by hand -- both are frozen alongside the spec, not data
+/// that changes daily. threshold/position/direction now come from the
+/// server (evaluate.py's threshold_value/compute_position) rather than
+/// being duplicated here.
 enum IndicatorCopy {
-    static let bucketLabels: [String: String] = [
-        "A": "Financial & Credit",
-        "B": "Business",
-        "C": "Household & Labor",
+    static let shortName: [Int: String] = [
+        1: "Yield Curve", 2: "HY Spread", 3: "Baa Spread", 4: "NFCI",
+        5: "STL Stress", 6: "Lending Standards", 7: "Equity Drawdown",
+        8: "CFNAI", 9: "Industrial Prod.", 10: "Truck Sales",
+        11: "Building Permits", 12: "Capex Orders", 13: "Temp Help",
+        14: "Loan Delinquency", 15: "Jobless Claims", 16: "Continuing Claims",
+        17: "Sahm Rule", 18: "CC Delinquency", 19: "Mortgage Delinq.",
+        20: "Retail Sales",
     ]
 
     static let whatIsThis: [Int: String] = [
@@ -34,25 +41,5 @@ enum IndicatorCopy {
         18: "The delinquency rate on credit card balances at commercial banks.",
         19: "The delinquency rate on single-family residential mortgages at commercial banks.",
         20: "Retail sales adjusted for inflation, compared with a year earlier.",
-    ]
-
-    /// Horizontal threshold-line value for each indicator's sparkline, in the
-    /// same metric units evaluate.py's metric_series computes (so the line
-    /// and the plotted values always line up).
-    static let thresholdLine: [Int: Double] = [
-        1: 0.0, 2: 4.75, 3: 2.375, 4: 0.0, 5: 0.95, 6: 19.0, 7: -14.25,
-        8: -0.3325, 9: -0.95, 10: -19.0, 11: -9.5, 12: -1.9, 13: -2.85,
-        14: 1.9, 15: 19.0, 16: 14.25, 17: 0.4999, 18: 2.85, 19: 2.375, 20: 0.0,
-    ]
-
-    /// Which side of the threshold line is red, per indicator's rule. `true`
-    /// = the reading turns red by rising above the line; `false` = by
-    /// falling below it. Mirrors the direction baked into each rule type in
-    /// evaluate.py -- best-effort for compound rules (e.g. #14/#18/#19 also
-    /// require a "rising" leg), reporting distance on the level leg only.
-    static let aboveIsBad: [Int: Bool] = [
-        1: false, 2: true, 3: true, 4: true, 5: true, 6: true, 7: false,
-        8: false, 9: false, 10: false, 11: false, 12: false, 13: false,
-        14: true, 15: true, 16: true, 17: true, 18: true, 19: true, 20: false,
     ]
 }

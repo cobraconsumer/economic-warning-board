@@ -1,113 +1,186 @@
 import SwiftUI
 
-/// Answers exactly five questions, in order, per spec 2.2. The why_text card
-/// at the bottom is the anti-confirmation-bias feature: it explains green
-/// states with the same weight as red ones.
+/// Answers exactly five questions, in order, per spec 7.3. The why-callout
+/// is the anti-confirmation-bias feature: a clear indicator gets the same
+/// card, same weight, same five questions as a flagged one -- this screen
+/// must never be a reduced version of itself based on state.
 struct IndicatorDetailView: View {
     let indicator: Indicator
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 28) {
-                header
+        AmbientBackground {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    heroCard
 
-                if !indicator.sparkline.isEmpty {
-                    SparklineChart(
-                        values: indicator.sparkline,
-                        thresholdValue: IndicatorCopy.thresholdLine[indicator.id]
-                    )
-                }
+                    questionBlock("What is this?") {
+                        Text(IndicatorCopy.whatIsThis[indicator.id] ?? indicator.name)
+                    }
+                    divider
 
-                DistanceToThresholdBar(indicator: indicator)
-
-                question("What is this?") {
-                    Text(IndicatorCopy.whatIsThis[indicator.id] ?? indicator.name)
-                }
-
-                question("What is it now?") {
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text(valueText)
-                            .font(.title3.weight(.semibold))
-                        if let observationDate = indicator.observationDate,
-                           let formatted = DateFormatting.dayMonthYear(observationDate) {
-                            Text("as of \(formatted)")
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                        }
-                        if let observationDate = indicator.observationDate,
-                           let age = DateFormatting.dataAgeText(observationDate) {
-                            Text(age)
-                                .font(.footnote)
-                                .foregroundStyle(.orange)
+                    questionBlock("What is it now?") {
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                                Text(indicator.tileValueText)
+                                    .font(.title3.weight(.bold))
+                                    .foregroundStyle(EWB.ink)
+                                Text(indicator.unit)
+                                    .font(.subheadline)
+                                    .foregroundStyle(EWB.ink3)
+                                if let observationDate = indicator.observationDate,
+                                   let formatted = DateFormatting.dayMonthYear(observationDate) {
+                                    Text("as of \(formatted)")
+                                        .font(.footnote)
+                                        .foregroundStyle(EWB.ink3)
+                                }
+                            }
+                            if let observationDate = indicator.observationDate,
+                               let age = DateFormatting.dataAgeText(observationDate) {
+                                Text(age.uppercased())
+                                    .font(.caption2.weight(.bold))
+                                    .tracking(1)
+                                    .foregroundStyle(EWB.quietText)
+                            }
                         }
                     }
-                }
+                    divider
 
-                question("What makes it red?") {
-                    Text(indicator.thresholdText)
-                }
+                    questionBlock("What makes it red?") {
+                        Text(indicator.thresholdText)
+                    }
+                    divider
 
-                question("How long has it been in this state?") {
-                    Text(DateFormatting.daysInStateText(indicator.daysInState))
-                }
+                    questionBlock("How long in this state?") {
+                        Text(durationText)
+                    }
+                    divider
 
-                question("Where does this come from?") {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(indicator.sourceName)
+                    DistanceBar(indicator: indicator)
+
+                    whyCallout
+
+                    divider
+
+                    HStack(alignment: .top) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("SOURCE")
+                                .font(.caption2.weight(.bold))
+                                .tracking(1.6)
+                                .foregroundStyle(EWB.ink3)
+                            Text(indicator.sourceName)
+                                .font(.footnote)
+                                .foregroundStyle(EWB.ink2)
+                        }
+                        Spacer()
                         if let url = URL(string: indicator.sourceUrl) {
                             Link("View on FRED ↗", destination: url)
+                                .font(.footnote.weight(.semibold))
+                                .foregroundStyle(indicator.bucket.textColor)
                         }
                     }
                 }
-
-                whyCard
+                .padding(.horizontal, Metrics.screenPadding)
+                .padding(.top, 12)
+                .padding(.bottom, 40)
             }
-            .padding(20)
+            .scrollContentBackground(.hidden)
         }
         .navigationTitle(indicator.name)
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text((IndicatorCopy.bucketLabels[indicator.bucket] ?? indicator.bucket).uppercased())
-                .font(.system(size: 12, weight: .semibold))
-                .tracking(1)
-                .foregroundStyle(.secondary)
-            HStack(spacing: 8) {
-                DotView(state: indicator.state)
-                Text(indicator.state.rawValue.capitalized)
-                    .font(.subheadline.weight(.medium))
-                    .foregroundStyle(indicator.state == .red ? Tier.broad.color : .secondary)
+    private var heroCard: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(indicator.bucket.label.uppercased())
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
+
+            HStack(alignment: .top) {
+                Text(indicator.name)
+                    .font(.title3.weight(.bold))
+                    .foregroundStyle(EWB.ink)
+                Spacer()
+                StateDot(state: indicator.state, bucket: indicator.bucket, size: Metrics.dotLarge)
             }
+
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                Text(indicator.tileValueText)
+                    .font(.system(size: 42, weight: .bold))
+                    .minimumScaleFactor(0.5)
+                    .monospacedDigit()
+                    .foregroundStyle(indicator.state == .red ? EWB.broadText : indicator.bucket.textColor)
+                Text(indicator.unit)
+                    .font(.subheadline)
+                    .foregroundStyle(EWB.ink3)
+            }
+
+            if !indicator.sparkline.isEmpty {
+                SparklineChart(
+                    values: indicator.sparkline,
+                    thresholdValue: indicator.threshold,
+                    color: indicator.state == .red ? EWB.broadText : indicator.bucket.textColor
+                )
+                .frame(height: 70)
+            }
+        }
+        .padding(20)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .glassCard(radius: Radius.hero)
+    }
+
+    private var divider: some View {
+        Rectangle().fill(EWB.stroke).frame(height: 1)
+    }
+
+    private var whyCallout: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(calloutHeading.uppercased())
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(calloutColor)
+            Text(indicator.whyText)
+                .font(.subheadline)
+                .foregroundStyle(EWB.ink2)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .glassCard()
+    }
+
+    private var calloutHeading: String {
+        switch indicator.state {
+        case .green: return "Why it is clear"
+        case .red: return "Why it is flagged"
+        case .unavailable: return "Why it is excluded"
         }
     }
 
-    private var whyCard: some View {
-        Text(indicator.whyText)
-            .font(.callout)
-            .padding(16)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(
-                (indicator.state == .red ? Tier.broad.color : Color.green).opacity(0.08),
-                in: RoundedRectangle(cornerRadius: 12)
-            )
+    private var calloutColor: Color {
+        switch indicator.state {
+        case .green: return indicator.bucket.textColor
+        case .red: return EWB.broadText
+        case .unavailable: return EWB.ink3
+        }
     }
 
-    private var valueText: String {
-        guard let value = indicator.value else { return "Unavailable" }
-        return String(format: "%.2f %@", value, indicator.unit)
+    private var durationText: String {
+        let coarse = DateFormatting.daysInStateText(indicator.daysInState)
+        return "\(coarse) \(indicator.accessibilityStateWord) · \(indicator.daysInState) days"
     }
 
     @ViewBuilder
-    private func question<Content: View>(
+    private func questionBlock<Content: View>(
         _ title: String, @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.secondary)
+            Text(title.uppercased())
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
             content()
+                .font(.subheadline)
+                .foregroundStyle(EWB.ink2)
         }
     }
 }

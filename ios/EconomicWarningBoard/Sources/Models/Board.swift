@@ -16,14 +16,34 @@ struct BoardSummary: Decodable {
     let fraction: Double
     let tier: Tier
     let tierSince: String
-    let buckets: [String: Bucket]
+    let buckets: [String: BucketSummary]
     let ignitionActive: Bool
 }
 
-struct Bucket: Decodable, Hashable {
+/// Per-bucket score counts, keyed by Bucket.rawValue ("A"/"B"/"C") in
+/// BoardSummary.buckets. Not to be confused with `Bucket`, the category enum.
+struct BucketSummary: Decodable, Hashable {
     let red: Int
     let available: Int
     let label: String
+}
+
+/// Category. Rides directly on the server's existing "A"/"B"/"C" indicator.bucket
+/// string -- no schema change needed, just a typed wrapper around it.
+enum Bucket: String, Decodable, Hashable, CaseIterable {
+    case financial = "A"
+    case business = "B"
+    case household = "C"
+
+    static let order: [Bucket] = [.financial, .business, .household]
+
+    var label: String {
+        switch self {
+        case .financial: return "Financial & Credit"
+        case .business: return "Business"
+        case .household: return "Household & Labor"
+        }
+    }
 }
 
 enum Tier: String, Decodable, Hashable, CaseIterable {
@@ -42,6 +62,19 @@ enum Tier: String, Decodable, Hashable, CaseIterable {
         case .broad: return 3
         }
     }
+
+    var explanation: String {
+        switch self {
+        case .quiet:
+            return "No unusual conditions. Most of history looks like this."
+        case .watch:
+            return "Early signs are showing up. Historically the tier that matters most — it has led every recession studied by 4 to 12 months."
+        case .warning:
+            return "Conditions have broadened. Historically arrives at or near the start of a downturn, not far ahead of it."
+        case .broad:
+            return "Red across most of the board. Has not occurred outside an actual recession in the 35 years studied."
+        }
+    }
 }
 
 enum IndicatorState: String, Decodable, Hashable {
@@ -51,11 +84,17 @@ enum IndicatorState: String, Decodable, Hashable {
 struct Indicator: Decodable, Identifiable, Hashable {
     let id: Int
     let name: String
-    let bucket: String
+    let bucket: Bucket
     let role: String
     let state: IndicatorState
     let value: Double?
     let unit: String
+    /// 1.0 == exactly at threshold, 0 == the metric's own historical typical
+    /// level, >1.0 == past it. Server-computed; see evaluate.py's
+    /// compute_position. nil only for indicators fetched before this field
+    /// shipped (stale cache).
+    let threshold: Double?
+    let position: Double?
     let thresholdText: String
     let whyText: String
     let observationDate: String?
@@ -84,8 +123,4 @@ struct HistoryPoint: Decodable, Identifiable, Hashable {
     let fraction: Double
     let tier: Tier
     var id: String { date }
-}
-
-extension Bucket {
-    static let order = ["A", "B", "C"]
 }

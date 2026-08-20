@@ -1,104 +1,108 @@
 import SwiftUI
 
-/// Context, not part of the scored board -- per spec-v0.5-candidates.md
-/// section 4, this must render as a visually distinct, clearly labeled
-/// section and never imply these items carry the same weight as the 20
-/// scored indicators.
+/// The demotion here is structural, not cosmetic: these items get no dot, no
+/// tile, no category color, because a dot signals a state and something
+/// without a threshold has no state to report. Spec 7.5.
 struct WatchlistView: View {
     @EnvironmentObject private var store: BoardStore
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
-                disclaimer
+        AmbientBackground {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    Text("Three things worth watching, none of which count.")
+                        .font(.title.weight(.bold))
+                        .foregroundStyle(EWB.ink)
 
-                if let items = store.board?.watchlist, !items.isEmpty {
-                    ForEach(items) { item in
-                        WatchlistRow(item: item)
+                    explainer
+
+                    if let items = store.board?.watchlist, !items.isEmpty {
+                        ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                            watchRow(item)
+                            if index < items.count - 1 {
+                                Rectangle().fill(EWB.stroke).frame(height: 1)
+                            }
+                        }
+                        Rectangle().fill(EWB.stroke).frame(height: 1)
+                        Text("If one of these accumulates enough history to be tested properly, it will be promoted to the twenty and the change will be recorded in the methodology.")
+                            .font(.footnote)
+                            .foregroundStyle(EWB.ink3)
+                    } else {
+                        Text("No watchlist data available right now.")
+                            .font(.subheadline)
+                            .foregroundStyle(EWB.ink3)
                     }
-                } else {
-                    Text("No watchlist data available right now.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
                 }
+                .padding(.horizontal, Metrics.screenPadding)
+                .padding(.top, 12)
+                .padding(.bottom, 40)
             }
-            .padding(20)
+            .scrollContentBackground(.hidden)
         }
         .navigationTitle("Context")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Done") { dismiss() }
+                    .tint(EWB.ink2)
             }
         }
     }
 
-    private var disclaimer: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("Not part of the scored board")
-                .font(.headline)
-            Text("These readings are public, free, and timely, but don't yet have enough history to be backtested across three or more recessions the way the 20 scored indicators are. They never affect the count, the tier, or any notification.")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+    private var explainer: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "exclamationmark.circle")
+                .foregroundStyle(EWB.ink3)
+            Text("These are **not part of the count**. None has enough backtested history to earn a threshold, so none has a red or green state and none can move the number on the board. They are here because ignoring them would be dishonest, not because they are evidence.")
+                .font(.subheadline)
+                .foregroundStyle(EWB.ink2)
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: Radius.card).strokeBorder(EWB.stroke2, lineWidth: 1))
     }
-}
 
-private struct WatchlistRow: View {
-    let item: WatchlistItem
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(item.name)
-                .font(.headline)
-
-            if !item.sparkline.isEmpty {
-                SparklineChart(values: item.sparkline, thresholdValue: nil)
-                    .frame(height: 70)
+    private func watchRow(_ item: WatchlistItem) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(item.name)
+                        .font(.headline)
+                        .foregroundStyle(EWB.ink)
+                    Text(item.unit)
+                        .font(.footnote)
+                        .foregroundStyle(EWB.ink3)
+                }
+                Spacer()
+                if let value = item.value {
+                    Text(formattedValue(value, unit: item.unit))
+                        .font(.title3.weight(.semibold).monospacedDigit())
+                        .foregroundStyle(EWB.ink2)
+                }
             }
 
-            if let value = item.value {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(formattedValue(value))
-                        .font(.title3.weight(.semibold))
-                    if let date = item.observationDate,
-                       let formatted = DateFormatting.dayMonthYear(date) {
-                        Text("as of \(formatted)")
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                    }
-                }
+            if !item.sparkline.isEmpty {
+                SparklineChart(values: item.sparkline, thresholdValue: nil, color: EWB.ink3, dimmed: true)
+                    .frame(height: 40)
             }
 
             Text(item.whatIsThis)
-                .font(.callout)
-                .foregroundStyle(.secondary)
+                .font(.subheadline)
+                .foregroundStyle(EWB.ink2)
 
-            HStack(spacing: 6) {
-                Text(item.sourceName)
-                if let url = URL(string: item.sourceUrl) {
-                    Link("View on FRED ↗", destination: url)
-                }
+            Link(destination: URL(string: item.sourceUrl) ?? URL(string: "https://fred.stlouisfed.org")!) {
+                Text("\(item.sourceName) →")
+                    .font(.footnote)
+                    .foregroundStyle(EWB.ink3)
             }
-            .font(.footnote)
         }
-        .padding(16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 14))
     }
 
-    private func formattedValue(_ value: Double) -> String {
-        if item.unit == "applications" || item.unit == "$ billions" {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            formatter.maximumFractionDigits = item.unit == "$ billions" ? 1 : 0
-            let number = formatter.string(from: NSNumber(value: value)) ?? "\(value)"
-            return "\(number) \(item.unit)"
-        }
-        return String(format: "%.2f %@", value, item.unit)
+    private func formattedValue(_ value: Double, unit: String) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = unit == "$ billions" ? 1 : (abs(value) >= 100 ? 0 : 2)
+        return formatter.string(from: NSNumber(value: value)) ?? "\(value)"
     }
 }

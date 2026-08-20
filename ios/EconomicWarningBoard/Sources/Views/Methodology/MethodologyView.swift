@@ -1,117 +1,226 @@
 import SwiftUI
 
-/// Non-negotiable content per spec 2.3: the tiers, the honest out-of-sample
-/// lead times, the 35-year false-Warning record, the 2020 exception, the
-/// three named blind spots, the historical chart, and "what this is not"
-/// stated prominently in the app itself, not just the store listing.
+/// Non-negotiable content per spec 7.4: "what this is not" sits near the top
+/// as a real card (not fine print), the four tiers, the history chart, the
+/// honest out-of-sample track record, three named blind spots, and a link
+/// to the public methodology. All figures below are the real out-of-sample
+/// numbers from the frozen backtest -- not the calibrated ones, which are
+/// better and are deliberately withheld because the system was fitted on
+/// the same history that produced them.
 struct MethodologyView: View {
     @EnvironmentObject private var store: BoardStore
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 32) {
-                whatThisIsNot
-                tiersSection
-                trackRecordSection
-                if let history = store.board?.history, !history.isEmpty {
-                    historySection(history)
+        AmbientBackground {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 28) {
+                    intro
+                    whatThisIsNot
+                    fourTiers
+                    if let history = store.board?.history, !history.isEmpty {
+                        historySection(history)
+                    }
+                    trackRecord
+                    blindSpots
+                    methodologyLink
                 }
-                blindSpotsSection
-                methodologyLinks
+                .padding(.horizontal, Metrics.screenPadding)
+                .padding(.top, 12)
+                .padding(.bottom, 40)
             }
-            .padding(20)
+            .scrollContentBackground(.hidden)
         }
         .navigationTitle("Methodology")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Done") { dismiss() }
+                    .tint(EWB.ink2)
             }
+        }
+    }
+
+    private var intro: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("How this works.")
+                .font(.title.weight(.bold))
+                .foregroundStyle(EWB.ink)
+            Text("Twenty indicators from public government data. Each has a fixed threshold set in advance. The count is how many are past theirs today. Nothing here is a forecast.")
+                .font(.subheadline)
+                .foregroundStyle(EWB.ink2)
         }
     }
 
     private var whatThisIsNot: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("What this is not").font(.headline)
-            VStack(alignment: .leading, spacing: 4) {
-                bulletText("Not a prediction.")
-                bulletText("Not a probability.")
-                bulletText("Not financial advice.")
-                bulletText("Not a recommendation to buy or sell anything.")
-            }
+        VStack(alignment: .leading, spacing: 14) {
+            Text("WHAT THIS IS NOT")
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
+            notItem("Not a prediction.", "A high count means conditions resemble past pre-recession periods. It does not mean one is coming.")
+            notItem("Not financial advice.", "Nothing here is a recommendation to buy, sell, or hold anything.")
+            notItem("Not a live feed.", "The data updates once a day. Some underlying series are monthly or quarterly and are older than that.")
+            notItem("Not complete.", "Three known blind spots are listed below. There are certainly others.")
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: Radius.card).strokeBorder(EWB.stroke2, lineWidth: 1))
     }
 
-    private var tiersSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("The tiers").font(.headline)
+    private func notItem(_ lead: String, _ rest: String) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Text("—").foregroundStyle(EWB.ink3)
+            (Text(lead).fontWeight(.bold) + Text(" " + rest))
+                .font(.subheadline)
+                .foregroundStyle(EWB.ink2)
+        }
+    }
+
+    private var fourTiers: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("THE FOUR TIERS")
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
+                .padding(.bottom, 14)
             ForEach(Tier.allCases, id: \.self) { tier in
-                HStack(alignment: .top, spacing: 12) {
-                    Circle().fill(tier.color).frame(width: 12, height: 12).padding(.top, 5)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(tier.label).font(.subheadline.weight(.semibold))
-                        Text(tier.explanation).font(.footnote).foregroundStyle(.secondary)
-                    }
+                tierRow(tier)
+                if tier != Tier.allCases.last {
+                    Rectangle().fill(EWB.stroke).frame(height: 1).padding(.vertical, 14)
                 }
             }
         }
     }
 
-    private var trackRecordSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Track record, 1988–present").font(.headline)
-            Text("Out-of-sample, the Watch tier led the last three recessions by **12, 4, and 5 months**. Those are the honest figures to quote — not ones from any lightly calibrated version of the thresholds.")
-                .font(.subheadline)
-            Text("**No false Warning-tier reading in 35 years.** The board has shown no active tier roughly 75% of the time.")
-                .font(.subheadline)
-            Text("2020 is the exception: no advance warning, because no indicator-based system can forecast an external shock like a pandemic. That's a limit worth stating, not hiding.")
-                .font(.subheadline)
+    private func tierRow(_ tier: Tier) -> some View {
+        let isCurrent = store.board?.board.tier == tier
+        return HStack(alignment: .top, spacing: 12) {
+            Rectangle().fill(tier.markColor).frame(width: 3).frame(maxHeight: .infinity)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text(tier.rawValue.capitalized + (isCurrent ? " · now" : ""))
+                        .font(.subheadline.weight(.bold))
+                        .foregroundStyle(isCurrent ? tier.textColor : EWB.ink)
+                    Spacer()
+                    Text(flaggedRange(tier))
+                        .font(.footnote)
+                        .foregroundStyle(EWB.ink3)
+                }
+                Text(tier.explanation)
+                    .font(.footnote)
+                    .foregroundStyle(EWB.ink2)
+            }
+        }
+        .frame(minHeight: 44)
+    }
+
+    private func flaggedRange(_ tier: Tier) -> String {
+        switch tier {
+        case .quiet: return "0–4 flagged"
+        case .watch: return "5–7 flagged"
+        case .warning: return "8–11 flagged"
+        case .broad: return "12+ flagged"
         }
     }
 
     private func historySection(_ history: [HistoryPoint]) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("The board, 1988–present").font(.headline)
-            HistoryChart(history: history)
-            Text("Shaded bands are NBER recessions.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("SHARE OF INDICATORS FLAGGED, 1988 TO TODAY")
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
+            Text("Shaded bands are NBER recessions. Dashed line is the Watch threshold.")
+                .font(.footnote)
+                .foregroundStyle(EWB.ink3)
+            HistoryChart(history: history, watchFraction: 0.25)
         }
     }
 
-    private var blindSpotsSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("What this board can't see").font(.headline)
-            Text("Three blind spots, named rather than hidden:")
-                .font(.subheadline)
-            VStack(alignment: .leading, spacing: 8) {
-                bulletText("Non-bank private credit — direct lending outside the traditional banking system isn't well covered by public data.")
-                bulletText("AI-specific capital spending — a boom-and-bust in this narrow category wouldn't clearly show up in broad investment indicators.")
-                bulletText("SMB customer-acquisition costs — stress in how small businesses find customers has no reliable public data series.")
+    private var trackRecord: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text("TRACK RECORD, OUT OF SAMPLE")
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
+
+            LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible())], spacing: 10) {
+                statCard("3 of 3", "Recessions called in advance", "1990-91, 2001, 2007-09")
+                statCard("5 mo", "Median lead time", "range 4 to 12 months")
+                statCard("0", "False Warning or Broad readings", "in 35 years, four stress tests")
+                statCard("1", "Missed entirely", "2020 — external shock")
+            }
+
+            Text("These are the out-of-sample figures. The calibrated numbers are better and are not shown, because the system was fitted on the same history that produced them.")
+                .font(.footnote)
+                .foregroundStyle(EWB.ink3)
+        }
+    }
+
+    private func statCard(_ value: String, _ title: String, _ subtitle: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(value)
+                .font(.title2.weight(.bold).monospacedDigit())
+                .foregroundStyle(EWB.ink)
+            Text(title)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(EWB.ink2)
+            Text(subtitle)
+                .font(.caption2)
+                .foregroundStyle(EWB.ink3)
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .glassCard(radius: Radius.tile)
+    }
+
+    private var blindSpots: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("THREE THINGS IT CANNOT SEE")
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
+            blindSpot("01", "Shocks with no economic build-up", "A pandemic, a war, a sudden fiscal cliff. 2020 was missed because nothing in the data was deteriorating beforehand. No indicator here can see an event that hasn't started.")
+            blindSpot("02", "Stress that never reaches public data", "Non-bank private credit, AI-specific capital spending, and small-business customer acquisition costs don't appear in any series this reads. A crisis can build in places the government doesn't publish.")
+            blindSpot("03", "A changed economy", "These thresholds were calibrated on 1988-2026. If the relationship between manufacturing, labor, and output has structurally shifted, the levels may be tuned to an economy that no longer exists.")
+        }
+    }
+
+    private func blindSpot(_ number: String, _ title: String, _ body: String) -> some View {
+        HStack(alignment: .top, spacing: 14) {
+            Text(number)
+                .font(.footnote.weight(.bold).monospacedDigit())
+                .foregroundStyle(EWB.ink3)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.subheadline.weight(.bold))
+                    .foregroundStyle(EWB.ink)
+                Text(body)
+                    .font(.footnote)
+                    .foregroundStyle(EWB.ink2)
             }
         }
     }
 
-    private var methodologyLinks: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Published methodology").font(.headline)
-            Text("The full specification, changelog, and backtest results are public.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            Link("View on GitHub ↗", destination: URL(string: "https://github.com/cobraconsumer/economic-warning-board")!)
+    private var methodologyLink: some View {
+        Link(destination: URL(string: "https://github.com/cobraconsumer/economic-warning-board")!) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Full methodology and source code")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(EWB.ink)
+                    Text("Every threshold, in public")
+                        .font(.footnote)
+                        .foregroundStyle(EWB.ink3)
+                }
+                Spacer()
+                Text("Open ↗")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(EWB.finText)
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity)
+            .glassCard()
         }
-    }
-
-    private func bulletText(_ text: String) -> some View {
-        HStack(alignment: .top, spacing: 8) {
-            Text("•")
-            Text(text)
-        }
-        .font(.footnote)
-        .foregroundStyle(.secondary)
     }
 }
