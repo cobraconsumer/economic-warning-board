@@ -33,7 +33,7 @@ jobs:
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
-          python evaluate.py --spec spec_v03.json --out board.json \
+          python evaluate.py --spec spec_v05.json --out board.json \
             --history-seed history_seed.json --previous previous_board.json
 
       - name: Stage publish directory

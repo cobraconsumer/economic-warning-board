@@ -353,14 +353,13 @@ def build_indicator(ind, fred, today, prev_indicators):
     value = float(metric.iloc[-1])
     state = "red" if red else "green"
 
-    if prev and prev.get("state") in ("red", "green"):
-        prev_days = int(prev.get("days_in_state", 0))
-        if prev.get("state") == state:
-            days_in_state = prev_days + 1
-        else:
-            days_in_state = 0
+    if prev and prev.get("state") == state and prev.get("since"):
+        since = date.fromisoformat(prev["since"])
+    elif prev and prev.get("state") in ("red", "green"):
+        since = today
     else:
-        _since, days_in_state = bootstrap_indicator_since(ind, df, today, red)
+        since, _ = bootstrap_indicator_since(ind, df, today, red)
+    days_in_state = (today - since).days
 
     sparkline = [round(float(x), 4) for x in metric.tail(60).tolist()]
 
@@ -376,6 +375,7 @@ def build_indicator(ind, fred, today, prev_indicators):
         "why_text": why_text(ind, red, metric),
         "observation_date": df["date"].iloc[-1].date().isoformat(),
         "days_in_state": days_in_state,
+        "since": since.isoformat(),
         "source_name": f"Federal Reserve (FRED: {sid})",
         "source_url": f"https://fred.stlouisfed.org/series/{sid}",
         "sparkline": sparkline,
