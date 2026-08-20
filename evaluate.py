@@ -288,6 +288,39 @@ def metric_series(ind, df):
     raise ValueError(rule)
 
 
+def threshold_value(ind):
+    """The rule's threshold as a single scalar, in the same units
+    metric_series returns. Mirrors the client's old static thresholdLine
+    table -- computed here from params directly so there's one source of
+    truth instead of two hand-kept copies."""
+    p = ind["params"]
+    rule = ind["rule"]
+    if rule == "curve":
+        return 0.0
+    if rule in ("hy_spread", "level_above", "level_below",
+                "level_or_rising", "level_and_rising"):
+        return p["level"]
+    if rule in ("drawdown", "drop_from_peak_ma"):
+        return -p["drop"] * 100.0
+    if rule in ("yoy_below", "yoy_above_weekly"):
+        return p["pct"]
+    if rule == "claims_vs_low":
+        return p["rise"] * 100.0
+    raise ValueError(rule)
+
+
+def compute_position(threshold, typical, value):
+    """UI-only distance-to-threshold, on a scale where 1.0 IS the threshold
+    and 0 is the metric's own typical historical level -- so direction
+    (whether red means above or below) falls out of the sign of
+    (threshold - typical) automatically, no separate direction table needed.
+    Not part of the scoring rules; purely for the app's distance bar."""
+    denom = threshold - typical
+    if abs(denom) < 1e-6:
+        return 1.15 if value >= threshold else -0.15
+    return round((value - typical) / denom, 4)
+
+
 class LiveFred:
     def __init__(self, api_key):
         self.key = api_key
@@ -401,6 +434,9 @@ def build_indicator(ind, fred, today, prev_indicators):
     days_in_state = (today - since).days
 
     sparkline = [round(float(x), 4) for x in metric.tail(60).tolist()]
+    threshold = threshold_value(ind)
+    typical = float(metric.median())
+    position = compute_position(threshold, typical, value)
 
     return {
         "id": ind["id"],
@@ -410,6 +446,8 @@ def build_indicator(ind, fred, today, prev_indicators):
         "state": state,
         "value": round(value, 4),
         "unit": UNIT[ind["id"]],
+        "threshold": round(threshold, 4),
+        "position": position,
         "threshold_text": threshold_text(ind),
         "why_text": why_text(ind, red, metric),
         "observation_date": df["date"].iloc[-1].date().isoformat(),
