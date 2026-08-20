@@ -3,6 +3,7 @@ import SwiftUI
 struct BoardView: View {
     @EnvironmentObject private var store: BoardStore
     @State private var showMethodology = false
+    @State private var showWatchlist = false
 
     var body: some View {
         ScrollView {
@@ -42,6 +43,9 @@ struct BoardView: View {
         .sheet(isPresented: $showMethodology) {
             NavigationStack { MethodologyView() }
         }
+        .sheet(isPresented: $showWatchlist) {
+            NavigationStack { WatchlistView() }
+        }
     }
 
     @ViewBuilder
@@ -78,6 +82,27 @@ struct BoardView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+
+        if let watchlist = board.watchlist, !watchlist.isEmpty {
+            Button {
+                showWatchlist = true
+            } label: {
+                HStack {
+                    Text("CONTEXT")
+                        .font(.system(size: 12, weight: .semibold))
+                        .tracking(1)
+                    Spacer()
+                    Text("\(watchlist.count) items, not scored")
+                        .font(.footnote)
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                }
+                .foregroundStyle(.secondary)
+                .padding(14)
+                .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12))
+            }
+            .buttonStyle(.plain)
+        }
 
         VStack(spacing: 4) {
             Text("Updated \(DateFormatting.dayMonthYear(board.generatedAt))")

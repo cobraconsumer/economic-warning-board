@@ -18,6 +18,8 @@ struct IndicatorDetailView: View {
                     )
                 }
 
+                DistanceToThresholdBar(indicator: indicator)
+
                 question("What is this?") {
                     Text(IndicatorCopy.whatIsThis[indicator.id] ?? indicator.name)
                 }
@@ -31,6 +33,12 @@ struct IndicatorDetailView: View {
                             Text("as of \(formatted)")
                                 .font(.footnote)
                                 .foregroundStyle(.secondary)
+                        }
+                        if let observationDate = indicator.observationDate,
+                           let age = DateFormatting.dataAgeText(observationDate) {
+                            Text(age)
+                                .font(.footnote)
+                                .foregroundStyle(.orange)
                         }
                     }
                 }

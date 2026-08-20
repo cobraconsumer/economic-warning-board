@@ -44,4 +44,15 @@ enum IndicatorCopy {
         8: -0.3325, 9: -0.95, 10: -19.0, 11: -9.5, 12: -1.9, 13: -2.85,
         14: 1.9, 15: 19.0, 16: 14.25, 17: 0.4999, 18: 2.85, 19: 2.375, 20: 0.0,
     ]
+
+    /// Which side of the threshold line is red, per indicator's rule. `true`
+    /// = the reading turns red by rising above the line; `false` = by
+    /// falling below it. Mirrors the direction baked into each rule type in
+    /// evaluate.py -- best-effort for compound rules (e.g. #14/#18/#19 also
+    /// require a "rising" leg), reporting distance on the level leg only.
+    static let aboveIsBad: [Int: Bool] = [
+        1: false, 2: true, 3: true, 4: true, 5: true, 6: true, 7: false,
+        8: false, 9: false, 10: false, 11: false, 12: false, 13: false,
+        14: true, 15: true, 16: true, 17: true, 18: true, 19: true, 20: false,
+    ]
 }

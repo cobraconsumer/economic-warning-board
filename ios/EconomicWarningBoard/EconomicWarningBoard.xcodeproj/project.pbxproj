@@ -10,6 +10,7 @@
 		0235FFC9549A9590189886D2 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D2264EFD6746EB880F579E /* NotificationScheduler.swift */; };
 		064691A176F0758DB5D98D82 /* DateFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95139A15AD7DDCAFAFCF7C2 /* DateFormatting.swift */; };
 		0B2E45CE201411C5D5C21DE0 /* IndicatorCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D01473D635FFC011E8E98D9 /* IndicatorCopy.swift */; };
+		0CCE2FFF3B50B89793DCDC5F /* WatchlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7C99228DF5F84805757DE /* WatchlistView.swift */; };
 		12A373451D7B06D99393CDCC /* HistoryChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = D152CCCD2EDE5F47AD03B9A6 /* HistoryChart.swift */; };
 		1DF12794CBC709554C5152BC /* TierStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B374F43EC861D0E0848D294 /* TierStyle.swift */; };
 		2C7BB91387B6A3130D2383C2 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FCF3432A1478D505B7721A /* Board.swift */; };
@@ -22,12 +23,14 @@
 		C1AB2A1473328475D859A346 /* BoardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1019D063A41EFD6BE6D59 /* BoardStore.swift */; };
 		CBA8C0650D5FB0304A685BD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F04CBE7FDC8AEF5BC2C81615 /* Assets.xcassets */; };
 		CC2BAFF2A35F77F4BB2FEDF2 /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DED774F49B53D011FA820D2 /* DotView.swift */; };
+		D0D6DAF6109DD10CE93E8D10 /* DistanceToThresholdBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2972A943B24AA78CA0BD955 /* DistanceToThresholdBar.swift */; };
 		DD0B4BC1225C77E53649444A /* IndicatorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D80B255FC088B8DC46594 /* IndicatorDetailView.swift */; };
 		EAD86D44AC1926B0815A0700 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED788990FF618D8D58963AA /* RootView.swift */; };
 		F49EDE61BB9A872ECA6D2754 /* MethodologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD649CC6844271B6B7A9C3 /* MethodologyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01B7C99228DF5F84805757DE /* WatchlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistView.swift; sourceTree = "<group>"; };
 		06BC6C0355648193D033C195 /* EconomicWarningBoardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomicWarningBoardApp.swift; sourceTree = "<group>"; };
 		1ED788990FF618D8D58963AA /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		252D7BE3A8ECBD44B335E5A1 /* BoardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardService.swift; sourceTree = "<group>"; };
@@ -45,11 +48,20 @@
 		B2926EB420505F5D5EB29FE3 /* IndicatorPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorPreviewCard.swift; sourceTree = "<group>"; };
 		B7D2264EFD6746EB880F579E /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		D152CCCD2EDE5F47AD03B9A6 /* HistoryChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryChart.swift; sourceTree = "<group>"; };
+		E2972A943B24AA78CA0BD955 /* DistanceToThresholdBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceToThresholdBar.swift; sourceTree = "<group>"; };
 		E95139A15AD7DDCAFAFCF7C2 /* DateFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatting.swift; sourceTree = "<group>"; };
 		F04CBE7FDC8AEF5BC2C81615 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		052DFEFB6CA178AD66C680E8 /* Watchlist */ = {
+			isa = PBXGroup;
+			children = (
+				01B7C99228DF5F84805757DE /* WatchlistView.swift */,
+			);
+			path = Watchlist;
+			sourceTree = "<group>";
+		};
 		0D86FD127B7E02D4AF569497 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +150,7 @@
 		964881D4350E728F2B876EE0 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				E2972A943B24AA78CA0BD955 /* DistanceToThresholdBar.swift */,
 				A97D80B255FC088B8DC46594 /* IndicatorDetailView.swift */,
 				A8E59DE60DE2BE15F41C6101 /* SparklineChart.swift */,
 			);
@@ -167,6 +180,7 @@
 				782056FE63005D1ECEF28A87 /* Board */,
 				964881D4350E728F2B876EE0 /* Detail */,
 				32D79BFB1E552894B275B799 /* Methodology */,
+				052DFEFB6CA178AD66C680E8 /* Watchlist */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,6 +261,7 @@
 				34A08B30F3ABB13CB1A11EAE /* BoardView.swift in Sources */,
 				C08C98A5A7CB7251031A1E62 /* BucketRow.swift in Sources */,
 				064691A176F0758DB5D98D82 /* DateFormatting.swift in Sources */,
+				D0D6DAF6109DD10CE93E8D10 /* DistanceToThresholdBar.swift in Sources */,
 				CC2BAFF2A35F77F4BB2FEDF2 /* DotView.swift in Sources */,
 				41218F432FC49FF1CE5303E3 /* EconomicWarningBoardApp.swift in Sources */,
 				12A373451D7B06D99393CDCC /* HistoryChart.swift in Sources */,
@@ -258,6 +273,7 @@
 				EAD86D44AC1926B0815A0700 /* RootView.swift in Sources */,
 				6415EBE06C66AFB75D3E3E45 /* SparklineChart.swift in Sources */,
 				1DF12794CBC709554C5152BC /* TierStyle.swift in Sources */,
+				0CCE2FFF3B50B89793DCDC5F /* WatchlistView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

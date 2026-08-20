@@ -7,6 +7,7 @@ struct Board: Decodable {
     let board: BoardSummary
     let indicators: [Indicator]
     let history: [HistoryPoint]
+    let watchlist: [WatchlistItem]?
 }
 
 struct BoardSummary: Decodable {
@@ -62,6 +63,20 @@ struct Indicator: Decodable, Identifiable, Hashable {
     let sourceName: String
     let sourceUrl: String
     let sparkline: [Double]
+}
+
+/// Context, not part of the scored board -- see spec-v0.5-candidates.md
+/// section 4. No rule, no red/green, never counted in reds/available/fraction.
+struct WatchlistItem: Decodable, Identifiable, Hashable {
+    let id: String
+    let name: String
+    let unit: String
+    let whatIsThis: String
+    let value: Double?
+    let observationDate: String?
+    let sparkline: [Double]
+    let sourceName: String
+    let sourceUrl: String
 }
 
 struct HistoryPoint: Decodable, Identifiable, Hashable {

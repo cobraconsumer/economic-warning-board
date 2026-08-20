@@ -196,8 +196,12 @@ def why_text(ind, red, metric):
 
     if rule == "curve":
         months = round(p["lookback_days"] / 30.44)
-        if red:
+        if red and v < 0:
             return f"{subj.capitalize()} is inverted at {v:.2f}, below zero."
+        if red:
+            return (f"{subj.capitalize()} is positive at {v:.2f} today, but was inverted "
+                     f"within the past {months} months -- recessions have historically "
+                     f"followed within roughly that window of an inversion ending.")
         return f"{subj.capitalize()} is positive at {v:.2f} and has not been inverted in the past {months} months."
     if rule == "hy_spread":
         if red:
