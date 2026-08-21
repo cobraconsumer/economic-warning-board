@@ -55,6 +55,18 @@ struct IndicatorDetailView: View {
                     }
                     divider
 
+                    if let trend = indicator.trend, trend.direction != .flat {
+                        questionBlock("Where is it heading?") {
+                            HStack(alignment: .top, spacing: 8) {
+                                Image(systemName: trend.direction == .toward ? "arrow.up.right" : "arrow.down.right")
+                                    .font(.footnote.weight(.bold))
+                                    .foregroundStyle(indicator.bucket.textColor)
+                                Text(trend.text)
+                            }
+                        }
+                        divider
+                    }
+
                     DistanceBar(indicator: indicator)
 
                     if let legs = indicator.legs, legs.count > 1 {

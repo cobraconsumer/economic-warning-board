@@ -23,6 +23,31 @@ extension Indicator {
         case .unavailable: return "unavailable"
         }
     }
+
+    /// Weight scaled by run length, capped low so a long run can never
+    /// approach a red state's visual weight -- spec-v0.6-tile-information.md
+    /// section 7. The server already gates direction to toward/away only
+    /// past a 3-step minimum, so any non-flat trend here is real.
+    var trendArrowOpacity: Double {
+        guard let steps = trend?.steps else { return 0 }
+        return min(0.85, 0.45 + 0.04 * Double(steps))
+    }
+}
+
+/// Small, bucket-hued, never a tier color -- a trend is a direction, not a
+/// state. Spec section 2's "no tier colors on tiles" non-negotiable.
+struct TrendArrow: View {
+    let indicator: Indicator
+    var size: CGFloat = 9
+
+    var body: some View {
+        if let trend = indicator.trend, trend.direction != .flat {
+            Image(systemName: trend.direction == .toward ? "arrow.up.right" : "arrow.down.right")
+                .font(.system(size: size, weight: .bold))
+                .foregroundStyle(indicator.bucket.markColor.opacity(indicator.trendArrowOpacity))
+                .accessibilityHidden(true)
+        }
+    }
 }
 
 /// Label top-left, dot top-right, value bottom-left. Fixed 70pt height;
@@ -47,9 +72,12 @@ struct IndicatorTile: View {
                     .padding(.trailing, 2)
             }
             Spacer(minLength: 0)
-            Text(indicator.compactValueText)
-                .font(.caption2.monospacedDigit())
-                .foregroundStyle(indicator.state == .red ? EWB.broadText : EWB.ink2)
+            HStack(spacing: 3) {
+                Text(indicator.compactValueText)
+                    .font(.caption2.monospacedDigit())
+                    .foregroundStyle(indicator.state == .red ? EWB.broadText : EWB.ink2)
+                TrendArrow(indicator: indicator)
+            }
         }
         .padding(10)
         .frame(height: 70, alignment: .topLeading)
@@ -58,7 +86,12 @@ struct IndicatorTile: View {
         .overlay(tileBorder)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(indicator.name), \(indicator.accessibilityStateWord), \(indicator.tileValueText) \(indicator.unit)")
+        .accessibilityLabel("\(indicator.name), \(indicator.accessibilityStateWord), \(indicator.tileValueText) \(indicator.unit)\(trendAccessibilitySuffix)")
+    }
+
+    private var trendAccessibilitySuffix: String {
+        guard let trend = indicator.trend, trend.direction != .flat else { return "" }
+        return ", " + trend.text
     }
 
     private var tileBackground: some View {
@@ -104,9 +137,12 @@ struct IndicatorWideTile: View {
                 Spacer()
             }
 
-            Text(indicator.compactValueText)
-                .font(.caption.monospacedDigit())
-                .foregroundStyle(indicator.state == .red ? EWB.broadText : EWB.ink2)
+            HStack(spacing: 3) {
+                Text(indicator.compactValueText)
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(indicator.state == .red ? EWB.broadText : EWB.ink2)
+                TrendArrow(indicator: indicator, size: 10)
+            }
         }
         .padding(.horizontal, 12)
         .frame(height: 54)
@@ -126,6 +162,11 @@ struct IndicatorWideTile: View {
         )
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(indicator.name), \(indicator.accessibilityStateWord), \(indicator.tileValueText) \(indicator.unit)")
+        .accessibilityLabel("\(indicator.name), \(indicator.accessibilityStateWord), \(indicator.tileValueText) \(indicator.unit)\(trendAccessibilitySuffix)")
+    }
+
+    private var trendAccessibilitySuffix: String {
+        guard let trend = indicator.trend, trend.direction != .flat else { return "" }
+        return ", " + trend.text
     }
 }

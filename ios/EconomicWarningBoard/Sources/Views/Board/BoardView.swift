@@ -77,9 +77,7 @@ struct BoardView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
 
-        if let closest = closestToFlipping(board.indicators) {
-            closestToFlippingRow(closest)
-        }
+        worthWatchingSection(board.indicators)
 
         if let watchlist = board.watchlist, !watchlist.isEmpty {
             contextRow(count: watchlist.count)
@@ -88,7 +86,7 @@ struct BoardView: View {
         if let lastError = store.lastError {
             Text(lastError)
                 .font(.footnote)
-                .foregroundStyle(EWB.warnText)
+                .foregroundStyle(EWB.ink3)
         }
     }
 
@@ -132,38 +130,54 @@ struct BoardView: View {
         "since " + (DateFormatting.monthYear(summary.tierSince) ?? summary.tierSince)
     }
 
-    /// The clear indicator nearest its own threshold, so someone scanning a
-    /// quiet board can see what's worth watching next -- not just today's
-    /// count. Only surfaces past the halfway mark; a clear indicator that's
-    /// nowhere close isn't worth naming. Spec section 9 flags this module as
-    /// undesigned; this is a plain, low-key placeholder, not a final look.
-    private func closestToFlipping(_ indicators: [Indicator]) -> Indicator? {
+    /// Ranked by trend, not proximity -- a tile sitting right at its
+    /// threshold but flat or improving isn't worth watching; a tile further
+    /// off but moving steadily toward it is. Replaces the old proximity-
+    /// ranked "closest to flipping" module, which spec-v0.6-tile-
+    /// information.md section 0 shows gets indicator #18 backwards (it
+    /// surfaced as "closest" while on a 7-quarter improving streak).
+    /// Ranked by run length, then magnitude -- never by position, and never
+    /// a count/fraction over all twenty (spec section 9 acceptance check 7).
+    private func worthWatching(_ indicators: [Indicator]) -> Indicator? {
         indicators
-            .filter { $0.state == .green }
-            .compactMap { ind -> (Indicator, Double)? in
-                guard let p = ind.position, p >= 0.5 else { return nil }
-                return (ind, p)
+            .filter { $0.trend?.direction == .toward }
+            .max { a, b in
+                let stepsA = a.trend?.steps ?? 0, stepsB = b.trend?.steps ?? 0
+                if stepsA != stepsB { return stepsA < stepsB }
+                return (a.trend?.deltaPosition ?? 0) < (b.trend?.deltaPosition ?? 0)
             }
-            .max { $0.1 < $1.1 }?
-            .0
     }
 
-    private func closestToFlippingRow(_ indicator: Indicator) -> some View {
+    /// Renders unconditionally -- per spec section 7, "nothing is trending
+    /// toward a threshold" is itself a finding worth stating, not a state
+    /// to hide the module for.
+    @ViewBuilder
+    private func worthWatchingSection(_ indicators: [Indicator]) -> some View {
+        if let indicator = worthWatching(indicators) {
+            worthWatchingRow(indicator)
+        } else {
+            worthWatchingEmptyState
+        }
+    }
+
+    private func worthWatchingRow(_ indicator: Indicator) -> some View {
         NavigationLink(value: indicator) {
-            HStack {
+            HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("CLOSEST TO FLIPPING")
+                    Text("WORTH WATCHING")
                         .font(.caption2.weight(.bold))
                         .tracking(1.6)
                         .foregroundStyle(EWB.ink3)
                     Text(IndicatorCopy.shortName[indicator.id] ?? indicator.name)
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(EWB.ink)
+                    if let trend = indicator.trend {
+                        Text(trend.text)
+                            .font(.footnote)
+                            .foregroundStyle(EWB.ink3)
+                    }
                 }
                 Spacer()
-                Text(headroomLabel(indicator.position ?? 0))
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(indicator.bucket.textColor)
                 Image(systemName: "chevron.right")
                     .font(.footnote)
                     .foregroundStyle(EWB.ink3)
@@ -175,9 +189,22 @@ struct BoardView: View {
         .buttonStyle(.plain)
     }
 
-    private func headroomLabel(_ position: Double) -> String {
-        let headroom = max(0, min(1, 1 - position))
-        return "\(Int((headroom * 100).rounded()))% left"
+    private var worthWatchingEmptyState: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("WORTH WATCHING")
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
+            Text("Nothing is trending toward a threshold.")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(EWB.ink)
+            Text("All twenty indicators are flat or moving away.")
+                .font(.footnote)
+                .foregroundStyle(EWB.ink3)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .glassCard()
     }
 
     private func contextRow(count: Int) -> some View {

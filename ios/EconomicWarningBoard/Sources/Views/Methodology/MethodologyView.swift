@@ -18,6 +18,7 @@ struct MethodologyView: View {
                     intro
                     whatThisIsNot
                     fourTiers
+                    tilesArentAVote
                     if let history = store.board?.history, !history.isEmpty {
                         historySection(history)
                     }
@@ -121,6 +122,18 @@ struct MethodologyView: View {
         case .watch: return "5–7 flagged"
         case .warning: return "8–11 flagged"
         case .broad: return "12+ flagged"
+        }
+    }
+
+    private var tilesArentAVote: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("WHY TILES NEVER ADD UP TO A TIER")
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
+            Text("Each tile shows its own state and trend, but they never combine into a count or a tier of their own. The twenty indicators aren't twenty independent votes — several move together off the same underlying stress, so tallying coloured tiles would overstate how broad a signal really is. The bucket gates exist to handle that correlation properly, and they run on the hero count alone.")
+                .font(.footnote)
+                .foregroundStyle(EWB.ink2)
         }
     }
 

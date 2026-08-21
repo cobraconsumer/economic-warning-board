@@ -90,6 +90,23 @@ struct Leg: Decodable, Hashable {
     let text: String
 }
 
+enum TrendDirection: String, Decodable, Hashable {
+    case toward, away, flat
+}
+
+/// Direction and persistence toward/away from the threshold, computed off
+/// the full history (not the 60-point sparkline). See evaluate.py's
+/// compute_trend. spec-v0.6-tile-information.md section 3. `direction` is
+/// only ever "toward" or "away" once `steps` has cleared a 3-step minimum
+/// -- the server already collapses shorter runs to "flat" server-side.
+struct Trend: Decodable, Hashable {
+    let direction: TrendDirection
+    let steps: Int
+    let unit: String
+    let deltaPosition: Double
+    let text: String
+}
+
 struct Indicator: Decodable, Identifiable, Hashable {
     let id: Int
     let name: String
@@ -113,6 +130,7 @@ struct Indicator: Decodable, Identifiable, Hashable {
     let bindingLeg: String?
     /// Which leg `position`/the distance bar actually measures.
     let positionBasis: String?
+    let trend: Trend?
     let thresholdText: String
     let whyText: String
     let observationDate: String?
