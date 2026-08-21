@@ -187,6 +187,152 @@ def _is_rising(metric, n):
     return all(metric.iloc[-i] > metric.iloc[-i - 1] for i in range(1, n + 1))
 
 
+def _trailing_run(metric, want_rising):
+    """Count consecutive most-recent periods moving the same direction, for
+    leg explanatory text only -- not spec-v0.6's trend channel (unimplemented;
+    that has its own frequency-aware step size and deadband)."""
+    n = 0
+    i = len(metric) - 1
+    while i > 0:
+        step_rising = metric.iloc[i] > metric.iloc[i - 1]
+        if step_rising != want_rising:
+            break
+        n += 1
+        i -= 1
+    return n
+
+
+PERIOD_ADJ = {"d": "daily", "w": "weekly", "m": "monthly", "q": "quarterly"}
+
+
+def _rising_leg(metric, p, period, freq):
+    n = p["rising_periods"]
+    rising = _is_rising(metric, n)
+    adj = PERIOD_ADJ[freq]
+    straight = "" if n == 1 else "straight "
+    if rising:
+        run = max(_trailing_run(metric, True), n)
+        text = f"Risen for {run} straight {_n(period, run)}" if run > 1 else f"Risen for {run} {period}"
+    else:
+        decline_run = _trailing_run(metric, False)
+        text = f"Has not risen for {n} {straight}{_n(period, n)}"
+        if decline_run >= 2:
+            text += f" — {decline_run} straight {adj} declines"
+    return {"name": "rising", "met": rising, "text": text}
+
+
+def compute_legs(ind, df, D, metric):
+    """Per-leg breakdown for compound rules (spec-v0.6-tile-information.md
+    section 5). `position` only ever measures one leg (`position_basis`);
+    the state can be decided by an entirely different one -- #1 can be red
+    on the lookback window while today's level is clear, #18 can already be
+    past its level and held green purely by an unbroken rising requirement.
+    Returns (legs: list[dict], position_basis: str). Every rule gets at
+    least one leg so the client's handling is uniform; single-condition
+    rules just get a length-1 legs list naming what threshold_value/
+    compute_position already measure for that rule."""
+    p = ind["params"]
+    rule = ind["rule"]
+    period = PERIOD_NOUN[ind["freq"]]
+    v = metric
+
+    if rule == "curve":
+        red_a, detail = evaluate(ind, df, D, scale=1.0)
+        lookback_met = bool(detail.get("variant_b", False))
+        level_met = bool(red_a)
+        months = round(p["lookback_days"] / 30.44)
+        legs = [
+            {"name": "level", "met": level_met,
+             "text": "Inverted today" if level_met else "Not inverted today"},
+            {"name": "lookback", "met": lookback_met,
+             "text": (f"Inverted within the past {months} months" if lookback_met
+                      else f"Not inverted in the past {months} months")},
+        ]
+        return legs, "level"
+
+    if rule == "hy_spread":
+        low = v.rolling(p["low_window"]).min()
+        level_met = bool(v.iloc[-1] > p["level"])
+        widen_met = bool(v.iloc[-1] >= low.iloc[-1] + p["widen"])
+        legs = [
+            {"name": "level", "met": level_met,
+             "text": (f"Above {p['level']} points" if level_met
+                      else f"Below {p['level']} points")},
+            {"name": "widen", "met": widen_met,
+             "text": (f"Widened {p['widen']} points from its 3-month low" if widen_met
+                      else f"Not widened {p['widen']} points from its 3-month low")},
+        ]
+        return legs, "level"
+
+    if rule in ("level_and_rising", "level_or_rising"):
+        level_met = bool(v.iloc[-1] > p["level"])
+        legs = [
+            {"name": "level", "met": level_met,
+             "text": f"Above {p['level']}" if level_met else f"Below {p['level']}"},
+            _rising_leg(v, p, period, ind["freq"]),
+        ]
+        return legs, "level"
+
+    if rule == "level_above":
+        met = bool(v.iloc[-1] > p["level"])
+        text = f"Above {p['level']}" if met else f"Below {p['level']}"
+        return [{"name": "level", "met": met, "text": text}], "level"
+
+    if rule == "level_below":
+        met = bool(v.iloc[-1] < p["level"])
+        text = f"Below {p['level']}" if met else f"Above {p['level']}"
+        return [{"name": "level", "met": met, "text": text}], "level"
+
+    if rule == "drawdown":
+        met = bool(v.iloc[-1] < -(p["drop"] * 100.0))
+        text = (f"More than {p['drop'] * 100:.1f}% below its 1-year high" if met
+                else f"Within {p['drop'] * 100:.1f}% of its 1-year high")
+        return [{"name": "drop", "met": met, "text": text}], "drop"
+
+    if rule == "drop_from_peak_ma":
+        met = bool(v.iloc[-1] < -(p["drop"] * 100.0))
+        text = (f"{p['drop'] * 100:.0f}% or more below its {p['peak_window']}-month high" if met
+                else f"Within {p['drop'] * 100:.0f}% of its {p['peak_window']}-month high")
+        return [{"name": "drop", "met": met, "text": text}], "drop"
+
+    if rule == "yoy_below":
+        met = bool(v.iloc[-1] < p["pct"])
+        text = (f"Down {abs(p['pct'])}% or more year-over-year" if met
+                else f"Above the {p['pct']}% year-over-year threshold")
+        return [{"name": "yoy", "met": met, "text": text}], "yoy"
+
+    if rule == "yoy_above_weekly":
+        met = bool(v.iloc[-1] > p["pct"])
+        text = (f"Up {p['pct']}% or more year-over-year" if met
+                else f"Below the {p['pct']}% year-over-year threshold")
+        return [{"name": "yoy", "met": met, "text": text}], "yoy"
+
+    if rule == "claims_vs_low":
+        met = bool(v.iloc[-1] > p["rise"] * 100.0)
+        text = (f"{p['rise'] * 100:.0f}% or more above the 1-year low" if met
+                else "Inside the 1-year-low threshold")
+        return [{"name": "rise", "met": met, "text": text}], "rise"
+
+    raise ValueError(rule)
+
+
+def pick_binding_leg(red, legs, position_basis):
+    """For a red indicator, the leg that fired it; for a green one, the
+    unmet leg keeping it green. Falls back to position_basis when every leg
+    agrees (an AND-rule with both legs met, or an OR-rule with none met) --
+    there's no single leg to name as the reason in that case."""
+    if len(legs) == 1:
+        return legs[0]["name"]
+    if red:
+        unmet = [leg["name"] for leg in legs if not leg["met"]]
+        if not unmet:
+            return position_basis
+        met = [leg["name"] for leg in legs if leg["met"]]
+        return met[0] if met else position_basis
+    unmet = [leg["name"] for leg in legs if not leg["met"]]
+    return unmet[0] if unmet else position_basis
+
+
 def why_text(ind, red, metric):
     p = ind["params"]
     rule = ind["rule"]
@@ -437,6 +583,8 @@ def build_indicator(ind, fred, today, prev_indicators):
     threshold = threshold_value(ind)
     typical = float(metric.median())
     position = compute_position(threshold, typical, value)
+    legs, position_basis = compute_legs(ind, df, today, metric)
+    binding_leg = pick_binding_leg(red, legs, position_basis)
 
     return {
         "id": ind["id"],
@@ -448,6 +596,9 @@ def build_indicator(ind, fred, today, prev_indicators):
         "unit": UNIT[ind["id"]],
         "threshold": round(threshold, 4),
         "position": position,
+        "legs": legs,
+        "binding_leg": binding_leg,
+        "position_basis": position_basis,
         "threshold_text": threshold_text(ind),
         "why_text": why_text(ind, red, metric),
         "observation_date": df["date"].iloc[-1].date().isoformat(),

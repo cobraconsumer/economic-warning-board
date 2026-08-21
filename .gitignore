@@ -14,3 +14,4 @@ DerivedData/
 *.cer
 *.mobileprovision
 *.p12
+ios/EconomicWarningBoard/build/

@@ -81,6 +81,15 @@ enum IndicatorState: String, Decodable, Hashable {
     case red, green, unavailable
 }
 
+/// One sub-condition of a compound rule -- e.g. level_and_rising's "level"
+/// and "rising" legs. See evaluate.py's compute_legs. spec-v0.6-tile-
+/// information.md section 5.
+struct Leg: Decodable, Hashable {
+    let name: String
+    let met: Bool
+    let text: String
+}
+
 struct Indicator: Decodable, Identifiable, Hashable {
     let id: Int
     let name: String
@@ -95,6 +104,15 @@ struct Indicator: Decodable, Identifiable, Hashable {
     /// shipped (stale cache).
     let threshold: Double?
     let position: Double?
+    /// Compound-rule breakdown -- nil or single-element for simple rules.
+    /// `position` only ever measures `positionBasis`; the actual state can
+    /// be decided by a different leg entirely (evaluate.py's compute_legs).
+    let legs: [Leg]?
+    /// For a red indicator, the leg that fired it; for green, the unmet leg
+    /// keeping it that way. nil on cache predating this field.
+    let bindingLeg: String?
+    /// Which leg `position`/the distance bar actually measures.
+    let positionBasis: String?
     let thresholdText: String
     let whyText: String
     let observationDate: String?

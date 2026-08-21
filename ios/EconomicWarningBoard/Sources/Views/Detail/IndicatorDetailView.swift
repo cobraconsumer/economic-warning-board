@@ -57,6 +57,10 @@ struct IndicatorDetailView: View {
 
                     DistanceBar(indicator: indicator)
 
+                    if let legs = indicator.legs, legs.count > 1 {
+                        legsSection(legs)
+                    }
+
                     whyCallout
 
                     divider
@@ -131,6 +135,46 @@ struct IndicatorDetailView: View {
 
     private var divider: some View {
         Rectangle().fill(EWB.stroke).frame(height: 1)
+    }
+
+    /// Only for compound rules (legs.count > 1) -- `position` measures one
+    /// leg, but the state can be decided by another entirely, so this is
+    /// what actually explains the discrepancy the distance bar can't:
+    /// #18 sits at 93% of its level leg but stays green because "rising"
+    /// hasn't fired; #1 reads clear at the level leg but is red on the
+    /// lookback leg alone. spec-v0.6-tile-information.md section 5.
+    private func legsSection(_ legs: [Leg]) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("THE FULL PICTURE")
+                .font(.caption2.weight(.bold))
+                .tracking(1.6)
+                .foregroundStyle(EWB.ink3)
+            ForEach(legs, id: \.name) { leg in
+                HStack(alignment: .top, spacing: 10) {
+                    Image(systemName: leg.met ? "checkmark.circle.fill" : "circle")
+                        .font(.footnote)
+                        .foregroundStyle(leg.met ? indicator.bucket.textColor : EWB.ink3)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(leg.name.capitalized)
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(EWB.ink)
+                        Text(leg.text)
+                            .font(.footnote)
+                            .foregroundStyle(EWB.ink2)
+                    }
+                    if leg.name == indicator.bindingLeg {
+                        Spacer()
+                        Text("DECIDING")
+                            .font(.caption2.weight(.bold))
+                            .tracking(1)
+                            .foregroundStyle(indicator.state == .red ? EWB.broadText : indicator.bucket.textColor)
+                    }
+                }
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .overlay(RoundedRectangle(cornerRadius: Radius.card).strokeBorder(EWB.stroke2, lineWidth: 1))
     }
 
     private var whyCallout: some View {

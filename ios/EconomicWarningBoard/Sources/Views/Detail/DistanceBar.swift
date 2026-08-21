@@ -54,6 +54,12 @@ struct DistanceBar: View {
                 }
                 .font(.caption2)
                 .foregroundStyle(EWB.ink4)
+
+                if let basis = indicator.positionBasis, (indicator.legs?.count ?? 0) > 1 {
+                    Text("Measures the \(basis) leg only — see below for the full picture.")
+                        .font(.caption2)
+                        .foregroundStyle(EWB.ink4)
+                }
             }
         }
     }
