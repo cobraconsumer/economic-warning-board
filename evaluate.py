@@ -730,6 +730,65 @@ def build_watchlist_item(item, fred):
     }
 
 
+CCR_SERIES = {
+    "total": "BCNSDODNS",       # Nonfinancial Corporate Business; Debt Securities and Loans (D.3)
+    "debt_securities": "NCBDBIQ027S",  # ...Debt Securities only (S.5)
+    "bank_loans": "BLNECLBSNNCB",      # ...Depository Institution Loans N.e.c. (B.103)
+}
+
+
+def compute_ccr(fred):
+    """Credit Coverage Ratio -- what share of nonfinancial CORPORATE credit
+    the board's own instruments (bank loans via #14, public bonds via #2/
+    #3) can structurally observe. Not a stress measure, and never scored --
+    it qualifies the score rather than entering it. See CHANGELOG.md's
+    2026-08-21 CCR pre-flight note for the series enumeration, the B.103/
+    S.5/D.3 table correction against spec-v0.7-candidates.md's guessed
+    L.103/L.104, and the finding that coverage has moved in a 63-77% band
+    since 1990 rather than declining secularly -- the record low was 2007,
+    not today."""
+    series = {}
+    for key, sid in CCR_SERIES.items():
+        df = fred.observations(sid)
+        if df.empty:
+            return None
+        series[key] = df
+
+    # Align on the latest date all three series report in common -- Z.1
+    # data publishes with a lag and the three series can differ by a
+    # release cycle.
+    common_dates = set(series["total"]["date"])
+    for key in ("debt_securities", "bank_loans"):
+        common_dates &= set(series[key]["date"])
+    if not common_dates:
+        return None
+    as_of = max(common_dates)
+
+    def value_at(key):
+        row = series[key][series[key]["date"] == as_of]
+        return float(row["value"].iloc[0])
+
+    total = value_at("total")
+    if total <= 0:
+        return None
+    covered = value_at("debt_securities") + value_at("bank_loans")
+    covered_pct = round(covered / total * 100.0, 1)
+
+    return {
+        "covered_pct": covered_pct,
+        "uncovered_pct": round(100.0 - covered_pct, 1),
+        "as_of": as_of.date().isoformat(),
+        "scope": "nonfinancial corporate business credit (Fed Z.1)",
+        "text": (
+            f"This board's credit indicators can see about {covered_pct:.0f}% "
+            "of nonfinancial corporate credit -- bank loans and public bonds. "
+            f"The rest, about {100.0 - covered_pct:.0f}%, sits in private "
+            "credit funds, direct lenders, and other nonbank sources this "
+            "board cannot score."
+        ),
+    }
+
+
 SPEC = None  # set in main(), read by build_indicator for staleness windows
 
 
@@ -781,6 +840,17 @@ def main():
 
     watchlist_out = [build_watchlist_item(item, fred) for item in WATCHLIST]
 
+    # Z.1 is quarterly and slow-moving; a transient fetch hiccup shouldn't
+    # blank out a context stat that changes four times a year. Fall back to
+    # yesterday's reading rather than failing the whole publish over it.
+    try:
+        ccr = compute_ccr(fred)
+    except Exception as e:
+        print(f"CCR fetch failed, carrying forward previous reading: {e}", file=sys.stderr)
+        ccr = None
+    if ccr is None:
+        ccr = (prev or {}).get("credit_coverage")
+
     board_df = pd.DataFrame([row])
     scored = score_board(board_df, SPEC).iloc[0]
 
@@ -830,6 +900,7 @@ def main():
         "indicators": indicators_out,
         "history": history,
         "watchlist": watchlist_out,
+        "credit_coverage": ccr,
     }
 
     Path(args.out).write_text(json.dumps(board, indent=2) + "\n")

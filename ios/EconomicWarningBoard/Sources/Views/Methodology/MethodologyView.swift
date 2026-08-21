@@ -194,9 +194,20 @@ struct MethodologyView: View {
                 .tracking(1.6)
                 .foregroundStyle(EWB.ink3)
             blindSpot("01", "Shocks with no economic build-up", "A pandemic, a war, a sudden fiscal cliff. 2020 was missed because nothing in the data was deteriorating beforehand. No indicator here can see an event that hasn't started.")
-            blindSpot("02", "Stress that never reaches public data", "Non-bank private credit, AI-specific capital spending, and small-business customer acquisition costs don't appear in any series this reads. A crisis can build in places the government doesn't publish.")
+            blindSpot("02", "Stress that never reaches public data", stressBlindSpotBody)
             blindSpot("03", "A changed economy", "These thresholds were calibrated on 1988-2026. If the relationship between manufacturing, labor, and output has structurally shifted, the levels may be tuned to an economy that no longer exists.")
         }
+    }
+
+    /// Named and quantified rather than left as a vague "there's a blind
+    /// spot somewhere" -- spec-v0.7-candidates.md section 2.1: "we cannot
+    /// score this, and here is why" is stronger than an open question.
+    private var stressBlindSpotBody: String {
+        guard let c = store.board?.creditCoverage else {
+            return "Non-bank private credit, AI-specific capital spending, and small-business customer acquisition costs don't appear in any series this reads. A crisis can build in places the government doesn't publish."
+        }
+        let covered = Int(c.coveredPct.rounded())
+        return "This board's credit indicators see about \(covered)% of nonfinancial corporate credit — bank loans and public bonds. The rest sits in private credit funds and other nonbank lenders with no three-recession track record to score against; that share can't be scored, only disclosed. AI-specific capital spending and small-business customer acquisition costs have the same problem: no series this reads captures them."
     }
 
     private func blindSpot(_ number: String, _ title: String, _ body: String) -> some View {

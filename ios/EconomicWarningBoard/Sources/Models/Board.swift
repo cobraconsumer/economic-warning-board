@@ -8,6 +8,19 @@ struct Board: Decodable {
     let indicators: [Indicator]
     let history: [HistoryPoint]
     let watchlist: [WatchlistItem]?
+    let creditCoverage: CreditCoverage?
+}
+
+/// What share of nonfinancial corporate credit the board's own instruments
+/// (bank loans via #14, public bonds via #2/#3) can structurally observe.
+/// Never scored -- qualifies the score, doesn't enter it. See evaluate.py's
+/// compute_ccr and CHANGELOG.md's 2026-08-21 CCR pre-flight note.
+struct CreditCoverage: Decodable, Hashable {
+    let coveredPct: Double
+    let uncoveredPct: Double
+    let asOf: String
+    let scope: String
+    let text: String
 }
 
 struct BoardSummary: Decodable {

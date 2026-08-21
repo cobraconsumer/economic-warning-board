@@ -66,6 +66,10 @@ struct BoardView: View {
     private func content(for board: Board) -> some View {
         countBlock(board.board)
 
+        if let coverage = board.creditCoverage {
+            creditCoverageCaption(coverage)
+        }
+
         VStack(alignment: .leading, spacing: Metrics.gapGroup + 10) {
             ForEach(Bucket.order, id: \.self) { bucket in
                 let inds = board.indicators
@@ -114,6 +118,20 @@ struct BoardView: View {
             }
         }
         .animation(.easeInOut(duration: 0.5), value: summary.reds)
+    }
+
+    /// Sits beside the hero, not inside it -- a coverage statement, not a
+    /// score. Never colored by tier; this qualifies every reading above it,
+    /// it doesn't react to one. spec-v0.7-candidates.md section 2.4.
+    private func creditCoverageCaption(_ coverage: CreditCoverage) -> some View {
+        HStack(alignment: .top, spacing: 6) {
+            Image(systemName: "eye.slash")
+                .font(.caption2)
+                .foregroundStyle(EWB.ink4)
+            Text("Sees about \(Int(coverage.coveredPct.rounded()))% of corporate credit — the rest sits in private credit this board can't score.")
+                .font(.caption)
+                .foregroundStyle(EWB.ink3)
+        }
     }
 
     private func tierChip(_ tier: Tier) -> some View {
