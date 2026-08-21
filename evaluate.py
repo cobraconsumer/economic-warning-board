@@ -333,6 +333,98 @@ def pick_binding_leg(red, legs, position_basis):
     return unmet[0] if unmet else position_basis
 
 
+STEP_OBS = {"d": 21, "w": 4, "m": 1, "q": 1}
+STEP_UNIT_PLURAL = {"d": "months", "w": "months", "m": "months", "q": "quarters"}
+STEP_UNIT_SINGULAR = {"d": "month", "w": "month", "m": "month", "q": "quarter"}
+
+# +1 if the rule's bad direction is "metric above threshold", -1 if below.
+# Fixed per rule type, independent of any one indicator's calibration.
+RULE_DIRECTION = {
+    "curve": -1, "hy_spread": 1, "level_above": 1, "level_below": -1,
+    "drawdown": -1, "yoy_below": -1, "drop_from_peak_ma": -1,
+    "level_or_rising": 1, "level_and_rising": 1, "claims_vs_low": 1,
+    "yoy_above_weekly": 1,
+}
+
+
+def compute_trend(ind, metric, threshold, typical):
+    """Direction and persistence toward/away from the threshold --
+    spec-v0.6-tile-information.md section 3. A tile sitting at 0.9 and flat
+    for years isn't worth watching; a tile at 0.4 moving steadily toward its
+    threshold is.
+
+    Deviates from spec 3.1's literal formula in one respect, discovered by
+    checking its own section 3.6 acceptance table against real data: 3.1
+    says to reuse `position` unchanged, on the claim that "position rising"
+    always means "toward the threshold." That's only true when `typical`
+    sits on the safe side of `threshold`. For #18, `typical` (the full-
+    history median, ~3.85 -- CC delinquency ran far higher for much of
+    1991-2010 than today's threshold) sits on the WRONG side: `position`
+    increases as the metric *improves*, so a literal reading reports #18
+    moving toward its threshold while it's on a multi-quarter decline --
+    exactly backwards, and exactly what section 3.6 says must not happen.
+    Fixed by anchoring on the rule's own bad-direction sign (RULE_DIRECTION)
+    rather than sign(threshold - typical), which coincide only when typical
+    happens to fall on the expected side."""
+    freq = ind["freq"]
+    step_obs = STEP_OBS[freq]
+    unit_plural = STEP_UNIT_PLURAL[freq]
+    unit_singular = STEP_UNIT_SINGULAR[freq]
+    rule_dir = RULE_DIRECTION[ind["rule"]]
+
+    denom = abs(threshold - typical)
+    if denom < 1e-6:
+        pos_series = metric.apply(lambda v: 1.15 if rule_dir * (v - threshold) >= 0 else -0.15)
+    else:
+        pos_series = rule_dir * (metric - threshold) / denom + 1.0
+
+    # Trailing mean over one step, then sampled at step boundaries, so a
+    # single print can't start or break a run and each diff is genuinely
+    # one step of calendar time (a month, or a quarter) apart.
+    smoothed = pos_series.rolling(step_obs).mean().dropna().reset_index(drop=True)
+    smoothed = smoothed.iloc[::step_obs].reset_index(drop=True)
+    steps = smoothed.diff().dropna().reset_index(drop=True)
+
+    flat = {"direction": "flat", "steps": 0, "unit": unit_plural,
+            "delta_position": 0.0, "text": "Flat, or not enough history for a trend."}
+    if len(steps) == 0:
+        return flat
+
+    eps = max(0.005, 0.25 * float(steps.tail(36).abs().median()))
+    latest = float(steps.iloc[-1])
+
+    if abs(latest) <= eps:
+        return flat
+
+    sign = 1 if latest > 0 else -1
+    run = 0
+    total_delta = 0.0
+    for i in range(len(steps) - 1, -1, -1):
+        s = float(steps.iloc[i])
+        if abs(s) <= eps or (1 if s > 0 else -1) != sign:
+            break
+        run += 1
+        total_delta += s
+
+    # Below the 3-step minimum, this is noise, not a trend -- report flat
+    # rather than a direction the client would render. Per spec 3.4.
+    if run < 3:
+        return {"direction": "flat", "steps": run, "unit": unit_plural,
+                "delta_position": round(total_delta, 4),
+                "text": "Flat, or not enough history for a trend."}
+
+    direction = "toward" if sign > 0 else "away"
+    verb = "Moving toward" if direction == "toward" else "Moving away from"
+    period = _n(unit_singular, run)
+    return {
+        "direction": direction,
+        "steps": run,
+        "unit": unit_plural,
+        "delta_position": round(total_delta, 4),
+        "text": f"{verb} its threshold for {run} straight {period}.",
+    }
+
+
 def why_text(ind, red, metric):
     p = ind["params"]
     rule = ind["rule"]
@@ -585,6 +677,7 @@ def build_indicator(ind, fred, today, prev_indicators):
     position = compute_position(threshold, typical, value)
     legs, position_basis = compute_legs(ind, df, today, metric)
     binding_leg = pick_binding_leg(red, legs, position_basis)
+    trend = compute_trend(ind, metric, threshold, typical)
 
     return {
         "id": ind["id"],
@@ -599,6 +692,7 @@ def build_indicator(ind, fred, today, prev_indicators):
         "legs": legs,
         "binding_leg": binding_leg,
         "position_basis": position_basis,
+        "trend": trend,
         "threshold_text": threshold_text(ind),
         "why_text": why_text(ind, red, metric),
         "observation_date": df["date"].iloc[-1].date().isoformat(),
