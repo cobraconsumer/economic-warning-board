@@ -2,6 +2,135 @@
 
 ---
 
+## C11 — high-tech divergence in industrial production: validated, then found unscoreable — 21 August 2026
+
+**§3's 2001 telecom test: CONFIRMED.** Using latest-vintage data for
+`INDPRO` and `IPX4HTMVS` (`c11_telecom_test.py`), ex-hi-tech industrial
+production peaked **December 1999**; total industrial production peaked
+**June 2000** — a 6-month level lead. More precisely, applying #9's actual
+rule mechanics (yoy_below, -0.95%, 2-month streak) to each series: the
+ex-hi-tech version would have fired **end of January 2001**, the INDPRO
+version **end of April 2001**, against NBER's March 2001 onset — a
+3-month lead using the mechanism that would actually be scored, not just
+the level-peak number. The pre-registered hypothesis holds.
+
+**§3's divergence-widening claim: does not hold as stated.** The y/y gap
+between the two series was **widest in mid-1999** (+6.23pp, July 1999 —
+over a year before onset) and **narrowed steadily** through the boom and
+into the recession itself, converging to +0.40pp by December 2001 as both
+series fell together. A fixed "divergence > 1.5pp sustained 3 months"
+rule (C11b as pre-registered) would have been almost continuously red
+through the healthy 1999–2000 expansion and would have turned off exactly
+as the recession hit — the shape of a sector-boom detector, not a warning.
+Per the standing rule against reshaping a rule after seeing results, C11b
+is not retuned. It is recorded as **not supported by this evidence** in
+its pre-registered form.
+
+**C11a and C11b: both found unscoreable regardless of the above,
+for a reason the spec's implementation order missed.** §5 claimed no
+pre-flight was needed ("`IPX4HTMVS` is an unrevised-in-practice official
+index with 1967 history"). Checked directly: ALFRED's vintage archive for
+`IPX4HTMVS` starts **2015-02-18**. Checked whether a longer-vintage
+reconstruction was possible from underlying components — three separate
+series checked (`IPX4HTMVS` itself, the hi-tech-only variant
+`IPX4HTK2S`, and the raw hi-tech component `IPG334S`, published since
+1972) — **all three hit the identical 2015-02-18 wall.** This is not
+specific to the hi-tech framing; it is a structural limit on how far back
+ALFRED archives any detailed G.17 sub-industry breakdown (only headline
+`INDPRO` has deep, 1927-present vintage coverage). Unlike C10's
+`LNS13025703`, there is no `revised: false` escape here: industrial
+production sub-indices undergo real, substantive periodic benchmark
+revisions (unlike CPS's seasonal-factor-only revisions), so treating
+pre-2015 values as reliably unrevised is not defensible.
+
+The 1967–2015 portion of any hi-tech breakdown is a retroactive
+reconstruction using current methodology, not data anyone could have
+observed in real time. ALFRED's archive covers **none** of the three
+pre-2020 target recessions. C11a/C11b cannot be scored against them —
+not a class-B caveat, the same category of limitation that keeps private
+credit permanently unscored elsewhere in this document.
+
+**Disposition: same treatment as PCSI.** A real, validated pattern (the
+2001 test), displayed and named as a limitation, never entered as a
+scored candidate. `c11_telecom_test.py` is kept in the repo as the
+validation record. C11a is a candidate for a *future* round if a genuine
+pre-2015 reconstruction is ever found; per the standing rule, that
+requires fresh pre-registration, not a retrofit of this one.
+
+---
+
+## Pre-flight note — 21 August 2026: CCR series enumeration and first reading
+
+**Written per `spec-v0.7-candidates.md` §5 step 3: "enumerate and confirm the
+quarterly Z.1 series IDs and the holder decomposition... before writing the
+calculation."** Series confirmed below; do not substitute guessed IDs.
+
+**One correction to the spec's own text:** §2.4 names Z.1 tables "L.103/
+L.104" for the holder decomposition. The actual tables are **B.103** (Balance
+Sheet of Nonfinancial Corporate Business) and **S.5** (Nonfinancial
+Corporate Business, integrated flow-and-level). No L.104 equivalent was
+needed — see scope note below.
+
+**Series enumerated and confirmed (FRED mnemonic IDs, not BOGZ1 codes,
+since FRED aliases these to human-readable names):**
+
+| Series | FRED ID | Table | Coverage |
+|---|---|---|---|
+| Total debt securities & loans | `BCNSDODNS` | D.3 | Q4 1945– |
+| Debt securities (bonds) | `NCBDBIQ027S` | S.5 | Q4 1945– |
+| Depository institution loans | `BLNECLBSNNCB` | B.103 | Q4 1945– |
+
+`CCR = (NCBDBIQ027S + BLNECLBSNNCB) / BCNSDODNS`  — the share of debt the
+board's credit bucket can structurally observe (bonds, via #2/#3, plus bank
+loans, via #14). `1 - CCR` is what neither instrument reaches.
+
+**Scope, stated explicitly rather than left implicit.** This version of CCR
+covers **nonfinancial corporate business only** — not the broader
+"nonfinancial business" the spec's prose uses loosely, which would also
+include noncorporate (sole-proprietor/partnership) borrowers. Corporate
+business is where direct-lending and BDC activity concentrates almost
+entirely, so this is the economically relevant cut; the noncorporate
+decomposition (a B.104-equivalent) was not pursued, and this note records
+that as a deliberate scope decision, not an oversight.
+
+**First reading, and a finding the spec's motivation section didn't
+anticipate.** Fetched via FRED's public CSV export (no API key required for
+this endpoint — bulk historical data, not the rate-limited JSON API):
+
+| Date | Covered | Uncovered |
+|---|---|---|
+| 1990 Q1 | 72.1% | 27.9% |
+| 1998 Q1 | 77.5% | 22.5% |
+| 2001 Q1 | 76.9% | 23.1% |
+| 2007 Q4 | **63.3%** | **36.7%** |
+| 2011 Q1 | 72.8% | 27.2% |
+| 2015 Q1 | 77.3% | 22.7% |
+| 2020 Q1 | 75.2% | 24.8% |
+| 2022 Q1 | 71.2% | 28.8% |
+| 2026 Q1 (current) | 70.3% | 29.7% |
+
+**This is not a secular decline.** The coverage ratio has moved in a
+63–77% band for 35+ years; today's 70.3% sits mid-band, not at a record
+low. The record low is **2007** — right before the crisis the board's
+existing 20 indicators did eventually catch. That complicates the round's
+own framing (§0: credit risk "migrating" into an ever-growing blind spot)
+without contradicting the underlying private-credit concern: CCR measures
+*coverage breadth*, not the *composition* of the uncovered share, and the
+uncovered instruments in 1990 (insurance-company private placements,
+finance-company lending) are not the same institutions as the uncovered
+instruments today (BDCs, direct-lending funds) even where the aggregate
+share rhymes. The honest sentence CCR supports is narrower than the spec's
+draft framing implied: *"the board has never seen roughly a quarter to a
+third of corporate credit, and that share is not obviously worse today
+than in past decades — but who holds that share has changed."*
+
+**Not scored.** Per spec §2.4 and §4's standing rule, CCR never enters
+`reds`, `available`, or `fraction`. This note is the enumeration and first
+reading only; wiring it into `evaluate.py` and the app (as a coverage
+statement beside the hero, per §7) is separate follow-on work.
+
+---
+
 ## Pre-flight note — 21 August 2026: C10 vintage and comparability case
 
 **Written before any backtest ran, per `spec-v0.7-candidates.md` §1's own
