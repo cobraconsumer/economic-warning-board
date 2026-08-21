@@ -2,6 +2,72 @@
 
 ---
 
+## Pre-flight note — 21 August 2026: C10 vintage and comparability case
+
+**Written before any backtest ran, per `spec-v0.7-candidates.md` §1's own
+requirement that the `revised: false` argument be "made and written down
+before the run, not reached for afterwards when the vintage check comes
+back short."** This is that argument.
+
+**The vintage check.** ALFRED's vintage archive for `LNS13025703` (Percent
+of Unemployed 27 Weeks & over) starts **2011-09-02** — the identical
+failure shape that demoted C4 (`LNS12300060` started 2014-12-05). Without
+an exception, every pre-2011 evaluation date falls back to class B.
+
+**The `revised: false` case.** ALFRED's own note on `SAHMREALTIME` — the
+series the spec already carries with this flag — states the mechanism
+directly: *"The BLS revises the unemployment rate each year at the
+beginning of January... Otherwise the unemployment rate does not revise."*
+`LNS13025703` is the same BLS household-survey (CPS) series family as the
+unemployment rate itself (the "LNS" prefix denotes seasonally-adjusted
+CPS estimates), and BLS's own CPS seasonal-adjustment documentation
+confirms the same annual-reestimation practice applies across that
+family: seasonally adjusted CPS series are revised once a year, each
+January, for the trailing five years, with the revision to the oldest of
+those years "usually quite small." This is a revision-magnitude argument,
+and it holds for `LNS13025703` on the same grounds it holds for
+`SAHMREALTIME`.
+
+**The harder question, not raised in the spec: the January 1994 CPS
+redesign.** BLS's own documentation names "duration of unemployment"
+specifically among the statistics affected by the 1994 questionnaire
+redesign and quantifies its effect on the unemployment rate (+0.56pp) —
+a genuine break in series, not a revision. If that break materially
+distorted the *long-term* share, the 1990-91 comparison C10 pre-registers
+against would be invalid on measurement-comparability grounds, separately
+from the vintage question above.
+
+**Resolved, with a citation, not a guess.** Abraham & Shimer (Abraham of
+BLS, Shimer then Princeton; NBER WP8513) measured the 1994 redesign's
+effect on duration statistics directly, using the incoming-rotation-group
+natural experiment. Their finding: the redesign's distortions are
+concentrated in **short-term unemployment (0-4 weeks) and mean duration**
+— "the redesign... does not explain the increase in long-term
+unemployment." Isolating the dependent-interviewing effect specifically,
+they report the 27-weeks-and-over rate at **0.79% for the full sample
+vs. 0.78% for the redesign-affected incoming rotation groups** —
+functionally identical, not a break.
+
+One real, minor effect survives: post-1994, respondents can report
+duration in months/years instead of weeks, and some spells just over 27
+weeks get digit-preference-rounded down to "6 months" (~26 weeks) —
+Abraham & Shimer flag this as a likely small **undercount** of the
+long-term share going forward. That's a conservative bias (makes C10
+slightly *less* likely to fire post-1994), constant across the whole
+post-1994 period rather than a one-time discontinuity, and it does not
+touch the pre-1994 side of the 1990-91 comparison at all.
+
+**Verdict: the case holds.** `LNS13025703` is treated as `revised: false`
+for the C10 backtest, evaluated as integrity class M throughout, and
+tested against all three pre-2020 recessions including 1990-91 as
+pre-registered in `spec-v0.7-candidates.md` §1's expectations table. If
+the backtest itself produces a result inconsistent with this
+reasoning — in particular a 1990-91 read that looks like a measurement
+artifact rather than an economic one — that will be reported as a
+limitation on the result, not retrofitted into this pre-flight note.
+
+---
+
 ## v0.5 candidate round — 20 August 2026
 
 **Spec hash:** `e011e3d4b9e94e03` (`spec_v05.json`)
