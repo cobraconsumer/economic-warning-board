@@ -2,6 +2,62 @@
 
 ---
 
+## C10 — long-term unemployed share: tested, REJECTED — 21 August 2026
+
+Full three-variant round run per `spec-v0.7-candidates.md` §4
+(`run_candidates_v07.py`, against `spec_v05.json`, 1988–2026). The
+`revised: false` pre-flight case (see the dated note below) held up
+mechanically: all 464 evaluation dates report integrity class **M**, zero
+class-B contamination.
+
+**Criterion 2 fails decisively for both variants: red before onset in
+0 of 3 pre-2020 recessions**, against the pre-registered expectation of
+3/3. This is the one to sit with, because it overturns the round's own
+premise, not just its threshold. `LNS13025703` measures a *stock*: nobody
+counts toward "27+ weeks unemployed" until they have already been out of
+work for more than half a year. By construction, the share cannot begin
+rising until a downturn is well underway — it cannot clear a fixed level
+within the pre-registered 24-months-before-onset window, in any of the
+three episodes, regardless of where the threshold sits. This is the same
+"measures realized conditions, cannot lead" failure mode that rejected
+C6/C8/C9 in the v0.5 round (see §0 of the v0.7 document, which named that
+exact pattern as the reason for this round's redirection) — except here
+the mechanism is definitional, not a data-quality accident, so no
+threshold search could have rescued it.
+
+**The pre-registered risk was directionally right, just not sufficient
+on its own.** §1 flagged the 2011 control window as C10's highest
+failure risk. It does move: 2011's peak fraction rises from 22% (baseline,
+tier `-`) to 28% (replace) / 26% (add), crossing into WATCH for both
+variants. Per the shared `verdict()` criterion, that alone doesn't
+register as a FAIL (WATCH is tolerated; WARNING/BROAD would not be) — but
+it confirms the concern was well-founded, and combined with criterion 2
+it reinforces rather than rescues the result.
+
+**A real, measurable cost of the addition variant, independent of C10's
+own performance.** Even in the 1990-91 window, where C10 never fires,
+adding it as a 21st indicator degraded that recession's Warning-tier lead
+from 12 months to 1 — pure denominator dilution, exactly the "raises the
+bar for every tier" cost §1's replacement-vs-addition argument predicted
+in the abstract. Confirmed here in the concrete case it was worried about.
+
+**Redundancy: not the deciding factor, but recorded.** 93% disagreement
+vs. #15 (initial claims), 91% vs. #16 (continuing claims) — both clear
+the ≥25% bar easily. Irrelevant given criterion 2's result, but the
+harness computed it correctly and it's worth having on record that this
+was never a "just a duplicate of claims data" rejection.
+
+**Verdict: REJECTED, both forms.** Per the pre-registered decision rule
+("A FAIL on both is recorded as a rejected candidate... and the Sahm rule
+stays"), indicator #17 is unchanged. The board's currently-carried
+concern — that the Sahm rule cannot fire in a labor-force-shrinkage
+regime — remains open. This round's finding narrows what a fix would
+need: not just "a measure less sensitive to labor-force size," but one
+that can move on a leading, not lagging, horizon. A long-term-unemployment
+share, however constructed, structurally cannot be that measure.
+
+---
+
 ## C11 — high-tech divergence in industrial production: validated, then found unscoreable — 21 August 2026
 
 **§3's 2001 telecom test: CONFIRMED.** Using latest-vintage data for

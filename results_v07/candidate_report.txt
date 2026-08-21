@@ -1,0 +1,38 @@
+==========================================================================
+C10 CANDIDATE EVALUATION -- v0.7
+==========================================================================
+
+BASELINE (spec_v05.json, 20 indicators)
+  Watch/Warning lead months: 1990-91: W12/Wn12  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 22%/-, 2015-16 industrial recession 28%/WATCH, 2022 rate shock 39%/WATCH
+
+C10-replaces-17: FAIL
+  Watch/Warning lead months: 1990-91: W12/Wn12  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 28%/WATCH, 2015-16 industrial recession 28%/WATCH, 2022 rate shock 39%/WATCH
+  note: own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)
+  note: CRITERION 2 FAIL: red in fewer than 2 of 3 pre-2020 recessions
+  note: disagreement with #15 (initial claims (4-wk avg)): 93% (needs >=25%)
+  note: disagreement with #16 (continuing claims): 91% (needs >=25%)
+  note: integrity classes observed: {'M': 464}
+
+C10-added: FAIL
+  Watch/Warning lead months: 1990-91: W12/Wn1  2001: W6/Wn2  2007-09: W5/Wn0
+  control windows: 1998 LTCM 11%/-, 2011 debt ceiling / Europe 26%/WATCH, 2015-16 industrial recession 26%/WATCH, 2022 rate shock 37%/WATCH
+  note: own red pre-onset: {'1990-91': False, '2001': False, '2007-09': False} (0/3)
+  note: CRITERION 2 FAIL: red in fewer than 2 of 3 pre-2020 recessions
+  note: disagreement with #15 (initial claims (4-wk avg)): 93% (needs >=25%)
+  note: disagreement with #16 (continuing claims): 91% (needs >=25%)
+  note: integrity classes observed: {'M': 464}
+
+CURRENT READING
+  baseline:         1/19 -
+  C10-replaces-17:  1/19 -
+  C10-added:        1/20 -
+
+DECISION
+  C10-replaces-17 passes only if it meets every criterion 1-5 AND
+  preserves every Sahm-rule lead across all three recessions. If it
+  fails that extra bar but C10-added still passes on its own, the
+  addition variant is the fallback per spec-v0.7-candidates.md.
+  A FAIL on both is recorded as a rejected candidate, written up
+  in CHANGELOG.md, and the Sahm rule stays.
