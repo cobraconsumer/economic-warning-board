@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T17:51:55Z",
+  "generated_at": "2026-09-29T16:12:26Z",
   "spec_version": "0.5",
   "spec_hash": "e011e3d4b9e94e03",
   "board": {
@@ -34,10 +34,10 @@
       "bucket": "A",
       "role": "leading",
       "state": "red",
-      "value": 0.93,
+      "value": 0.96,
       "unit": "percentage points",
       "threshold": 0.0,
-      "position": 0.4076,
+      "position": 0.3885,
       "legs": [
         {
           "name": "level",
@@ -60,14 +60,13 @@
         "text": "Flat, or not enough history for a trend."
       },
       "threshold_text": "Red when inverted (below 0) for 15 straight trading days, or if that happened within the past 24 months",
-      "why_text": "The curve is positive at 0.93 today, but was inverted within the past 24 months -- recessions have historically followed within roughly that window of an inversion ending.",
-      "observation_date": "2026-09-25",
-      "days_in_state": 1413,
+      "why_text": "The curve is positive at 0.96 today, but was inverted within the past 24 months -- recessions have historically followed within roughly that window of an inversion ending.",
+      "observation_date": "2026-09-28",
+      "days_in_state": 1414,
       "since": "2022-11-15",
       "source_name": "Federal Reserve (FRED: T10Y3M)",
       "source_url": "https://fred.stlouisfed.org/series/T10Y3M",
       "sparkline": [
-        0.67,
         0.61,
         0.69,
         0.69,
@@ -126,7 +125,8 @@
         0.8,
         0.92,
         0.94,
-        0.93
+        0.93,
+        0.96
       ]
     },
     {
@@ -135,10 +135,10 @@
       "bucket": "A",
       "role": "leading",
       "state": "green",
-      "value": 2.93,
+      "value": 3.02,
       "unit": "percentage points",
       "threshold": 4.75,
-      "position": -0.052,
+      "position": 0.0,
       "legs": [
         {
           "name": "level",
@@ -157,18 +157,17 @@
         "direction": "flat",
         "steps": 1,
         "unit": "months",
-        "delta_position": -0.0369,
+        "delta_position": -0.0399,
         "text": "Flat, or not enough history for a trend."
       },
       "threshold_text": "Red when the spread is above 4.75 points, or has widened 1.425 points from its 3-month low, for 10 straight trading days",
-      "why_text": "The spread is 2.93 points, below the 4.75-point level and not sharply wider than its recent low.",
-      "observation_date": "2026-09-25",
-      "days_in_state": 524,
+      "why_text": "The spread is 3.02 points, below the 4.75-point level and not sharply wider than its recent low.",
+      "observation_date": "2026-09-28",
+      "days_in_state": 525,
       "since": "2025-04-22",
       "source_name": "Federal Reserve (FRED: BAMLH0A0HYM2)",
       "source_url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
       "sparkline": [
-        2.72,
         2.67,
         2.7,
         2.7,
@@ -227,7 +226,8 @@
         2.68,
         2.73,
         2.8,
-        2.93
+        2.93,
+        3.02
       ]
     },
     {
@@ -236,10 +236,10 @@
       "bucket": "A",
       "role": "leading",
       "state": "green",
-      "value": 1.39,
+      "value": 1.46,
       "unit": "percentage points",
       "threshold": 2.375,
-      "position": -3.0204,
+      "position": -2.7347,
       "legs": [
         {
           "name": "level",
@@ -257,14 +257,13 @@
         "text": "Flat, or not enough history for a trend."
       },
       "threshold_text": "Red when the reading is above 2.375 for 10 straight trading days",
-      "why_text": "The spread is 1.39, below the 2.375 threshold.",
-      "observation_date": "2026-09-24",
-      "days_in_state": 2139,
+      "why_text": "The spread is 1.46, below the 2.375 threshold.",
+      "observation_date": "2026-09-25",
+      "days_in_state": 2140,
       "since": "2020-11-19",
       "source_name": "Federal Reserve (FRED: BAA10Y)",
       "source_url": "https://fred.stlouisfed.org/series/BAA10Y",
       "sparkline": [
-        1.54,
         1.54,
         1.56,
         1.55,
@@ -323,7 +322,8 @@
         1.42,
         1.42,
         1.39,
-        1.39
+        1.39,
+        1.46
       ]
     },
     {
@@ -355,7 +355,7 @@
       "threshold_text": "Red when the reading is above 0.0 for 3 straight weeks",
       "why_text": "The index is -0.56, below the 0.0 threshold.",
       "observation_date": "2026-09-18",
-      "days_in_state": 2334,
+      "days_in_state": 2335,
       "since": "2020-05-08",
       "source_name": "Federal Reserve (FRED: NFCI)",
       "source_url": "https://fred.stlouisfed.org/series/NFCI",
@@ -451,7 +451,7 @@
       "threshold_text": "Red when the reading is above 0.95 for 2 straight weeks",
       "why_text": "The index is -0.91, below the 0.95 threshold.",
       "observation_date": "2026-09-18",
-      "days_in_state": 2327,
+      "days_in_state": 2328,
       "since": "2020-05-15",
       "source_name": "Federal Reserve (FRED: STLFSI4)",
       "source_url": "https://fred.stlouisfed.org/series/STLFSI4",
@@ -547,7 +547,7 @@
       "threshold_text": "Red when the reading is above 19.0",
       "why_text": "The net tightening share is 0.00, below the 19.0 threshold.",
       "observation_date": "2026-07-01",
-      "days_in_state": 1001,
+      "days_in_state": 1002,
       "since": "2024-01-01",
       "source_name": "Federal Reserve (FRED: DRTSCILM)",
       "source_url": "https://fred.stlouisfed.org/series/DRTSCILM",
@@ -620,10 +620,10 @@
       "bucket": "A",
       "role": "confirmation",
       "state": "green",
-      "value": -0.7127,
+      "value": -1.4784,
       "unit": "% below 1-year high",
       "threshold": -14.25,
-      "position": -0.1044,
+      "position": -0.042,
       "legs": [
         {
           "name": "drop",
@@ -637,18 +637,17 @@
         "direction": "flat",
         "steps": 2,
         "unit": "months",
-        "delta_position": -0.1053,
+        "delta_position": -0.0865,
         "text": "Flat, or not enough history for a trend."
       },
       "threshold_text": "Red when the index is more than 14.2% below its 1-year high for 10 straight trading days",
-      "why_text": "The index is 0.7% off its 1-year high, inside the 14.2% drawdown threshold.",
-      "observation_date": "2026-09-25",
-      "days_in_state": 1354,
+      "why_text": "The index is 1.5% off its 1-year high, inside the 14.2% drawdown threshold.",
+      "observation_date": "2026-09-28",
+      "days_in_state": 1355,
       "since": "2023-01-13",
       "source_name": "Federal Reserve (FRED: SP500)",
       "source_url": "https://fred.stlouisfed.org/series/SP500",
       "sparkline": [
-        -1.6629,
         -0.9508,
         -1.392,
         -1.6698,
@@ -707,7 +706,8 @@
         -0.4404,
         -1.1919,
         -1.2163,
-        -0.7127
+        -0.7127,
+        -1.4784
       ]
     },
     {
@@ -739,7 +739,7 @@
       "threshold_text": "Red when the reading is below -0.3325",
       "why_text": "The 3-month average is 0.01, above the -0.3325 threshold.",
       "observation_date": "2026-08-01",
-      "days_in_state": 301,
+      "days_in_state": 302,
       "since": "2025-12-01",
       "source_name": "Federal Reserve (FRED: CFNAIMA3)",
       "source_url": "https://fred.stlouisfed.org/series/CFNAIMA3",
@@ -835,7 +835,7 @@
       "threshold_text": "Red when down 0.95% or more year-over-year for 2 straight months",
       "why_text": "Output is up 1.4% year-over-year, above the -0.95% threshold.",
       "observation_date": "2026-08-01",
-      "days_in_state": 666,
+      "days_in_state": 667,
       "since": "2024-12-01",
       "source_name": "Federal Reserve (FRED: INDPRO)",
       "source_url": "https://fred.stlouisfed.org/series/INDPRO",
@@ -931,7 +931,7 @@
       "threshold_text": "Red when the 4-month average is 19% or more below its 24-month high for 2 straight months",
       "why_text": "Truck sales are 8.4% off their 2-year high, inside the 19% threshold.",
       "observation_date": "2026-08-01",
-      "days_in_state": 119,
+      "days_in_state": 120,
       "since": "2026-06-01",
       "source_name": "Federal Reserve (FRED: HTRUCKSSAAR)",
       "source_url": "https://fred.stlouisfed.org/series/HTRUCKSSAAR",
@@ -1027,7 +1027,7 @@
       "threshold_text": "Red when down 9.5% or more year-over-year for 2 straight months",
       "why_text": "Permits are up 4.2% year-over-year, above the -9.5% threshold.",
       "observation_date": "2026-08-01",
-      "days_in_state": 1154,
+      "days_in_state": 1155,
       "since": "2023-08-01",
       "source_name": "Federal Reserve (FRED: PERMIT)",
       "source_url": "https://fred.stlouisfed.org/series/PERMIT",
@@ -1123,7 +1123,7 @@
       "threshold_text": "Red when down 1.9% or more year-over-year for 2 straight months",
       "why_text": "Orders are up 14.1% year-over-year, above the -1.9% threshold.",
       "observation_date": "2026-08-01",
-      "days_in_state": 970,
+      "days_in_state": 971,
       "since": "2024-02-01",
       "source_name": "Federal Reserve (FRED: NEWORDER)",
       "source_url": "https://fred.stlouisfed.org/series/NEWORDER",
@@ -1219,7 +1219,7 @@
       "threshold_text": "Red when down 2.85% or more year-over-year for 2 straight months",
       "why_text": "Temp employment is up 1.5% year-over-year, above the -2.85% threshold.",
       "observation_date": "2026-08-01",
-      "days_in_state": 270,
+      "days_in_state": 271,
       "since": "2026-01-01",
       "source_name": "Federal Reserve (FRED: TEMPHELPS)",
       "source_url": "https://fred.stlouisfed.org/series/TEMPHELPS",
@@ -1320,7 +1320,7 @@
       "threshold_text": "Red when above 1.9, or rising for 3 straight quarters",
       "why_text": "The delinquency rate is 1.27, below 1.9 and not on a sustained rise.",
       "observation_date": "2026-04-01",
-      "days_in_state": 545,
+      "days_in_state": 546,
       "since": "2025-04-01",
       "source_name": "Federal Reserve (FRED: DRBLACBS)",
       "source_url": "https://fred.stlouisfed.org/series/DRBLACBS",
@@ -1416,7 +1416,7 @@
       "threshold_text": "Red when 19% or more above the 1-year low for 3 straight weeks",
       "why_text": "Claims are 1.6% above their 1-year low, inside the 19% threshold.",
       "observation_date": "2026-09-19",
-      "days_in_state": 1115,
+      "days_in_state": 1116,
       "since": "2023-09-09",
       "source_name": "Federal Reserve (FRED: ICSA)",
       "source_url": "https://fred.stlouisfed.org/series/ICSA",
@@ -1512,7 +1512,7 @@
       "threshold_text": "Red when up 14.25% or more year-over-year for 3 straight weeks",
       "why_text": "Claims are down 10.3% year-over-year, below the 14.25% threshold.",
       "observation_date": "2026-09-12",
-      "days_in_state": 1010,
+      "days_in_state": 1011,
       "since": "2023-12-23",
       "source_name": "Federal Reserve (FRED: CCSA)",
       "source_url": "https://fred.stlouisfed.org/series/CCSA",
@@ -1608,7 +1608,7 @@
       "threshold_text": "Red when the reading is above 0.4999",
       "why_text": "The sahm rule reading is -0.07, below the 0.4999 threshold.",
       "observation_date": "2026-08-01",
-      "days_in_state": 727,
+      "days_in_state": 728,
       "since": "2024-10-01",
       "source_name": "Federal Reserve (FRED: SAHMREALTIME)",
       "source_url": "https://fred.stlouisfed.org/series/SAHMREALTIME",
@@ -1709,7 +1709,7 @@
       "threshold_text": "Red when above 2.85 and rising for 1 straight quarter",
       "why_text": "Delinquencies are at 2.85%, below the 2.85% threshold.",
       "observation_date": "2026-04-01",
-      "days_in_state": 819,
+      "days_in_state": 820,
       "since": "2024-07-01",
       "source_name": "Federal Reserve (FRED: DRCCLACBS)",
       "source_url": "https://fred.stlouisfed.org/series/DRCCLACBS",
@@ -1810,7 +1810,7 @@
       "threshold_text": "Red when above 2.375 and rising for 2 straight quarters",
       "why_text": "Delinquencies are at 1.86%, below the 2.375% threshold.",
       "observation_date": "2026-04-01",
-      "days_in_state": 2188,
+      "days_in_state": 2189,
       "since": "2020-10-01",
       "source_name": "Federal Reserve (FRED: DRSFRMACBS)",
       "source_url": "https://fred.stlouisfed.org/series/DRSFRMACBS",
@@ -1906,7 +1906,7 @@
       "threshold_text": "Red when down 0.0% or more year-over-year for 2 straight months",
       "why_text": "Sales are up 2.5% year-over-year, above the 0.0% threshold.",
       "observation_date": "2026-08-01",
-      "days_in_state": 727,
+      "days_in_state": 728,
       "since": "2024-10-01",
       "source_name": "Federal Reserve (FRED: RRSFS)",
       "source_url": "https://fred.stlouisfed.org/series/RRSFS",
@@ -4494,6 +4494,11 @@
       "date": "2026-09-28",
       "fraction": 0.05,
       "tier": "QUIET"
+    },
+    {
+      "date": "2026-09-29",
+      "fraction": 0.05,
+      "tier": "QUIET"
     }
   ],
   "watchlist": [
@@ -4574,10 +4579,9 @@
       "name": "JOLTS hires rate",
       "unit": "%",
       "what_is_this": "New hires as a share of total employment. A direct read on how willing employers are to hire, independent of the labor-force-size arithmetic that can distort the unemployment rate.",
-      "value": 3.2,
-      "observation_date": "2026-07-01",
+      "value": 3.3,
+      "observation_date": "2026-08-01",
       "sparkline": [
-        4.3,
         4.5,
         4.5,
         4.6,
@@ -4636,7 +4640,8 @@
         3.3,
         3.3,
         3.4,
-        3.2
+        3.2,
+        3.3
       ],
       "source_name": "Federal Reserve (FRED: JTSHIR)",
       "source_url": "https://fred.stlouisfed.org/series/JTSHIR"
